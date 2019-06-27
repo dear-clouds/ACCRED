@@ -31,6 +31,7 @@ class Attendee extends MyBaseModel
         'ticket_id',
         'account_id',
         'reference',
+        'enveloppe',
         'has_arrived',
         'arrival_time'
     ];
@@ -106,6 +107,16 @@ class Attendee extends MyBaseModel
     public function getReferenceAttribute()
     {
         return $this->order->order_reference . '-' . $this->reference_index;
+    }
+
+    /**
+     * Get the attendee enveloppe
+     *
+     * @return string
+     */
+    public function getEnveloppeAttribute()
+    {
+        return $this->order->order_enveloppe . '-' . $this->enveloppe_index;
     }
 
     /**

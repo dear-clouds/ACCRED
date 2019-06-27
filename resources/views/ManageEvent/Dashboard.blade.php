@@ -46,12 +46,12 @@
                 <span>@lang("Dashboard.sales_volume")</span>
             </div>
         </div>
-        <div class="col-sm-3">
+        <!-- <div class="col-sm-3">
             <div class="stat-box">
                 <h3>{{ $event->orders->count() }}</h3>
                 <span>@lang("Dashboard.orders")</span>
             </div>
-        </div>
+        </div> -->
         <div class="col-sm-3">
             <div class="stat-box">
                 <h3>{{ $event->tickets->sum('quantity_sold') }}</h3>

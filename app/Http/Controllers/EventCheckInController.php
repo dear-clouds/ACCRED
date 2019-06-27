@@ -65,6 +65,7 @@ class EventCheckInController extends MyBaseController
                     )
                     //->orWhere('attendees.email', 'like', $searchQuery . '%')
                     ->orWhere('orders.order_reference', 'like', $searchQuery . '%')
+                    ->orWhere('orders.order_enveloppe', 'like', $searchQuery . '%')
                     ->orWhere('attendees.last_name', 'like', $searchQuery . '%');
             })
             ->select([
@@ -74,9 +75,11 @@ class EventCheckInController extends MyBaseController
                 'attendees.email',
                 'attendees.arrival_time',
                 'attendees.reference_index',
+                'attendees.enveloppe_index',
                 'attendees.has_arrived',
                 'tickets.title as ticket',
                 'orders.order_reference',
+                'orders.order_enveloppe',
                 'orders.is_payment_received'
             ])
             ->orderBy('attendees.first_name', 'ASC')
@@ -147,6 +150,7 @@ class EventCheckInController extends MyBaseController
                 'attendees.last_name',
                 'attendees.email',
                 'attendees.reference_index',
+                'attendees.enveloppe_index',
                 'attendees.arrival_time',
                 'attendees.has_arrived',
                 'tickets.title as ticket',
@@ -178,6 +182,7 @@ class EventCheckInController extends MyBaseController
             'status'  => 'success',
             'name' => $attendee->first_name." ".$attendee->last_name,
             'reference' => $attendee->reference,
+            'enveloppe' => $attendee->enveloppe,
             'ticket' => $attendee->ticket
         ]);
     }

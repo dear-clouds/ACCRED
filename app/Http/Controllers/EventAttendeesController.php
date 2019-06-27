@@ -36,7 +36,7 @@ class EventAttendeesController extends MyBaseController
      */
     public function showAttendees(Request $request, $event_id)
     {
-        $allowed_sorts = ['first_name', 'email', 'ticket_id', 'order_reference'];
+        $allowed_sorts = ['first_name', 'email', 'ticket_id', 'order_reference', 'order_enveloppe'];
 
         $searchQuery = $request->get('q');
         $sort_order = $request->get('sort_order') == 'asc' ? 'asc' : 'desc';
@@ -50,19 +50,20 @@ class EventAttendeesController extends MyBaseController
                 ->join('orders', 'orders.id', '=', 'attendees.order_id')
                 ->where(function ($query) use ($searchQuery) {
                     $query->where('orders.order_reference', 'like', $searchQuery . '%')
+                        ->orWhere('attendees.order_enveloppe', 'like', $searchQuery . '%')
                         ->orWhere('attendees.first_name', 'like', $searchQuery . '%')
                         ->orWhere('attendees.email', 'like', $searchQuery . '%')
                         ->orWhere('attendees.last_name', 'like', $searchQuery . '%');
                 })
-                ->orderBy(($sort_by == 'order_reference' ? 'orders.' : 'attendees.') . $sort_by, $sort_order)
-                ->select('attendees.*', 'orders.order_reference')
+                ->orderBy(($sort_by == 'order_enveloppe' ? 'orders.' : 'attendees.') . $sort_by, $sort_order)
+                ->select('attendees.*', 'orders.order_enveloppe')
                 ->paginate();
         } else {
             $attendees = $event->attendees()
                 ->join('orders', 'orders.id', '=', 'attendees.order_id')
                 ->withoutCancelled()
-                ->orderBy(($sort_by == 'order_reference' ? 'orders.' : 'attendees.') . $sort_by, $sort_order)
-                ->select('attendees.*', 'orders.order_reference')
+                ->orderBy(($sort_by == 'order_enveloppe' ? 'orders.' : 'attendees.') . $sort_by, $sort_order)
+                ->select('attendees.*', 'orders.order_enveloppe')
                 ->paginate();
         }
 
@@ -203,6 +204,7 @@ class EventAttendeesController extends MyBaseController
             $attendee->ticket_id = $ticket_id;
             $attendee->account_id = Auth::user()->account_id;
             $attendee->reference_index = 1;
+            $attendee->enveloppe_index = 1;
             $attendee->save();
 
 
@@ -368,6 +370,7 @@ class EventAttendeesController extends MyBaseController
                     $attendee->ticket_id = $ticket_id;
                     $attendee->account_id = Auth::user()->account_id;
                     $attendee->reference_index = 1;
+                    $attendee->enveloppe_index = 1;
                     $attendee->save();
 
                     if ($email_attendee == '1') {
@@ -593,6 +596,7 @@ class EventAttendeesController extends MyBaseController
                         'attendees.email',
 			'attendees.private_reference_number',
                         'orders.order_reference',
+                        'orders.order_enveloppe',
                         'tickets.title',
                         'orders.created_at',
                         DB::raw("(CASE WHEN attendees.has_arrived THEN 'YES' ELSE 'NO' END) AS has_arrived"),
@@ -610,6 +614,7 @@ class EventAttendeesController extends MyBaseController
                     'Email',
 		    'Ticket ID',
                     'Order Reference',
+                    'Order Enveloppe',
                     'Ticket Type',
                     'Purchase Date',
                     'Has Arrived',
@@ -886,5 +891,3 @@ class EventAttendeesController extends MyBaseController
     }
 
 }
-
-

@@ -22,11 +22,11 @@ class Ticket extends MyBaseModel
         $format = config('attendize.default_datetime_format');
         return [
             'title'              => 'required',
-            'price'              => 'required|numeric|min:0',
-            'description'        => '',
-            'start_sale_date'    => 'date_format:"'.$format.'"',
-            'end_sale_date'      => 'date_format:"'.$format.'"|after:start_sale_date',
-            'quantity_available' => 'integer|min:'.($this->quantity_sold + $this->quantity_reserved)
+            // 'price'              => 'required|numeric|min:0',
+            'description'        => ''
+            // 'start_sale_date'    => 'date_format:"'.$format.'"',
+            // 'end_sale_date'      => 'date_format:"'.$format.'"|after:start_sale_date',
+            // 'quantity_available' => 'integer|min:'.($this->quantity_sold + $this->quantity_reserved)
         ];
     }
 
@@ -36,9 +36,9 @@ class Ticket extends MyBaseModel
      * @var array $messages
      */
     public $messages = [
-        'price.numeric'              => 'The price must be a valid number (e.g 12.50)',
-        'title.required'             => 'You must at least give a title for your ticket. (e.g Early Bird)',
-        'quantity_available.integer' => 'Please ensure the quantity available is a number.',
+        // 'price.numeric'              => 'The price must be a valid number (e.g 12.50)',
+        'title.required'             => 'You must at least give a title for your category. (e.g Early Bird)',
+        // 'quantity_available.integer' => 'Please ensure the quantity available is a number.',
     ];
     protected $perPage = 10;
 
