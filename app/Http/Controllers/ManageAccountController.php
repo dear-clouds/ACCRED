@@ -104,6 +104,7 @@ class ManageAccountController extends MyBaseController
         $account->first_name = Input::get('first_name');
         $account->last_name = Input::get('last_name');
         $account->email = Input::get('email');
+        $account->enveloppe = Input::get('enveloppe');
         $account->timezone_id = Input::get('timezone_id');
         $account->currency_id = Input::get('currency_id');
         $account->save();

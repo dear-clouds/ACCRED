@@ -1,6 +1,6 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2018/04/25 15:38:13 
+ Generated via "php artisan localization:missing" at 2018/04/25 15:38:13
 *************************************************************************/
 
 return array (
@@ -46,7 +46,7 @@ return array (
   'refund/cancel' => 'Rembourser / Annuler',
   'status' => 'Statut',
   'sub_total' => 'Sous-total',
-  'ticket' => 'Billet',
+  'ticket' => 'Categorie',
   'total' => 'Total',
   'transaction_id' => 'Identifiant de la transaction',
   'user_registered_n_tickets' => '<a href=":url">:name</a> a enregistré :n billet(s).',

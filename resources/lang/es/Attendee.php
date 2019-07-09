@@ -11,6 +11,7 @@ return array(
     'first_name'                           => 'Nombre',
     'last_name'                            => 'Apellidos',
     'name'                                 => 'Nombre',
+    'enveloppe' => 'Envelope',
     'ticket'                               => 'Entrada',
     'reference'                            => 'Referencia',
     'search_attendees'                     => 'Buscar asistentes....',

@@ -17,8 +17,8 @@ class Account extends MyBaseModel
      */
     protected $rules = [
         'first_name' => ['required'],
-        'last_name'  => ['required'],
-        'email'      => ['required', 'email'],
+        // 'last_name'  => ['required'],
+        'email'      => ['email'],
     ];
 
     /**
@@ -44,6 +44,7 @@ class Account extends MyBaseModel
         'first_name',
         'last_name',
         'email',
+        'enveloppe',
         'timezone_id',
         'date_format_id',
         'datetime_format_id',
