@@ -77,6 +77,8 @@ class CreateUsersTable extends Migration
             $t->string('last_name');
             $t->string('email');
             $t->string('enveloppe')->nullable();
+            $t->string('company')->nullable();
+            $t->string('sender')->nullable();
 
             $t->unsignedInteger('timezone_id')->nullable();
             $t->unsignedInteger('date_format_id')->nullable();
@@ -131,6 +133,8 @@ class CreateUsersTable extends Migration
             $t->string('phone')->nullable();
             $t->string('email');
             $t->string('enveloppe')->nullable();
+            $t->string('company')->nullable();
+            $t->string('sender')->nullable();
             $t->string('password');
             $t->string('confirmation_code');
             $t->boolean('is_registered')->default(false);
@@ -245,6 +249,8 @@ class CreateUsersTable extends Migration
             $t->string('last_name');
             $t->string('email');
             $t->string('enveloppe')->nullable();
+            $t->string('company')->nullable();
+            $t->string('sender')->nullable();
             $t->string('ticket_pdf_path', 155)->nullable();
 
             $t->string('order_reference', 15);
@@ -450,6 +456,8 @@ class CreateUsersTable extends Migration
             $t->string('last_name');
             $t->string('email');
             $t->string('enveloppe')->nullable();
+            $t->string('company')->nullable();
+            $t->string('sender')->nullable();
 
             $t->string('reference', 20);
             $t->integer('private_reference_number')->index();
