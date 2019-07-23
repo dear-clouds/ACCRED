@@ -14,15 +14,21 @@ env_variables:
   APP_DEBUG : true
   APP_LOG: errorlog
   APP_KEY: base64:gLg34YBy+1f3DsonrAnP7kdiNBsAozlsxJLiJ7HDJ10=
-  CACHE_DRIVER: database
-  SESSION_DRIVER: database
+  # CACHE_DRIVER: database
+  # SESSION_DRIVER: database
   ## Set these environment variables according to your CloudSQL configuration.
   DB_CONNECTION: mysql
   DB_HOST: localhost
-  DB_DATABASE: accred-app
+  DB_PORT: 3306
+  DB_DATABASE: accred
   DB_USERNAME: root
   DB_PASSWORD: Fiawec@2019
   DB_SOCKET: "/cloudsql/lmem-preprod:europe-west1:accred-app"
+  # DB_CONNECTION: mysql
+  # DB_HOST: eu-cdbr-west-02.cleardb.net
+  # DB_DATABASE: heroku_778403ff46ca725
+  # DB_USERNAME: b818f8f7d73431
+  # DB_PASSWORD: e076c4e6
 
 beta_settings:
     # for Cloud SQL, set this value to the Cloud SQL connection name,
