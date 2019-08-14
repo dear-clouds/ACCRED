@@ -34,7 +34,6 @@ return [
     */
 
     'default' => env('DB_TYPE', 'mysql'),
-    'default' => env('DB_CONNECTION', 'heroku'),
 
     /*
     |--------------------------------------------------------------------------
@@ -69,7 +68,7 @@ return [
         'mysql' => [
             'driver'    => 'mysql',
             'host'      => env('DB_HOST', 'localhost'),
-            'port'	    => env('DB_PORT', 3306),
+            'port'	    => env('DB_PORT', 8000),
             'database'  => env('DB_DATABASE', ''),
             'username'  => env('DB_USERNAME', ''),
             'password'  => env('DB_PASSWORD', ''),
@@ -99,7 +98,7 @@ return [
             'password' => env('DB_PASSWORD', ''),
             'prefix'   => '',
         ],
-        
+
         'heroku' => array(
     'driver' => 'mysql',
     'host' => $host,

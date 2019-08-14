@@ -8,7 +8,6 @@
     {!! HTML::script('vendor/vue/dist/vue.min.js') !!}
     {!! HTML::script('vendor/vue-resource/dist/vue-resource.min.js') !!}
 
-
     {!! HTML::style('assets/stylesheet/application.css') !!}
     {!! HTML::style('assets/stylesheet/check_in.css') !!}
     {!! HTML::script('vendor/jquery/dist/jquery.min.js') !!}
@@ -30,8 +29,6 @@
             background-attachment: fixed;
         }
     </style>
-    /* Signature Pad */
-    <script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
 </head>
 <body id="app">
 <header>
@@ -43,9 +40,9 @@
             <div class="col-md-12">
                 <div class="attendee_input_wrap">
                     <div class="input-group">
-                                <span class="input-group-btn">
-                               <button data-modal-id="InviteAttendee" href="javascript:void(0);"  data-href="{{route('showInviteAttendee', ['event_id'=>$event->id])}}" class="loadModal btn btn-success" type="button"><i class="ico-user-plus"></i></button>
-                              </span>
+                    <span class="input-group-btn">
+                 <button data-modal-id="InviteAttendee" href="javascript:void(0);"  data-href="{{route('showInviteAttendee', ['event_id'=>$event->id])}}" class="loadModal btn btn-success" type="button"><i class="ico-user-plus"></i></button>
+                </span>
                         {!!  Form::text('attendees_q', null, [
                     'class' => 'form-control attendee_search',
                             'id' => 'search',
@@ -87,18 +84,12 @@
 
                     <ul v-if="searchResultsCount > 0" class="list-group" id="attendee_list" v-cloak>
                         <li
-                        /* @click="toggleCheckin(attendee)" */
+                        @click="toggleCheckin(attendee)"
                         v-for="attendee in attendees"
                         class="at list-group-item"
                         :class = "{arrived : attendee.has_arrived || attendee.has_arrived == '1'}"
                         >
-                            <a
-                            data-modal-id="CheckAttendee"
-                            href="javascript:void(0);"
-                            data-href="#"
-                            class="loadModal">
-
-                            @lang("Attendee.name"): <b>@{{ attendee.first_name }} @{{ attendee.last_name }} </b> &nbsp; <span v-if="!attendee.is_payment_received" class="label label-danger">@lang("Order.awaiting_payment")</span>
+                        @lang("Attendee.name"): <b>@{{ attendee.first_name }} @{{ attendee.last_name }} </b> &nbsp; <span v-if="!attendee.is_payment_received" class="label label-danger">@lang("Order.awaiting_payment")</span>
                         <br>
                             @lang("Attendee.enveloppe"): <b>@{{ attendee.enveloppe }}</b>
                             <br>
@@ -108,13 +99,9 @@
                                     @lang("Attendee.sender"): <b>@{{ attendee.sender }}</b>
                         <br>
                             @lang("Order.ticket"): <b>@{{ attendee.ticket }}</b>
-                            <br />
-</a>
-
-                        <span href="" class="ci btn btn-successfulQrRead">
+                        <a href="" class="ci btn btn-successfulQrRead">
                             <i class="ico-checkmark"></i>
-                        </span>
-
+                        </a>
                         </li>
                     </ul>
                 </div>
@@ -122,8 +109,6 @@
         </div>
     </div>
 </section>
-
-
 
 <footer class="hide">
     <div class="container">
@@ -162,11 +147,11 @@
                         @{{ scanResultObject.message }}
                     </span>
                     <span class="message" v-if="scanResultObject.status == 'success'">
-                        <span class="uppercase">@lang("Attendee.name")</span>: @{{ scanResultObject.name }}<br>
-                        <span class="uppercase">@lang("Attendee.reference")</span>: @{{scanResultObject.reference }}<br>
-                        <span class="uppercase">@lang("Attendee.ticket")</span>: @{{scanResultObject.ticket }}
-                        <span class="uppercase">@lang("Attendee.company")</span>: @{{scanResultObject.company }}
-                        <span class="uppercase">@lang("Attendee.sender")</span>: @{{scanResultObject.sender }}
+                    <span class="uppercase">@lang("Attendee.name")</span>: @{{ scanResultObject.name }}<br>
+                   <span class="uppercase">@lang("Attendee.reference")</span>: @{{scanResultObject.reference }}<br>
+                   <span class="uppercase">@lang("Attendee.ticket")</span>: @{{scanResultObject.ticket }}
+                   <span class="uppercase">@lang("Attendee.company")</span>: @{{scanResultObject.company }}
+                   <span class="uppercase">@lang("Attendee.sender")</span>: @{{scanResultObject.sender }}
                     </span>
                     <span v-if="isScanning">
                         <div id="scanning-ellipsis">@lang("Attendee.scanning")<span>.</span><span>.</span><span>.</span></div>
@@ -179,38 +164,6 @@
 
 <script>
 Vue.http.headers.common['X-CSRF-TOKEN'] = '{{ csrf_token() }}';
-</script>
-<script>
-var canvas = document.querySelector("canvas");
-
-var signaturePad = new SignaturePad(canvas);
-
-// Returns signature image as data URL (see https://mdn.io/todataurl for the list of possible parameters)
-signaturePad.toDataURL(); // save image as PNG
-signaturePad.toDataURL("image/jpeg"); // save image as JPEG
-signaturePad.toDataURL("image/svg+xml"); // save image as SVG
-
-// Draws signature image from data URL.
-// NOTE: This method does not populate internal data structure that represents drawn signature. Thus, after using #fromDataURL, #toData won't work properly.
-signaturePad.fromDataURL("data:image/png;base64,iVBORw0K...");
-
-// Returns signature image as an array of point groups
-const data = signaturePad.toData();
-
-// Draws signature image from an array of point groups
-signaturePad.fromData(data);
-
-// Clears the canvas
-signaturePad.clear();
-
-// Returns true if canvas is empty, otherwise returns false
-signaturePad.isEmpty();
-
-// Unbinds all event handlers
-signaturePad.off();
-
-// Rebinds all event handlers
-signaturePad.on();
 </script>
 
 @include("Shared.Partials.LangScript")

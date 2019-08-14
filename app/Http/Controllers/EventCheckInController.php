@@ -18,20 +18,21 @@ class EventCheckInController extends MyBaseController
    * @param Request $request
    * @return \Illuminate\Http\JsonResponse
    */
-  public function showSignatureAttendee(Request $request, $event_id, $attendee_id)
+  public function showSignatureAttendee(Request $request, $event_id)
   {
-    $attendee = Attendee::scope()->findOrFail($attendee_id);
+    $event = Event::scope()->findOrFail($event_id);
+    $data = [
+        'event'     => $event,
+        'attendees' => $event->attendees
+    ];
 
-    return view('ManageEvent.Modals.Signature');
+    return view('ManageEvent.Modals.Signature', $data);
   }
-
-
 
     /**
      * Show the check-in page
      *
      * @param $event_id
-     * @param $attendee_id
      * @return \Illuminate\View\View
      */
     public function showCheckIn($event_id)
@@ -57,6 +58,11 @@ class EventCheckInController extends MyBaseController
         return view('ManageEvent.Modals.QrcodeCheckIn');
     }
 
+    public function showCheckInModal(Request $request, $event_id)
+    {
+        return view('ManageEvent.Modals.CheckIn');
+    }
+
     /**
      * Search attendees
      *
@@ -64,7 +70,7 @@ class EventCheckInController extends MyBaseController
      * @param $event_id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function postCheckInSearch(Request $request, $event_id, $attendee_id)
+    public function postCheckInSearch(Request $request, $event_id)
     {
         $searchQuery = $request->get('q');
 
@@ -80,7 +86,6 @@ class EventCheckInController extends MyBaseController
                         'like',
                         $searchQuery . '%'
                     )
-                    //->orWhere('attendees.email', 'like', $searchQuery . '%')
                     ->orWhere('orders.order_reference', 'like', $searchQuery . '%')
                     ->orWhere('attendees.enveloppe', 'like', $searchQuery . '%')
                     ->orWhere('attendees.company', 'like', $searchQuery . '%')
@@ -114,7 +119,7 @@ class EventCheckInController extends MyBaseController
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function postCheckInAttendee(Request $request, $attendee_id)
+    public function postCheckInAttendee(Request $request)
     {
         $attendee_id = $request->get('attendee_id');
         $checking = $request->get('checking');
@@ -153,7 +158,7 @@ class EventCheckInController extends MyBaseController
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function postCheckInAttendeeQr($event_id, Request $request, $attendee_id)
+    public function postCheckInAttendeeQr($event_id, Request $request)
     {
         $event = Event::scope()->findOrFail($event_id);
 
