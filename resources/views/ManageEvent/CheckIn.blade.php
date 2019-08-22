@@ -32,9 +32,6 @@
 </head>
 <body id="app">
 <header>
-    <div class="menuToggle hide">
-        <i class="ico-menu"></i>
-    </div>
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -42,6 +39,7 @@
                     <div class="input-group">
                     <span class="input-group-btn">
                  <button data-modal-id="InviteAttendee" href="javascript:void(0);"  data-href="{{route('showInviteAttendee', ['event_id'=>$event->id])}}" class="loadModal btn btn-success" type="button"><i class="ico-user-plus"></i></button>
+
                 </span>
                         {!!  Form::text('attendees_q', null, [
                     'class' => 'form-control attendee_search',
@@ -67,6 +65,8 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
+
+
                 <div class="attendee_list">
                     <h4 class="attendees_title">
                         <span v-if="!searchTerm">
@@ -84,15 +84,13 @@
 
                     <ul v-if="searchResultsCount > 0" class="list-group" id="attendee_list" v-cloak>
 
-                      <a data-modal-id="CheckInModal" href="javascript:void(0);"  data-href="{{route('showCheckInModal', ['event_id'=>$event->id])}}">
-
                         <li
-                        /* @click="toggleCheckin(attendee)"
                         v-for="attendee in attendees"
-                        class="at list-group-item" */
-                        /* @click="showCheckInModal" */
+                        class="at list-group-item"
                         :class = "{arrived : attendee.has_arrived || attendee.has_arrived == '1'}"
                         >
+
+                        @php ($event_id = $event->id)
 
                         @lang("Attendee.name"): <b>@{{ attendee.first_name }} @{{ attendee.last_name }} </b> &nbsp; <span v-if="!attendee.is_payment_received" class="label label-danger">@lang("Order.awaiting_payment")</span>
                         <br>
@@ -102,12 +100,23 @@
                                     @lang("Attendee.sender"): <b>@{{ attendee.sender }}</b>
                         <br>
                             @lang("Order.ticket"): <b>@{{ attendee.ticket }}</b>
-                        <a href="" class="ci btn btn-successfulQrRead">
+                            <br />
+                            @{{ attendee.id }}
+                            <br />
+
+                            <a
+                                data-modal-id="EditAttendee"
+                                href="javascript:void(0);"
+                                data-href="https://lmem-preprod.appspot.com/event/{{ $event_id }}/@{{ attendee.id }}/modal"
+                                class="loadModal btn btn-xs btn-primary"
+                                > @lang("basic.edit")</a>
+
+                        <span class="ci btn btn-successfulQrRead">
                             <i class="ico-checkmark"></i>
-                        </a>
+                        </span>
+
 
                         </li>
-                        </a>
 
                     </ul>
                 </div>

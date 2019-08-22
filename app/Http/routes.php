@@ -707,6 +707,16 @@ Route::group(
                 'uses' => 'EventCheckInController@confirmOrderTicketsQr',
             ]);
 
+            Route::get('{event_id}/check_in/{attendee_id}/modal', [
+                'as'   => 'showCheckInModal',
+                'uses' => 'EventCheckInController@showCheckInModal',
+            ]);
+
+            Route::post('{event_id}/check_in/{attendee_id}/modal', [
+                'as'   => 'postEditAttendee',
+                'uses' => 'EventAttendeesController@postEditAttendee',
+            ]);
+
 
             /*
              * -------
