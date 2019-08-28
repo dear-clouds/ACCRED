@@ -713,8 +713,8 @@ Route::group(
             ]);
 
             Route::post('{event_id}/check_in/{attendee_id}/modal', [
-                'as'   => 'postEditAttendee',
-                'uses' => 'EventAttendeesController@postEditAttendee',
+                'as'   => 'postCheckInEditAttendee',
+                'uses' => 'EventCheckInController@postCheckInEditAttendee',
             ]);
 
 
@@ -742,5 +742,12 @@ Route::group(
             return 'TODO: add terms and cond';
         }
     ]);
+
+
+
+    Route::get('/exception/{message}', function ($message) {
+    throw new Exception("Intentional exception, message: $message");
+});
+
 
 });

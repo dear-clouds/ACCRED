@@ -10,7 +10,7 @@ skip_files:
 
 env_variables:
   # Put production environment variables here.
-  APP_ENV: production   # or local
+  APP_ENV: local   # or production
   APP_DEBUG : true
   APP_LOG: errorlog
   APP_KEY: base64:gLg34YBy+1f3DsonrAnP7kdiNBsAozlsxJLiJ7HDJ10=

@@ -12,7 +12,17 @@
             <div class="modal-body">
                 <div class="row">
 
-                    <canvas></canvas>
+
+<div id="signature-pad" class="m-signature-pad">
+  <div class="m-signature-pad--body">
+    <canvas style="border: 2px dashed #ccc"></canvas>
+  </div>
+
+  <div class="m-signature-pad--footer">
+    <button type="button" class="btn btn-sm btn-secondary" data-action="clear">Clear</button>
+    <button type="button" class="btn btn-sm btn-primary" data-action="save">Save</button>
+  </div>
+</div>
 
                     </div>
                 </div>

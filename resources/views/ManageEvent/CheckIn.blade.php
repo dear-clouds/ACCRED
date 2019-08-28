@@ -13,6 +13,7 @@
     {!! HTML::script('vendor/jquery/dist/jquery.min.js') !!}
 
     @include('Shared/Layouts/ViewJavascript')
+
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
     <meta name="apple-mobile-web-app-capable" content="yes">
 
@@ -95,21 +96,16 @@
                         @lang("Attendee.name"): <b>@{{ attendee.first_name }} @{{ attendee.last_name }} </b> &nbsp; <span v-if="!attendee.is_payment_received" class="label label-danger">@lang("Order.awaiting_payment")</span>
                         <br>
                                 @lang("Attendee.company"): <b>@{{ attendee.company }}</b>
-
-                                <br>
-                                    @lang("Attendee.sender"): <b>@{{ attendee.sender }}</b>
                         <br>
                             @lang("Order.ticket"): <b>@{{ attendee.ticket }}</b>
                             <br />
-                            @{{ attendee.id }}
-                            <br />
 
                             <a
-                                data-modal-id="EditAttendee"
+                                data-modal-id="showCheckInModal@{{ attendee.id }}"
                                 href="javascript:void(0);"
-                                data-href="https://lmem-preprod.appspot.com/event/{{ $event_id }}/@{{ attendee.id }}/modal"
+                                data-href="https://lmem-preprod.appspot.com/event/{{ $event_id }}/check_in/@{{ attendee.id }}/modal"
                                 class="loadModal btn btn-xs btn-primary"
-                                > @lang("basic.edit")</a>
+                                > Check-in</a>
 
                         <span class="ci btn btn-successfulQrRead">
                             <i class="ico-checkmark"></i>
@@ -180,6 +176,8 @@
 <script>
 Vue.http.headers.common['X-CSRF-TOKEN'] = '{{ csrf_token() }}';
 </script>
+
+
 
 @include("Shared.Partials.LangScript")
 {!! HTML::script('vendor/qrcode-scan/llqrcode.js') !!}

@@ -32,6 +32,8 @@ class Attendee extends MyBaseModel
         'account_id',
         'reference',
         'enveloppe',
+        'company',
+        'sender',
         'has_arrived',
         'arrival_time'
     ];
