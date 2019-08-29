@@ -1,12 +1,10 @@
 <html>
 <head>
-  
+
 
   {!! HTML::script('vendor/jquery/dist/jquery.min.js') !!}
 
-  @include('Shared/Layouts/ViewJavascript')
 
-  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
 </head>
 <body>
 
@@ -166,6 +164,17 @@
 
                               </script>
 
+                              <h2>Enveloppe</h2>
+                              {{$attendee->enveloppe}}
+
+
+                              <a
+                                  href="{{route('postCheckInAttendee', ['attendee_id'=>$attendee->id])}}"
+                                  >Check-in</a></li>
+                          </ul>
+
+                            </div>
+
 
                             </div>
 
@@ -187,6 +196,22 @@
 
 @include("Shared.Partials.LangScript")
 {!! HTML::script('assets/javascript/backend.js') !!}
+<script>
+    $(function () {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            }
+        });
+    });
+
+    @if(!Auth::user()->first_name)
+      setTimeout(function () {
+        $('.editUserModal').click();
+    }, 1000);
+    @endif
+
+</script>
 <script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
 </body>
 </html>

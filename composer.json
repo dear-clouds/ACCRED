@@ -41,7 +41,9 @@
         "laravel/tinker": "^1.0",
         "setasign/fpdf": "^1.8",
         "setasign/fpdi": "^2.2",
-        "ext-gd": "*"
+        "ext-gd": "*",
+        "phpoffice/phpspreadsheet": "^1.9",
+        "gluedev/laravel-stackdriver": "^0.1.1"
     },
     "require-dev": {
         "phpunit/phpunit": "7.3.*",

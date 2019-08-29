@@ -70,6 +70,10 @@ return [
             'prefix'    => env('DB_PREFIX'),
             'unix_socket' => env('DB_SOCKET', ''),
             'strict'    => false,
+            'engine'    => null,
+            'options'   => [
+              \PDO::ATTR_PERSISTENT => true
+            ]
         ],
 
         'pgsql' => [

@@ -117,7 +117,7 @@ class EventAttendeesController extends MyBaseController
     public function postInviteAttendee(Request $request, $event_id)
     {
         $rules = [
-            'first_name' => 'required',
+            'last_name' => 'required',
             'ticket_id'  => 'required|exists:tickets,id,account_id,' . \Auth::user()->account_id,
             'email'      => 'email',
         ];
@@ -231,9 +231,13 @@ class EventAttendeesController extends MyBaseController
             return response()->json([
                 'status'      => 'success',
                 'redirectUrl' => route('showEventAttendees', [
-                    'event_id' => $event_id,
+                'event_id' => $event_id,
                 ]),
             ]);
+
+            // return back()->json([
+            //     'status'      => 'success'
+            // ]);
 
         } catch (Exception $e) {
 
@@ -284,6 +288,7 @@ class EventAttendeesController extends MyBaseController
     public function postImportAttendee(Request $request, $event_id)
     {
         $rules = [
+            'ticket_id'  => 'required|exists:tickets,id,account_id,' . \Auth::user()->account_id,
             'attendees_list' => 'required|mimes:csv,txt,xlsx|max:500000000|',
         ];
 
@@ -299,7 +304,7 @@ class EventAttendeesController extends MyBaseController
             ]);
 
         }
-        $attendee = Attendee::findOrFail($event_id);
+
         $ticket_id = $request->get('ticket_id');
         $event = Event::findOrFail($event_id);
         $ticket_price = 0;
@@ -307,12 +312,12 @@ class EventAttendeesController extends MyBaseController
         $num_added = 0;
         if ($request->file('attendees_list')) {
 
-            $the_file = Excel::load($request->file('attendees_list')->getRealPath(), function ($reader) {
+          $the_file = Excel::load($request->file('attendees_list')->getRealPath(), function ($reader) {
             })->get();
 
             // Loop through
             foreach ($the_file as $rows) {
-                if (!empty($rows['enveloppe'])) {
+                if (!empty($rows['enveloppe']) && !empty($rows['last_name'])) {
                     $num_added++;
                     $attendee_first_name = strip_tags($rows['first_name']);
                     $attendee_last_name = strip_tags($rows['last_name']);
