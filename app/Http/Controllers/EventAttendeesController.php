@@ -304,7 +304,7 @@ class EventAttendeesController extends MyBaseController
             ]);
 
         }
-        $enveloppe = [];
+
         $ticket_id = $request->get('ticket_id');
         $event = Event::findOrFail($event_id);
         $ticket_price = 0;
@@ -316,22 +316,8 @@ class EventAttendeesController extends MyBaseController
             })->get();
 
             // Loop through
-            foreach ($the_file as $key => $value) {
-
-
-                  // Skip enveloppe previously added using array_key_exists or in_array
-                    if (array_key_exists($value->enveloppe, $enveloppe))
-                        continue;
-
-                    $rows[] = ['enveloppe' => $value->enveloppe, 'first_name' => $value->first_name, 'last_name' => $value->last_name, 'company' => $value->company, 'email' => $value->email, 'sender' => $value->sender];
-
-                    // Index added enveloppe
-                    $enveloppe[$value->enveloppe] = true; // or array_push
-
-                  }
-
-                  if (!empty($rows['enveloppe']) && !empty($rows['last_name'])) {
-
+            foreach ($the_file as $rows) {
+                if (!empty($rows['enveloppe']) && !empty($rows['last_name'])) {
                     $num_added++;
                     $attendee_first_name = strip_tags($rows['first_name']);
                     $attendee_last_name = strip_tags($rows['last_name']);
@@ -428,6 +414,151 @@ class EventAttendeesController extends MyBaseController
             ]),
         ]);
     }
+
+    // public function postImportAttendee(Request $request, $event_id)
+    // {
+    //     $rules = [
+    //         'ticket_id'  => 'required|exists:tickets,id,account_id,' . \Auth::user()->account_id,
+    //         'attendees_list' => 'required|mimes:csv,txt,xlsx|max:500000000|',
+    //     ];
+    //
+    //     $messages = [
+    //         'ticket_id.exists' => trans("Controllers.ticket_not_exists_error"),
+    //     ];
+    //
+    //     $validator = Validator::make($request->all(), $rules, $messages);
+    //     if ($validator->fails()) {
+    //         return response()->json([
+    //             'status'   => 'error',
+    //             'messages' => $validator->messages()->toArray(),
+    //         ]);
+    //
+    //     }
+    //     $enveloppe = [];
+    //     $ticket_id = $request->get('ticket_id');
+    //     $event = Event::findOrFail($event_id);
+    //     $ticket_price = 0;
+    //     $email_attendee = $request->get('email_ticket');
+    //     $num_added = 0;
+    //     if ($request->file('attendees_list')) {
+    //
+    //       $the_file = Excel::load($request->file('attendees_list')->getRealPath(), function ($reader) {
+    //         })->get();
+    //
+    //         if(!empty($the_file) && $the_file->count()){
+    //         // Loop through
+    //         foreach ($the_file as $key => $value) {
+    //
+    //
+    //               // Skip enveloppe previously added using array_key_exists or in_array
+    //                 if (array_key_exists($value->enveloppe, $enveloppe))
+    //                     continue;
+    //
+    //                 $rows[] = ['enveloppe' => $value->enveloppe, 'first_name' => $value->first_name, 'last_name' => $value->last_name, 'company' => $value->company, 'email' => $value->email, 'sender' => $value->sender];
+    //
+    //                 // Index added enveloppe
+    //                 $enveloppe[$value->enveloppe] = true; // or array_push
+    //
+    //               }
+    //
+    //               if (!empty($rows['enveloppe']) && !empty($rows['last_name'])) {
+    //
+    //                 $num_added++;
+    //                 $attendee_first_name = strip_tags($rows['first_name']);
+    //                 $attendee_last_name = strip_tags($rows['last_name']);
+    //                 $attendee_email = $rows['email'];
+    //                 $attendee_enveloppe = $rows['enveloppe'];
+    //                 $attendee_company = strip_tags($rows['company']);
+    //                 $attendee_sender = strip_tags($rows['sender']);
+    //
+    //                 error_log($ticket_id . ' ' . $ticket_price . ' ' . $email_attendee);
+    //
+    //
+    //                 /**
+    //                  * Create the order
+    //                  */
+    //                 $order = new Order();
+    //                 $order->first_name = $attendee_first_name;
+    //                 $order->last_name = $attendee_last_name;
+    //                 $order->enveloppe = $attendee_enveloppe;
+    //                 $order->company = $attendee_company;
+    //                 $order->sender = $attendee_sender;
+    //                 $order->email = $attendee_email;
+    //                 $order->order_status_id = config('attendize.order_complete');
+    //                 $order->amount = $ticket_price;
+    //                 $order->account_id = Auth::user()->account_id;
+    //                 $order->event_id = $event_id;
+    //
+    //                 // Calculating grand total including tax
+    //                 $orderService = new OrderService($ticket_price, 0, $event);
+    //                 $orderService->calculateFinalCosts();
+    //                 $order->taxamt = $orderService->getTaxAmount();
+    //
+    //                 if ($orderService->getGrandTotal() == 0) {
+    //                     $order->is_payment_received = 1;
+    //                 }
+    //
+    //                 $order->save();
+    //
+    //                 /**
+    //                  * Update qty sold
+    //                  */
+    //                 $ticket = Ticket::scope()->find($ticket_id);
+    //                 $ticket->increment('quantity_sold');
+    //                 $ticket->increment('sales_volume', $ticket_price);
+    //                 $ticket->event->increment('sales_volume', $ticket_price);
+    //
+    //                 /**
+    //                  * Insert order item
+    //                  */
+    //                 $orderItem = new OrderItem();
+    //                 $orderItem->title = $ticket->title;
+    //                 $orderItem->quantity = 1;
+    //                 $orderItem->order_id = $order->id;
+    //                 $orderItem->unit_price = $ticket_price;
+    //                 $orderItem->save();
+    //
+    //                 /**
+    //                  * Update the event stats
+    //                  */
+    //                 $event_stats = new EventStats();
+    //                 $event_stats->updateTicketsSoldCount($event_id, 1);
+    //                 // $event_stats->updateTicketRevenue($ticket_id, $ticket_price);
+    //
+    //                 /**
+    //                  * Create the attendee
+    //                  */
+    //                 $attendee = new Attendee();
+    //                 $attendee->first_name = $attendee_first_name;
+    //                 $attendee->last_name = $attendee_last_name;
+    //                 $attendee->email = $attendee_email;
+    //                 $attendee->enveloppe = $attendee_enveloppe;
+    //                 $attendee->company = $attendee_company;
+    //                 $attendee->sender = $attendee_sender;
+    //                 $attendee->event_id = $event_id;
+    //                 $attendee->order_id = $order->id;
+    //                 $attendee->ticket_id = $ticket_id;
+    //                 $attendee->account_id = Auth::user()->account_id;
+    //                 $attendee->reference_index = 1;
+    //                 $attendee->save();
+    //
+    //                 if ($email_attendee == '1') {
+    //                     $this->dispatch(new SendAttendeeInvite($attendee));
+    //                 }
+    //             }
+    //         };
+    //     }
+    //
+    //     session()->flash('message', $num_added . ' Attendees Successfully Invited');
+    //
+    //     return response()->json([
+    //         'status'      => 'success',
+    //         'id'          => $attendee->id,
+    //         'redirectUrl' => route('showEventAttendees', [
+    //             'event_id' => $event_id,
+    //         ]),
+    //     ]);
+    // }
 
     /**
      * Show the printable attendee list
