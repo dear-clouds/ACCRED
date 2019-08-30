@@ -10,22 +10,22 @@ skip_files:
 
 env_variables:
   # Put production environment variables here.
-  APP_ENV: production   # or production
+  APP_ENV: local   # or production
   APP_DEBUG : true
   APP_LOG: errorlog
-  APP_KEY: base64:gLg34YBy+1f3DsonrAnP7kdiNBsAozlsxJLiJ7HDJ10=
+  APP_KEY: b
   # CACHE_DRIVER: database
   # SESSION_DRIVER: database
   ## Set these environment variables according to your CloudSQL configuration.
   DB_CONNECTION: mysql
   DB_HOST: localhost
   DB_PORT: 3306
-  DB_DATABASE: accred
+  DB_DATABASE: 
   DB_USERNAME: root
-  DB_PASSWORD: Fiawec@2019
-  DB_SOCKET: "/cloudsql/lmem-preprod:europe-west1:accred-app"
+  DB_PASSWORD: 
+  DB_SOCKET: 
 
 beta_settings:
     # for Cloud SQL, set this value to the Cloud SQL connection name,
     # e.g. "project:region:cloudsql-instance"
-    cloud_sql_instances: "lmem-preprod:europe-west1:accred-app"
+    cloud_sql_instances: 
