@@ -114,6 +114,8 @@
                                 </div>
                               </div>
 
+                              {!! HTML::script('vendor/jquery/dist/jquery.min.js') !!}
+
                               <script>
                               $(function () {
                                 var wrapper = document.getElementById("signature-pad"),
@@ -212,7 +214,6 @@
     @endif
 
 </script>
-{!! HTML::script('vendor/jquery/dist/jquery.min.js') !!}
 <script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
 </body>
 </html>
