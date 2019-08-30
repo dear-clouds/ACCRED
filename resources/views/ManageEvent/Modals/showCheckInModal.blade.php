@@ -1,10 +1,5 @@
 <html>
 <head>
-
-
-  {!! HTML::script('vendor/jquery/dist/jquery.min.js') !!}
-
-
 </head>
 <body>
 
