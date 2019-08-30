@@ -10,6 +10,7 @@
 
     {!! HTML::style('assets/stylesheet/application.css') !!}
     {!! HTML::style('assets/stylesheet/check_in.css') !!}
+    {!! HTML::script('vendor/jquery/dist/jquery.min.js') !!}
 
     @include('Shared/Layouts/ViewJavascript')
 
