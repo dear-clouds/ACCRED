@@ -697,6 +697,11 @@ Route::group(
                 'uses' => 'EventCheckInController@postCheckInAttendee',
             ]);
 
+            Route::post('{event_id}/check_in/{attendee_id}/modal/checkin', [
+                'as'   => 'postCheckInAttendee',
+                'uses' => 'EventCheckInController@postCheckInAttendee',
+            ]);
+
             Route::post('{event_id}/qrcode_check_in', [
                 'as'   => 'postQRCodeCheckInAttendee',
                 'uses' => 'EventCheckInController@postCheckInAttendeeQr',
