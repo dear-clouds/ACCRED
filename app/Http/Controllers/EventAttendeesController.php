@@ -236,7 +236,8 @@ class EventAttendeesController extends MyBaseController
             // ]);
 
             return back()->json([
-                'status'      => 'success'
+                'status'      => 'success',
+                'event_id' => $event_id,
             ]);
 
         } catch (Exception $e) {
