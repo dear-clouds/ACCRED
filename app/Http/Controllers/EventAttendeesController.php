@@ -228,17 +228,16 @@ class EventAttendeesController extends MyBaseController
 
             DB::commit();
 
-            // return response()->json([
-            //     'status'      => 'success',
-            //     'redirectUrl' => route('showEventAttendees', [
-            //     'event_id' => $event_id,
-            //     ]),
-            // ]);
-
-            return back()->json([
+            return response()->json([
                 'status'      => 'success',
+                'redirectUrl' => '#', [
                 'event_id' => $event_id,
+                ]),
             ]);
+
+            // return back()->json([
+            //     'status'      => 'success'
+            // ]);
 
         } catch (Exception $e) {
 
