@@ -124,14 +124,14 @@
                                 // Adjust canvas coordinate space taking into account pixel ratio,
                                 // to make it look crisp on mobile devices.
                                 // This also causes canvas to be cleared.
-                                window.resizeCanvas = $timeout(function() {
-                                  var ratio =  window.devicePixelRatio || 1;
-                                  canvas.width = canvas.offsetWidth * ratio;
-                                  canvas.height = canvas.offsetHeight * ratio;
-                                  canvas.getContext("2d").scale(ratio, ratio);
-                                });
-
-                                resizeCanvas();
+                                // window.resizeCanvas = function () {
+                                //   var ratio =  window.devicePixelRatio || 1;
+                                //   canvas.width = canvas.offsetWidth * ratio;
+                                //   canvas.height = canvas.offsetHeight * ratio;
+                                //   canvas.getContext("2d").scale(ratio, ratio);
+                                // }
+                                //
+                                // resizeCanvas();
 
                                 signaturePad = new SignaturePad(canvas);
 
