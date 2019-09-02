@@ -1,6 +1,8 @@
+{!! HTML::script('vendor/jquery/dist/jquery.min.js') !!}
 <script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
+
 <div role="dialog"  class="modal fade" style="display: none;">
-   {!! Form::model($attendee, array('url' => route('postCheckInEditAttendee', array('event_id' => $event->id, 'attendee_id' => $attendee->id)), 'class' => 'ajax')) !!}
+   {!! Form::model($attendee, array('url' => route('postEditAttendee', array('event_id' => $event->id, 'attendee_id' => $attendee->id)), 'class' => 'ajax')) !!}
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header text-center">
