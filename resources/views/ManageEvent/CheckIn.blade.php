@@ -11,7 +11,6 @@
     {!! HTML::style('assets/stylesheet/application.css') !!}
     {!! HTML::style('assets/stylesheet/check_in.css') !!}
     {!! HTML::script('vendor/jquery/dist/jquery.min.js') !!}
-    <script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
 
     @include('Shared/Layouts/ViewJavascript')
 
