@@ -95,7 +95,7 @@
 
                               <div id="signature-pad" class="m-signature-pad">
                                 <div class="m-signature-pad--body">
-                                  <canvas style="border: 2px dashed #ccc"></canvas>
+                                  <canvas style="border: 2px dashed #ccc; height: 200px; width: 100%;"></canvas>
                                 </div>
 
                                 <div class="m-signature-pad--footer">
@@ -170,7 +170,7 @@
 
                               </script>
 
-
+<script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
 
 
 
