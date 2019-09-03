@@ -56,7 +56,7 @@
                     <span class="text">@lang("ManageEvent.check-in")</span>
                 </a>
             </li>
-            <li class="{{ Request::is('*surveys*') ? 'active' : '' }}">
+            <!-- <li class="{{ Request::is('*surveys*') ? 'active' : '' }}">
                 <a href="{{route('showEventSurveys', array('event_id' => $event->id))}}">
                     <span class="figure"><i class="ico-question"></i></span>
                     <span class="text">@lang("ManageEvent.surveys")</span>
@@ -73,7 +73,7 @@
                     <span class="figure"><i class="ico-money"></i></span>
                     <span class="text">@lang("AccessCodes.title")</span>
                 </a>
-            </li>
+            </li> -->
         </ul>
     </section>
 </aside>
