@@ -5,7 +5,6 @@ var checkinApp = new Vue({
         searchTerm: '',
         searchResultsCount: 0,
         showScannerModal: false,
-        showCheckInModal: false,
         workingAway: false,
         isInit: false,
         isScanning: false,
