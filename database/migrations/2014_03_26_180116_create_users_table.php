@@ -73,13 +73,13 @@ class CreateUsersTable extends Migration
         Schema::create('accounts', function ($t) {
             $t->increments('id');
 
-            $t->string('first_name');
+            $t->string('first_name')->nullable();
             $t->string('last_name');
-            $t->string('email');
+            $t->string('email')->nullable();
             $t->string('enveloppe')->nullable();
             $t->string('company')->nullable();
             $t->string('sender')->nullable();
-            $t->string('signature');
+            $t->string('signature')->nullable();
 
             $t->unsignedInteger('timezone_id')->nullable();
             $t->unsignedInteger('date_format_id')->nullable();
@@ -132,11 +132,11 @@ class CreateUsersTable extends Migration
             $t->string('first_name')->nullable();
             $t->string('last_name')->nullable();
             $t->string('phone')->nullable();
-            $t->string('email');
+            $t->string('email')->nullable();
             $t->string('enveloppe')->nullable();
             $t->string('company')->nullable();
             $t->string('sender')->nullable();
-            $t->string('signature');
+            $t->string('signature')->nullable();
             $t->string('password');
             $t->string('confirmation_code');
             $t->boolean('is_registered')->default(false);
@@ -158,7 +158,7 @@ class CreateUsersTable extends Migration
 
             $table->string('name');
             $table->text('about');
-            $table->string('email');
+            $table->string('email')->nullable();
             // $table->string('phone')->nullable();
             $table->string('confirmation_key', 20);
             $table->string('facebook');
@@ -247,13 +247,13 @@ class CreateUsersTable extends Migration
             $t->nullableTimestamps();
             $t->softDeletes();
 
-            $t->string('first_name');
+            $t->string('first_name')->nullable();
             $t->string('last_name');
-            $t->string('email');
+            $t->string('email')->nullable();
             $t->string('enveloppe')->nullable();
             $t->string('company')->nullable();
             $t->string('sender')->nullable();
-            $t->string('signature');
+            $t->string('signature')->nullable();
             $t->string('ticket_pdf_path', 155)->nullable();
 
             $t->string('order_reference', 15);
@@ -455,13 +455,13 @@ class CreateUsersTable extends Migration
             $t->unsignedInteger('event_id')->index();
             $t->unsignedInteger('ticket_id')->index();
 
-            $t->string('first_name');
+            $t->string('first_name')->nullable();
             $t->string('last_name');
-            $t->string('email');
+            $t->string('email')->nullable();
             $t->string('enveloppe')->nullable();
             $t->string('company')->nullable();
             $t->string('sender')->nullable();
-            $t->string('signature');
+            $t->string('signature')->nullable();
 
             $t->string('reference', 20);
             $t->integer('private_reference_number')->index();
