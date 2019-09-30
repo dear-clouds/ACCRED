@@ -101,7 +101,7 @@
 
                                 <div class="m-signature-pad--footer">
                                   <button type="button" class="btn btn-sm btn-secondary" data-action="clear">Clear</button>
-                                  <button @click="toggleCheckin(attendee)" type="button" class="btn btn-sm btn-primary" data-action="save">Save</button>
+                                  <button type="button" class="btn btn-sm btn-primary" data-action="save">Save</button>
                                 </div>
                               </div>
 
@@ -153,8 +153,7 @@
                                       url: '/check_in/',
                                       type: 'POST',
                                       data: {
-                                        signature: signaturePad.toDataURL('image/png'),
-                                        position: $('#position').val()
+                                        signature: signaturePad.toDataURL('image/png')
                                       },
                                       success: function(response)
                                       {
@@ -178,6 +177,8 @@
 
 
                               <h2>Enveloppe n°{{$attendee->enveloppe}}</h2>
+
+                              <button @click="toggleCheckin(attendee)">Check-in</button>
 
 
                           </ul>
