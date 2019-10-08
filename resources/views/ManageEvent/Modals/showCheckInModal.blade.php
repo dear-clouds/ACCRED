@@ -150,10 +150,10 @@
                                     var image_data = dataUrl.replace(/^data:image\/(png|jpg);base64,/, "");
 
                                     $.ajax({
-                                      url: '/check_in/',
+                                      url: '/signature/',
                                       type: 'POST',
                                       data: {
-                                        signature: signaturePad.toDataURL('image/png')
+                                        signature: signaturePad.toDataURL('image/png'),
                                       },
                                       success: function(response)
                                       {
@@ -178,7 +178,7 @@
 
                               <h2>Enveloppe n°{{$attendee->enveloppe}}</h2>
 
-                              <a href="{{ action(EventCheckInController@postCheckInAttendee) }}">Check-in</a>
+                              <a href="{{ action(EventCheckInController@postCheckInAttendee', $attendee->id ) }}">Check-in</a>
 
 
                           </ul>
