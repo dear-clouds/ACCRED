@@ -236,33 +236,6 @@ class EventCheckInController extends MyBaseController
             ]);
         }
 
-        $attendee->has_arrived = ($checking == 'in') ? 1 : 0;
-        $attendee->arrival_time = Carbon::now();
-        $attendee->save();
-
-        // $data_uri = "data:image/png;base64,signature";
-        // $encoded_image = explode(",", $data_uri)[1];
-        // $decoded_image = base64_decode($encoded_image);
-        // Storage::put($attendee_id . '-signature.png', $decoded_image);
-
-        $signature = new Signature;
-        $signature->attendee_id = $attendee_id;
-        $signature->position = $request->position;
-
-        $data_uri = $request->signature;
-        $encoded_image = explode(",", $data_uri)[1];
-        //$decoded_image = base64_decode($encoded_image);
-
-        $sig = sha1($request->session()->get('attendee.first_name').$request->session()->get('attendee.last_name')) . "_signature.png";
-        $folder = '/uploads/signatures/';
-
-        Storage::put($folder, $sig);
-
-        $signature->signature = $encoded_image;
-        $signature->save();
-
-        dd($attendee, $signature);
-
         return response()->json([
             'status'  => 'success',
             'checked' => $checking,
@@ -282,7 +255,7 @@ class EventCheckInController extends MyBaseController
          var imageData = signaturePad.toDataURL();
          document.getElementsByName("image")[0].setAttribute("value", imageData);
   }
-  
+
     public function postSignatureAttendee(Request $request)
     {
         $attendee_id = $request->get('attendee_id');
