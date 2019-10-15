@@ -233,11 +233,6 @@ class EventCheckInController extends MyBaseController
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-      public function getSignaturePad() {
-         var imageData = signaturePad.toDataURL();
-         document.getElementsByName("image")[0].setAttribute("value", imageData);
-  }
-
     public function postSignatureAttendee(Request $request)
     {
         $attendee_id = $request->get('attendee_id');
