@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'env' => env('APP_ENV', 'production'),
+    'env' => env('APP_ENV', 'local'),
 
     /*
     |--------------------------------------------------------------------------
@@ -39,7 +39,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'https://lmem-preprod.appspot.com'),
+    'url' => env('APP_URL', 'https://accred.fiawec.com'),
 
     /*
     |--------------------------------------------------------------------------
