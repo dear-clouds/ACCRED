@@ -143,15 +143,6 @@ class EventCheckInController extends MyBaseController
         $attendee = Attendee::scope()->findOrFail($attendee_id);
         $attendee->update($request->all());
 
-        dd($attendee);
-
-        $data_uri = "data:image/png;base64,signature";
-        $encoded_image = explode(",", $data_uri)[1];
-        $decoded_image = base64_decode($encoded_image);
-        Storage::put($attendee_id . '-signature.png', $decoded_image);
-
-        dd($decoded_image);
-
         session()->flash('message',trans("Controllers.successfully_updated_attendee"));
 
         return response()->json([
@@ -273,8 +264,8 @@ class EventCheckInController extends MyBaseController
         $folder = '/uploads/signatures/';
 
         Storage::put($folder, $sig);
-        // $attendee->signature = $encoded_image;
-        // $attendee->save();
+        $attendee->signature = $encoded_image;
+        $attendee->save();
 
 
 
@@ -282,8 +273,9 @@ class EventCheckInController extends MyBaseController
         // $signature->save();
 
         return response()->json([
-            'status'  => 'success',
-            'id'      => $attendee->id,
+            'status'      => 'success',
+            'id'          => $attendee->id,
+            'redirectUrl' => '',
         ]);
     }
 
