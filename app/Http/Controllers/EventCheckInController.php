@@ -262,7 +262,7 @@ class EventCheckInController extends MyBaseController
 
         $attendee = Attendee::scope()->find($attendee_id);
 
-        $signature = new Signature;
+        // $signature = new Signature;
         $signature->attendee_id = $attendee_id;
         $signature->position = $request->position;
 
@@ -270,7 +270,7 @@ class EventCheckInController extends MyBaseController
         $encoded_image = explode(",", $data_uri)[1];
         //$decoded_image = base64_decode($encoded_image);
 
-        // $sig = sha1($request->session()->get('attendee.first_name').$request->session()->get('attendee.last_name')) . "_signature.png";
+        $sig = sha1($request->session()->get('attendee.first_name').$request->session()->get('attendee.last_name')) . "_signature.png";
         $folder = '/uploads/signatures/';
 
         Storage::put($folder, $sig);
