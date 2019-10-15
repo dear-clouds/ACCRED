@@ -263,8 +263,8 @@ class EventCheckInController extends MyBaseController
         $attendee = Attendee::scope()->find($attendee_id);
 
         // $signature = new Signature;
-        $signature->attendee_id = $attendee_id;
-        $signature->position = $request->position;
+        // $signature->attendee_id = $attendee_id;
+        // $signature->position = $request->position;
 
         $data_uri = $request->signature;
         $encoded_image = explode(",", $data_uri)[1];
@@ -274,9 +274,13 @@ class EventCheckInController extends MyBaseController
         $folder = '/uploads/signatures/';
 
         Storage::put($folder, $sig);
+        $attendee->signature = $sig;
+        $attendee->save();
 
-        $signature->signature = $encoded_image;
-        $signature->save();
+
+
+        // $signature->signature = $encoded_image;
+        // $signature->save();
 
         return response()->json([
             'status'  => 'success',
