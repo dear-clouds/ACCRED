@@ -109,6 +109,13 @@
 
                               <script>
                               $(function () {
+
+                                $.ajaxSetup({
+                                    headers: {
+                                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                    }
+                                });
+
                                 var wrapper = document.getElementById("signature-pad"),
                                     clearButton = wrapper.querySelector("[data-action=clear]"),
                                     saveButton = wrapper.querySelector("[data-action=save]"),
@@ -171,7 +178,7 @@
 
                               <h2>Enveloppe n°{{$attendee->enveloppe}}</h2>
 
-                              <!-- <a href="{{ action(EventCheckInController@postCheckInAttendee', $attendee->id ) }}">Check-in</a> -->
+                              <a href="{{ action(EventCheckInController@postCheckInAttendee', $attendee->id ) }}">Check-in</a>
 
 
                           </ul>

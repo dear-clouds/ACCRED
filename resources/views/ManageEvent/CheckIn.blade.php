@@ -179,7 +179,7 @@ Vue.http.headers.common['X-CSRF-TOKEN'] = '{{ csrf_token() }}';
 
 @include("Shared.Partials.LangScript")
 {!! HTML::script('assets/javascript/backend.js') !!}
-<script>
+/* <script>
     $(function () {
         $.ajaxSetup({
             headers: {
@@ -194,7 +194,7 @@ Vue.http.headers.common['X-CSRF-TOKEN'] = '{{ csrf_token() }}';
     }, 1000);
     @endif
 
-</script>
+</script> */
 {!! HTML::script('vendor/qrcode-scan/llqrcode.js') !!}
 {!! HTML::script('assets/javascript/check_in.js') !!}
 </body>
