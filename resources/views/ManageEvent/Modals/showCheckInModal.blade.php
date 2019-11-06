@@ -1,7 +1,7 @@
 
 
 <div role="dialog"  class="modal fade" style="display: none;">
-   {!! Form::model($attendee, array('url' => route('postCheckInEditAttendee', array('event_id' => $event->id, 'attendee_id' => $attendee->id)), 'class' => 'ajax')) !!}
+   {!! Form::model($attendee, array('url' => route('postEditAttendee', array('event_id' => $event->id, 'attendee_id' => $attendee->id)), 'class' => 'ajax')) !!}
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header text-center">
@@ -86,6 +86,11 @@
                                             'class'=>'form-control'
                                             ))  !!}
                                 </div>
+
+
+                                {!! Form::hidden('attendee_id', $attendee->id) !!}
+                                {!! Form::button(trans("basic.cancel"), ['class'=>"btn modal-close btn-danger",'data-dismiss'=>'modal']) !!}
+                                {!! Form::submit(trans("ManageEvent.edit_attendee"), ['class'=>"btn btn-success"]) !!}
                             </div>
                         </div>
                         <div class="row">
@@ -186,7 +191,7 @@
             <div class="modal-footer">
                {!! Form::hidden('attendee_id', $attendee->id) !!}
                {!! Form::button(trans("basic.cancel"), ['class'=>"btn modal-close btn-danger",'data-dismiss'=>'modal']) !!}
-               {!! Form::submit(trans("ManageEvent.edit_attendee"), ['class'=>"btn btn-success"]) !!}
+               <a href="" class="btn btn-success">Check-in</a>
             </div>
         </div><!-- /end modal content-->
        {!! Form::close() !!}
