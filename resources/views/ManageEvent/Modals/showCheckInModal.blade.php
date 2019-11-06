@@ -193,8 +193,7 @@
             </div> <!-- /end modal body-->
             <div class="modal-footer">
 
-
-              
+              <a href="/event/{{ $event_id }}/qrcode_check_in" class="btn btn-success">Check-in</a>
             </div>
         </div><!-- /end modal content-->
 
