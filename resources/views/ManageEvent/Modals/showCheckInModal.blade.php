@@ -193,9 +193,9 @@
             </div> <!-- /end modal body-->
             <div class="modal-footer">
 
-              {!! Form::open(['method' => 'post', 'route' => 'postCheckInAttendee']) !!}
+              {<form method="post" action="{{ action('EventCheckInController@postCheckInAttendee') }}" accept-charset="UTF-8">
               <button type="submit"><i class="glyphicon glyphicon-remove"></i>Check-in</button>
-              {!! Form::close() !!}
+            </form>
 
 
             </div>
