@@ -194,7 +194,7 @@
             <div class="modal-footer">
 
               <!-- <form method="post" action="{{route('postCheckInAttendee', ['event_id' => $event->id, 'attendee_id' => $attendee->id, 'checking' => $attendee->has_arrived])}}"> -->
-              <button @click="toggleCheckin(attendee)" name="check-in" class="btn btn-success">Check-in</button>
+              <button @click="toggleCheckin()" name="check-in" class="btn btn-success">Check-in</button>
             <!-- </form> -->
 
 
@@ -211,7 +211,7 @@ var checkinApp = new Vue({
     },
 
     methods: {
-        toggleCheckin: function (attendee) {
+        toggleCheckin: function () {
 
             if(this.workingAway) {
                 return;
