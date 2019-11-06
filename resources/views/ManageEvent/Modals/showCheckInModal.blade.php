@@ -179,6 +179,7 @@
 
                               <h2>Enveloppe n°{{$attendee->enveloppe}}</h2>
 
+                          </ul>
 
                             </div>
 
@@ -192,12 +193,13 @@
             </div> <!-- /end modal body-->
             <div class="modal-footer">
 
-              <button onclick="toggleCheckin(attendee)"></i>Check-in</button>
+              <form method="post" action="{{ action('EventCheckInController@postCheckInAttendee') }}" accept-charset="UTF-8">
+              <button type="submit" name="check-in">Check-in</button>
+            </form>
+
 
             </div>
         </div><!-- /end modal content-->
 
     </div>
 </div>
-{!! HTML::script('vendor/qrcode-scan/llqrcode.js') !!}
-{!! HTML::script('assets/javascript/check_in.js') !!}
