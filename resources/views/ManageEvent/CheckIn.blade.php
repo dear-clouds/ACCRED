@@ -83,11 +83,12 @@
 
                     <ul v-if="searchResultsCount > 0" class="list-group" id="attendee_list" v-cloak>
 
-                        <li
-                        v-for="attendee in attendees"
-                        class="at list-group-item"
-                        :class = "{arrived : attendee.has_arrived || attendee.has_arrived == '1'}"
-                        >
+                    <li
+                    @click="toggleCheckin(attendee)"
+                    v-for="attendee in attendees"
+                    class="at list-group-item"
+                    :class = "{arrived : attendee.has_arrived || attendee.has_arrived == '1'}"
+                    >
 
                         @php ($event_id = $event->id)
 
@@ -155,10 +156,8 @@
                     </span>
                     <span class="message" v-if="scanResultObject.status == 'success'">
                     <span class="uppercase">@lang("Attendee.name")</span>: @{{ scanResultObject.name }}<br>
-                   /* <span class="uppercase">@lang("Attendee.reference")</span>: @{{scanResultObject.reference }}<br> */
                    <span class="uppercase">@lang("Attendee.ticket")</span>: @{{scanResultObject.ticket }}
                    <span class="uppercase">@lang("Attendee.company")</span>: @{{scanResultObject.company }}
-                   /* <span class="uppercase">@lang("Attendee.sender")</span>: @{{scanResultObject.sender }} */
                     </span>
                     <span v-if="isScanning">
                         <div id="scanning-ellipsis">@lang("Attendee.scanning")<span>.</span><span>.</span><span>.</span></div>
@@ -172,7 +171,22 @@
 
 @include("Shared.Partials.LangScript")
 {!! HTML::script('assets/javascript/backend.js') !!}
+<script>
+    $(function () {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            }
+        });
+    });
 
+    @if(!Auth::user()->first_name)
+      setTimeout(function () {
+        $('.editUserModal').click();
+    }, 1000);
+    @endif
+
+</script>
 {!! HTML::script('vendor/qrcode-scan/llqrcode.js') !!}
 {!! HTML::script('assets/javascript/check_in.js') !!}
 </body>
