@@ -13,7 +13,6 @@
     {!! HTML::script('vendor/jquery/dist/jquery.min.js') !!}
 
     @include('Shared/Layouts/ViewJavascript')
-
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
     <meta name="apple-mobile-web-app-capable" content="yes">
 
@@ -33,15 +32,18 @@
 </head>
 <body id="app">
 <header>
+    <div class="menuToggle hide">
+        <i class="ico-menu"></i>
+    </div>
     <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <div class="attendee_input_wrap">
                     <div class="input-group">
-                    <span class="input-group-btn">
-                 <button data-modal-id="InviteAttendee" href="javascript:void(0);"  data-href="{{route('showInviteAttendee', ['event_id'=>$event->id])}}" class="loadModal btn btn-success" type="button"><i class="ico-user-plus"></i></button>
-
-                </span>
+                                  <span class="input-group-btn">
+                                 <button @click="showQrModal" title="Scan QR Code" class="btn btn-default qr_search" type="button"><i
+                                              class="ico-qrcode"></i></button>
+                                </span>
                         {!!  Form::text('attendees_q', null, [
                     'class' => 'form-control attendee_search',
                             'id' => 'search',
@@ -66,8 +68,6 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-
-
                 <div class="attendee_list">
                     <h4 class="attendees_title">
                         <span v-if="!searchTerm">
@@ -84,34 +84,21 @@
                     </div>
 
                     <ul v-if="searchResultsCount > 0" class="list-group" id="attendee_list" v-cloak>
-
                         <li
+                        @click="toggleCheckin(attendee)"
                         v-for="attendee in attendees"
                         class="at list-group-item"
                         :class = "{arrived : attendee.has_arrived || attendee.has_arrived == '1'}"
                         >
-
-                        @php ($event_id = $event->id)
-
-                        @lang("Attendee.name"): <b>@{{ attendee.first_name }} @{{ attendee.last_name }} </b> &nbsp; <span v-if="!attendee.is_payment_received" class="label label-danger">@lang("Order.awaiting_payment")</span>
+                            @lang("Attendee.name"): <b>@{{ attendee.first_name }} @{{ attendee.last_name }} </b> &nbsp; <span v-if="!attendee.is_payment_received" class="label label-danger">@lang("Order.awaiting_payment")</span>
                         <br>
-                                @lang("Attendee.company"): <b>@{{ attendee.company }}</b>
+                            @lang("Order.reference"): <b>@{{ attendee.order_reference + '-' + attendee.reference_index }}</b>
                         <br>
                             @lang("Order.ticket"): <b>@{{ attendee.ticket }}</b>
-                            <br />
-
-                                <script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
-
-                                <button data-modal-id="showCheckInModal@{{ attendee.id }}" href="javascript:void(0);"  data-href="/event/{{ $event_id }}/check_in/@{{ attendee.id }}/modal" class="loadModal btn btn-success" type="button">Check-in</button>
-
-
-                        <span class="ci btn btn-successfulQrRead">
+                        <a href="" class="ci btn btn-successfulQrRead">
                             <i class="ico-checkmark"></i>
-                        </span>
-
-
+                        </a>
                         </li>
-
                     </ul>
                 </div>
             </div>
@@ -156,11 +143,9 @@
                         @{{ scanResultObject.message }}
                     </span>
                     <span class="message" v-if="scanResultObject.status == 'success'">
-                    <span class="uppercase">@lang("Attendee.name")</span>: @{{ scanResultObject.name }}<br>
-                   /* <span class="uppercase">@lang("Attendee.reference")</span>: @{{scanResultObject.reference }}<br> */
-                   <span class="uppercase">@lang("Attendee.ticket")</span>: @{{scanResultObject.ticket }}
-                   <span class="uppercase">@lang("Attendee.company")</span>: @{{scanResultObject.company }}
-                   /* <span class="uppercase">@lang("Attendee.sender")</span>: @{{scanResultObject.sender }} */
+                        <span class="uppercase">@lang("Attendee.name")</span>: @{{ scanResultObject.name }}<br>
+                        <span class="uppercase">@lang("Attendee.reference")</span>: @{{scanResultObject.reference }}<br>
+                        <span class="uppercase">@lang("Attendee.ticket")</span>: @{{scanResultObject.ticket }}
                     </span>
                     <span v-if="isScanning">
                         <div id="scanning-ellipsis">@lang("Attendee.scanning")<span>.</span><span>.</span><span>.</span></div>
@@ -171,25 +156,11 @@
 </div>
 {{-- /END QR Modal--}}
 
+<script>
+Vue.http.headers.common['X-CSRF-TOKEN'] = '{{ csrf_token() }}';
+</script>
 
 @include("Shared.Partials.LangScript")
-{!! HTML::script('assets/javascript/backend.js') !!}
-<script>
-    $(function () {
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-            }
-        });
-    });
-
-    @if(!Auth::user()->first_name)
-      setTimeout(function () {
-        $('.editUserModal').click();
-    }, 1000);
-    @endif
-
-</script>
 {!! HTML::script('vendor/qrcode-scan/llqrcode.js') !!}
 {!! HTML::script('assets/javascript/check_in.js') !!}
 </body>
