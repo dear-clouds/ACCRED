@@ -171,23 +171,8 @@
 
 
 @include("Shared.Partials.LangScript")
+{!! HTML::script('assets/javascript/backend.js') !!}
 
-<script>
-    $(function () {
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-            }
-        });
-    });
-
-    @if(!Auth::user()->first_name)
-      setTimeout(function () {
-        $('.editUserModal').click();
-    }, 1000);
-    @endif
-
-</script>
 {!! HTML::script('vendor/qrcode-scan/llqrcode.js') !!}
 {!! HTML::script('assets/javascript/check_in.js') !!}
 </body>
