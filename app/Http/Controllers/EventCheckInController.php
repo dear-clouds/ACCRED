@@ -100,48 +100,48 @@ class EventCheckInController extends MyBaseController
      * @param $attendee_id
      * @return mixed
      */
-    public function postCheckInEditAttendee(Request $request, $event_id, $attendee_id)
-    {
-        $rules = [
-            'first_name' => 'required',
-            'ticket_id'  => 'required|exists:tickets,id,account_id,' . Auth::user()->account_id,
-            // 'email'      => 'required|email',
-        ];
-
-        $messages = [
-            'ticket_id.exists'   => trans("Controllers.ticket_not_exists_error"),
-            'ticket_id.required' => trans("Controllers.ticket_field_required_error"),
-        ];
-
-        $validator = Validator::make($request->all(), $rules, $messages);
-
-        if ($validator->fails()) {
-            return response()->json([
-                'status'   => 'error',
-                'messages' => $validator->messages()->toArray(),
-            ]);
-        }
-
-        $attendee = Attendee::scope()->findOrFail($attendee_id);
-        $attendee->update($request->all());
-
-        dd($attendee);
-
-        $data_uri = "data:image/png;base64,signature";
-        $encoded_image = explode(",", $data_uri)[1];
-        $decoded_image = base64_decode($encoded_image);
-        Storage::put($attendee_id . '-signature.png', $decoded_image);
-
-        dd($decoded_image);
-
-        session()->flash('message',trans("Controllers.successfully_updated_attendee"));
-
-        return response()->json([
-            'status'      => 'success',
-            'id'          => $attendee->id,
-            'redirectUrl' => '',
-        ]);
-    }
+    // public function postCheckInEditAttendee(Request $request, $event_id, $attendee_id)
+    // {
+    //     $rules = [
+    //         'first_name' => 'required',
+    //         'ticket_id'  => 'required|exists:tickets,id,account_id,' . Auth::user()->account_id,
+    //         // 'email'      => 'required|email',
+    //     ];
+    //
+    //     $messages = [
+    //         'ticket_id.exists'   => trans("Controllers.ticket_not_exists_error"),
+    //         'ticket_id.required' => trans("Controllers.ticket_field_required_error"),
+    //     ];
+    //
+    //     $validator = Validator::make($request->all(), $rules, $messages);
+    //
+    //     if ($validator->fails()) {
+    //         return response()->json([
+    //             'status'   => 'error',
+    //             'messages' => $validator->messages()->toArray(),
+    //         ]);
+    //     }
+    //
+    //     $attendee = Attendee::scope()->findOrFail($attendee_id);
+    //     $attendee->update($request->all());
+    //
+    //     dd($attendee);
+    //
+    //     $data_uri = "data:image/png;base64,signature";
+    //     $encoded_image = explode(",", $data_uri)[1];
+    //     $decoded_image = base64_decode($encoded_image);
+    //     Storage::put($attendee_id . '-signature.png', $decoded_image);
+    //
+    //     dd($decoded_image);
+    //
+    //     session()->flash('message',trans("Controllers.successfully_updated_attendee"));
+    //
+    //     return response()->json([
+    //         'status'      => 'success',
+    //         'id'          => $attendee->id,
+    //         'redirectUrl' => '',
+    //     ]);
+    // }
 
     /**
      * Search attendees
