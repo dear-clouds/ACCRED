@@ -97,7 +97,7 @@
                         <div class="row">
                             <div class="col-md-12">
 
-
+<form method="post" action="{{ action('EventCheckInController@postCheckInAttendee') }}" accept-charset="UTF-8">
 
                               <h2>Check-in</h2>
 
@@ -193,11 +193,13 @@
             </div> <!-- /end modal body-->
             <div class="modal-footer">
 
-              
+
+              <button type="submit"><i class="glyphicon glyphicon-remove"></i>Check-in</button>
+
 
 
             </div>
         </div><!-- /end modal content-->
-
+</form>
     </div>
 </div>
