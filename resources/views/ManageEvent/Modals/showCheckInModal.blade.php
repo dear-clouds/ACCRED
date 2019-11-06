@@ -193,8 +193,8 @@
             </div> <!-- /end modal body-->
             <div class="modal-footer">
 
-              <form method="post" action="{{route('postCheckInAttendee', ['event_id' => $event->id])}}">
-              <button type="submit" name="check-in">Check-in</button>
+              <form method="post" action="{{route('postCheckInAttendee', ['event_id' => $event->id, 'attendee_id' => $attendee->id])}}">
+              <button type="submit" name="check-in" class="btn btn-success">Check-in</button>
             </form>
 
 
