@@ -193,9 +193,7 @@
             </div> <!-- /end modal body-->
             <div class="modal-footer">
 
-              <!-- {<form method="post" action="{{ action('EventCheckInController@postCheckInAttendee') }}" accept-charset="UTF-8">
-              <button type="submit"><i class="glyphicon glyphicon-remove"></i>Check-in</button>
-            </form> -->
+              
 
 
             </div>
