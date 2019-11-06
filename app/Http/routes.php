@@ -697,15 +697,12 @@ Route::group(
                 'uses' => 'EventCheckInController@postCheckInAttendee',
             ]);
 
-            Route::post('/check_in/', [
-                'as'   => 'postCheckInAttendeeModal',
-                'uses' => 'EventCheckInController@postCheckInAttendee',
-            ]);
+            // Route::post('/check_in/', [
+            //     'as'   => 'postCheckInAttendeeModal',
+            //     'uses' => 'EventCheckInController@postCheckInAttendee',
+            // ]);
 
-            Route::post('/signature/', [
-                'as'   => 'postSignatureAttendee',
-                'uses' => 'EventCheckInController@postSignatureAttendee',
-            ]);
+
 
             Route::post('{event_id}/qrcode_check_in', [
                 'as'   => 'postQRCodeCheckInAttendee',
@@ -722,9 +719,14 @@ Route::group(
                 'uses' => 'EventCheckInController@showCheckInModal',
             ]);
 
-            Route::post('{event_id}/check_in/{attendee_id}/modal', [
+            Route::post('{event_id}/check_in/{attendee_id}/modal/edit', [
                 'as'   => 'postCheckInEditAttendee',
                 'uses' => 'EventCheckInController@postCheckInEditAttendee',
+            ]);
+
+            Route::post('{event_id}/check_in/{attendee_id}/signature', [
+                'as'   => 'postSignatureAttendee',
+                'uses' => 'EventCheckInController@postSignatureAttendee',
             ]);
 
 
