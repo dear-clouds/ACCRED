@@ -97,7 +97,7 @@
                         <div class="row">
                             <div class="col-md-12">
 
-                              {!! Form::model($attendee, array('url' => route('postQRCodeCheckInAttendee', array('event_id' => $event->id)), 'class' => 'ajax')) !!}
+                            
 
                               <h2>Check-in</h2>
 
