@@ -72,25 +72,25 @@ class EventCheckInController extends MyBaseController
      * @param $attendee_id
      * @return mixed
      */
-    // public function postSignatureAttendee(Request $request, $event_id, $attendee_id)
-    // {
-    //
-    //     $data_uri = "data:image/png;base64,signature";
-    //     $encoded_image = explode(",", $data_uri)[1];
-    //     $decoded_image = base64_decode($encoded_image);
-    //     Storage::put('/uploads/signatures/' . $attendee_id . '-signature.png', $decoded_image);
-    //
-    //     $attendee = Attendee::scope()->findOrFail($attendee_id);
-    //     $attendee->update($request->all());
-    //
-    //     session()->flash('message',trans("Controllers.successfully_updated_attendee"));
-    //
-    //     return response()->json([
-    //         'status'      => 'success',
-    //         'id'          => $attendee->id,
-    //         'redirectUrl' => '',
-    //     ]);
-    // }
+    public function postSignatureAttendee(Request $request, $event_id, $attendee_id)
+    {
+
+        $data_uri = "data:image/png;base64,signature";
+        $encoded_image = explode(",", $data_uri)[1];
+        $decoded_image = base64_decode($encoded_image);
+        Storage::put('/uploads/signatures/' . $attendee_id . '-signature.png', $decoded_image);
+
+        $attendee = Attendee::scope()->findOrFail($attendee_id);
+        $attendee->update($request->all());
+
+        session()->flash('message',trans("Controllers.successfully_updated_attendee"));
+
+        return response()->json([
+            'status'      => 'success',
+            'id'          => $attendee->id,
+            'redirectUrl' => '',
+        ]);
+    }
 
     /**
      * Updates an attendee
@@ -245,7 +245,7 @@ class EventCheckInController extends MyBaseController
     //     $signature->attendee_id = $attendee_id;
     //     $signature->event_id = $event_id;
     //     // $signature->position = $request->position;
-    // 
+    //
     //     $data_uri = $request->signature;
     //     $encoded_image = explode(",", $data_uri)[1];
     //     //$decoded_image = base64_decode($encoded_image);
