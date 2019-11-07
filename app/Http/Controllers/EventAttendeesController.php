@@ -317,7 +317,7 @@ class EventAttendeesController extends MyBaseController
 
             // Loop through
             foreach ($the_file as $rows) {
-                if (!empty($rows['enveloppe']) {
+                if (!empty($rows['enveloppe']) && !empty($rows['last_name'])) {
                     $num_added++;
                     $attendee_first_name = strip_tags($rows['first_name']);
                     $attendee_last_name = strip_tags($rows['last_name']);
