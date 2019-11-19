@@ -135,6 +135,24 @@
                                 //
                                 // resizeCanvas();
 
+                                function resizeCanvas() {
+     var ratio = Math.max(window.devicePixelRatio || 1, 1);
+     canvas.width = canvas.offsetWidth * ratio;
+     canvas.height = canvas.offsetHeight * ratio;
+     canvas.getContext("2d").scale(ratio, ratio);
+  }
+
+  function drawCanvas() {
+     resizeCanvas();
+     signaturePad = new SignaturePad(canvas);
+     if ("{$fsc->firma}" !== "") {
+        signaturePad.fromDataURL("{$fsc->firma}");
+     }
+  }
+
+  window.addEventListener("resize", drawCanvas);
+  drawCanvas();
+
                                 signaturePad = new SignaturePad(canvas);
 
                                 clearButton.addEventListener("click", function(event) {
