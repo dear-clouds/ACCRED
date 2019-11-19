@@ -153,7 +153,7 @@
   window.addEventListener("resize", drawCanvas);
   drawCanvas();
 
-                                signaturePad = new SignaturePad(canvas);
+                                // signaturePad = new SignaturePad(canvas);
 
                                 clearButton.addEventListener("click", function(event) {
                                   signaturePad.clear();
