@@ -135,22 +135,7 @@
                                 //
                                 // resizeCanvas();
 
-                                function resizeCanvas() {
-     var ratio = Math.max(window.devicePixelRatio || 1, 1);
-     canvas.width = canvas.offsetWidth * ratio;
-     canvas.height = canvas.offsetHeight * ratio;
-     canvas.getContext("2d").scale(ratio, ratio);
-  }
-
-  function drawCanvas() {
-     resizeCanvas();
-     signaturePad = new SignaturePad(canvas);
-  }
-
-  window.addEventListener("resize", drawCanvas);
-  drawCanvas();
-
-                                // signaturePad = new SignaturePad(canvas);
+                                signaturePad = new SignaturePad(canvas);
 
                                 clearButton.addEventListener("click", function(event) {
                                   signaturePad.clear();
@@ -209,6 +194,7 @@
             <div class="modal-footer">
 
               <form method="post" action="{{route('postCheckInAttendee', ['event_id' => $event->id, 'attendee_id' => $attendee->id, 'checking' => $attendee->has_arrived])}}">
+                @csrf
               <button type="submit" name="check-in" class="btn btn-success">Check-in</button>
             </form>
 
