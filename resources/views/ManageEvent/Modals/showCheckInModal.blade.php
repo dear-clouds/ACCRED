@@ -1,4 +1,4 @@
-
+    {!! HTML::script('vendor/jquery/dist/jquery.min.js') !!}
 
 <div role="dialog"  class="modal fade" style="display: none;">
    {!! Form::model($attendee, array('url' => route('postEditAttendee', array('event_id' => $event->id, 'attendee_id' => $attendee->id)), 'class' => 'ajax')) !!}
