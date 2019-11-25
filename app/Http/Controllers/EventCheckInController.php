@@ -231,8 +231,8 @@ class EventCheckInController extends MyBaseController
             'checked' => $checking,
             'message' =>  (($checking == 'in') ? trans("Controllers.attendee_successfully_checked_in") : trans("Controllers.attendee_successfully_checked_out")),
             'id'      => $attendee->id,
-            ]);
-            ->refresh();
+          ]);
+           App::make('redirect')->back()->refresh()->with('flash_success', 'Thank you,!');
     }
 
 
