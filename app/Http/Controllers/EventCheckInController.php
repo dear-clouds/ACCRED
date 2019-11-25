@@ -210,6 +210,9 @@ class EventCheckInController extends MyBaseController
          * Ugh
          */
         if ((($checking == 'in') && ($attendee->has_arrived == 1)) || (($checking == 'out') && ($attendee->has_arrived == 0))) {
+
+            Attendee::find($attendee->id)->update(['has_arrived' => false, 'arrival_time' => null]);
+
             return response()->json([
                 'status'  => 'error',
                 'message' => 'Attendee Already Checked ' . (($checking == 'in') ? 'In (at ' . $attendee->arrival_time->format('H:i A, F j') . ')' : 'Out') . '!',
