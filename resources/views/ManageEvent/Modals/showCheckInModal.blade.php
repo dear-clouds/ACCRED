@@ -193,7 +193,7 @@
             </div> <!-- /end modal body-->
             <div class="modal-footer">
 
-              <form method="get" action="{{route('postCheckInAttendee', ['event_id' => $event->id])}}" class="ajax" id="check-form">
+              <form method="post" action="{{route('postCheckInAttendee', ['event_id' => $event->id])}}" class="ajax" id="check-form">
                 @csrf
                 {!! Form::hidden('attendee_id', $attendee->id) !!}
                 {!! Form::hidden('has_arrived', $attendee->has_arrived) !!}
