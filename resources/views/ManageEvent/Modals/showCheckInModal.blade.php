@@ -135,6 +135,8 @@
                                 //
                                 // resizeCanvas();
 
+                                signaturePad = new SignaturePad(canvas);
+
                                 function resizeCanvas() {
                                   var ratio =  Math.max(window.devicePixelRatio || 1, 1);
                                   canvas.width = canvas.offsetWidth * ratio;
@@ -146,7 +148,7 @@
                               window.addEventListener("resize", resizeCanvas);
                               resizeCanvas();
 
-                                signaturePad = new SignaturePad(canvas);
+
 
                                 clearButton.addEventListener("click", function(event) {
                                   signaturePad.clear();
