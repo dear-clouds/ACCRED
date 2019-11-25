@@ -61,9 +61,9 @@ class EventCheckInController extends MyBaseController
             'tickets'  => $attendee->event->tickets->pluck('title', 'id'),
         ];
 
-        JavaScript::put([
-            'checkInRoute'       => route('postCheckInAttendee', ['event_id' => $event->id]),
-        ]);
+        // JavaScript::put([
+        //     'checkInRoute'       => route('postCheckInAttendee', ['event_id' => $event->id]),
+        // ]);
 
         return view('ManageEvent.Modals.showCheckInModal', $data);
     }
