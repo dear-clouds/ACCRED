@@ -218,18 +218,22 @@ class EventCheckInController extends MyBaseController
                 'message' => 'Attendee Already Checked ' . (($checking == 'in') ? 'In (at ' . $attendee->arrival_time->format('H:i A, F j') . ')' : 'Out') . '!',
                 'checked' => $checking,
                 'id'      => $attendee->id,
-                'redirectUrl' => '',
+                'redirectUrl' => route('showCheckIn', [
+                'event_id' => $event_id,
             ]);
         }
 
         Attendee::find($attendee->id)->update(['has_arrived' => true, 'arrival_time' => Carbon::now()]);
+
+        session()->flash('message', 'Attendeee successfully checked in!'));
 
         return response()->json([
             'status'  => 'success',
             'checked' => $checking,
             'message' =>  (($checking == 'in') ? trans("Controllers.attendee_successfully_checked_in") : trans("Controllers.attendee_successfully_checked_out")),
             'id'      => $attendee->id,
-            'redirectUrl' => '',
+            'redirectUrl' => route('showCheckIn', [
+            'event_id' => $event_id,
         ]);
     }
 
