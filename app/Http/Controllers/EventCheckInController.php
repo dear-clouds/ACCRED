@@ -228,9 +228,7 @@ class EventCheckInController extends MyBaseController
             'checked' => $checking,
             'message' =>  (($checking == 'in') ? trans("Controllers.attendee_successfully_checked_in") : trans("Controllers.attendee_successfully_checked_out")),
             'id'      => $attendee->id,
-            'redirectUrl' => route('showCheckIn', [
-            'event_id' => $event_id,
-            ]),
+            'redirectUrl' => '',
         ]);
     }
 
