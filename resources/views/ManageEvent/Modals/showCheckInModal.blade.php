@@ -97,7 +97,7 @@
                         <div class="row">
                             <div class="col-md-12">
 
-
+                              @if ($attendee->has_arrived == 1)
 
                               <h2>Check-in</h2>
 
@@ -173,13 +173,9 @@
 
                               </script>
 
-
-
-
-
                               <h2>Enveloppe n°{{$attendee->enveloppe}}</h2>
 
-                          </ul>
+                            @endif
 
                             </div>
 
