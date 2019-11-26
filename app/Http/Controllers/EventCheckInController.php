@@ -211,15 +211,17 @@ class EventCheckInController extends MyBaseController
          */
         if ((($checking == 'in') || ($attendee->has_arrived == 1))) {
 
-            Attendee::find($attendee->id)->update(['has_arrived' => 0, 'arrival_time' => 0]);
+            Attendee::find($attendee->id)->update(['has_arrived' => 0, 'arrival_time' => 0, 'checking' => $checking]);
 
-            return response()->json([
-                'status'  => 'error',
-                'message' => 'Attendee Already Checked ' . (($checking == 'in') ? 'In (at ' . $attendee->arrival_time->format('H:i A, F j') . ')' : 'Out') . '!',
-                'checked' => $checking,
-                'id'      => $attendee->id,
-                'redirectUrl' => '/event/' . $event_id . '/check_in',
-            ]);
+            return redirect()->back()->with('success', trans("Controllers.attendee_successfully_checked_out"));
+
+            // return response()->json([
+            //     'status'  => 'error',
+            //     'message' => 'Attendee Already Checked ' . (($checking == 'in') ? 'In (at ' . $attendee->arrival_time->format('H:i A, F j') . ')' : 'Out') . '!',
+            //     'checked' => $checking,
+            //     'id'      => $attendee->id,
+            //     'redirectUrl' => '/event/' . $event_id . '/check_in',
+            // ]);
         }
 
         else {
