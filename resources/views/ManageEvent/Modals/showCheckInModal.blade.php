@@ -218,3 +218,14 @@
 
     </div>
 </div>
+
+<script>
+done: function() {
+
+  if (data.redirect) {
+      // here you actually redirect to the new page
+      window.location = data.redirect;
+  }
+
+}
+</script>
