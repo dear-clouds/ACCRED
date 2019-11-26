@@ -218,6 +218,7 @@ class EventCheckInController extends MyBaseController
                 'message' => 'Attendee Already Checked ' . (($checking == 'in') ? 'In (at ' . $attendee->arrival_time->format('H:i A, F j') . ')' : 'Out') . '!',
                 'checked' => $checking,
                 'id'      => $attendee->id,
+                'redirectUrl' => '/event/' . $event_id . '/check_in',
             ]);
         }
 

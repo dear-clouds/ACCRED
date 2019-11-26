@@ -194,7 +194,7 @@
             <div class="modal-footer">
 
               @if ($attendee->has_arrived == 1)
-              <form method="post" action="{{route('postCheckInAttendee', ['event_id' => $event->id])}}" class="ajax" id="check-form">
+              <form method="post" action="{{route('postCheckInAttendee', ['event_id' => $event->id])}}" id="check-form">
                 @csrf
                 {!! Form::hidden('attendee_id', $attendee->id) !!}
                 {!! Form::hidden('has_arrived', $attendee->has_arrived) !!}
@@ -202,7 +202,7 @@
               <button type="submit" name="check-in" class="btn btn-danger">Check-out</button>
 
               @else
-              <form method="post" action="{{route('postCheckInAttendee', ['event_id' => $event->id])}}" class="ajax" id="check-form">
+              <form method="post" action="{{route('postCheckInAttendee', ['event_id' => $event->id])}}" id="check-form">
                 @csrf
                 {!! Form::hidden('attendee_id', $attendee->id) !!}
                 {!! Form::hidden('has_arrived', $attendee->has_arrived) !!}
