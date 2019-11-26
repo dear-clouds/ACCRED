@@ -193,7 +193,7 @@
             </div> <!-- /end modal body-->
             <div class="modal-footer">
 
-              @if ($attendee->checking == 1)
+              @if ($attendee->has_arrived == 1)
               <form method="post" action="{{route('postCheckInAttendee', ['event_id' => $event->id])}}" class="ajax" id="check-form">
                 @csrf
                 {!! Form::hidden('attendee_id', $attendee->id) !!}
