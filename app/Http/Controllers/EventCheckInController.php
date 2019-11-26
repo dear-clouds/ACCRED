@@ -209,7 +209,7 @@ class EventCheckInController extends MyBaseController
         /*
          * Ugh
          */
-        if ((($checking == 'in') && ($attendee->has_arrived == 1)) || (($checking == 'out') && ($attendee->has_arrived == 0))) {
+        if ((($checking == 'in') && ($attendee->has_arrived == 1))) {
 
             Attendee::find($attendee->id)->update(['has_arrived' => 0, 'arrival_time' => 0]);
 
