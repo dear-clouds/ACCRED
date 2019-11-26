@@ -93,11 +93,11 @@
                                 {!! Form::submit(trans("ManageEvent.edit_attendee"), ['class'=>"btn btn-success"]) !!}
                             </div>
                         </div>
-
+                        {!! Form::close() !!}
                         <div class="row">
                             <div class="col-md-12">
 
-                              @if ($attendee->has_arrived == 1)
+                              @if ($attendee->has_arrived == 0)
 
                               <h2>Check-in</h2>
 
@@ -176,7 +176,7 @@
                               <h2>Enveloppe n°{{$attendee->enveloppe}}</h2>
 
                             @endif
-{!! Form::close() !!}
+
                             </div>
 
 
