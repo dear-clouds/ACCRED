@@ -101,8 +101,7 @@
 
                 <h2>Check-in</h2>
 
-                <form>
-                {{ csrf_field() }}
+
                 <div id="signature-pad" class="m-signature-pad">
                 <div class="m-signature-pad--body">
                 <canvas style="border: 2px dashed #ccc; height: 200px; width: 100%;"></canvas>
@@ -113,20 +112,12 @@
               <button type="button" class="btn btn-sm btn-primary" data-action="save">Save</button>
             </div>
           </div>
-          </form>
 
 
 
           <script>
 
           $(function () {
-
-            $.ajaxSetup({
- headers: {
-   'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
- }
-});
-
             var wrapper = document.getElementById("signature-pad"),
                 clearButton = wrapper.querySelector("[data-action=clear]"),
                 saveButton = wrapper.querySelector("[data-action=save]"),
@@ -163,6 +154,7 @@
                 $.ajax({
                   url: '/signature',
                   type: 'POST',
+                  "_token": "{{ csrf_token() }}",},
                   data: {
                     signature: signaturePad.toDataURL(),
                   },
