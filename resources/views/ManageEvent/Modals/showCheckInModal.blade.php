@@ -146,7 +146,7 @@
             });
             var saveButton = document.getElementById('save');
             var cancelButton = document.getElementById('clear');
-            var assid = document.getElementById('assid').value;
+            // var assid = document.getElementById('assid').value;
 
             cancelButton.addEventListener('click', function (event){
                 event.preventDefault();
@@ -166,12 +166,11 @@
                         type: 'POST',
                         data : {
                             signature: signaturePad.toDataURL(),
-                            assid: assid,
 
                         },
                         success: function(response)
                         {
-                            alert('The signature has been saved reload the page to view the signature.')
+                            alert('The signature has been saved.')
 
                             console.log(response);
                         },
