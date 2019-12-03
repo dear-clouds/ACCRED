@@ -9,7 +9,7 @@ use DB;
 use Illuminate\Http\Request;
 use JavaScript;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Http\RedirectResponse
+use Illuminate\Http\RedirectResponse;
 
 class EventCheckInController extends MyBaseController
 {
