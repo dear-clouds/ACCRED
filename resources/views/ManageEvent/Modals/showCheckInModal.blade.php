@@ -152,7 +152,7 @@
                 // var image_data = dataUrl.replace(/^data:image\/(png|jpg);base64,/, "");
 
                 $.ajax({
-                  url: '{{route('saveSignature')}',
+                  url: '/signature/',
                   type: 'POST',
                   data: {
                     signature: signaturePad.toDataURL(),
