@@ -55,7 +55,8 @@
         <div class="col-sm-6">
             <div class="stat-box">
                 <h3>{{ $event->tickets->sum('quantity_sold') }}</h3>
-                <span>@lang("Dashboard.tickets_sold")</span>
+                <!-- <span>@lang("Dashboard.tickets_sold")</span> -->
+                <span>Attendees</span>
             </div>
         </div>
         <!-- <div class="col-sm-6">

@@ -80,7 +80,7 @@
                     <thead>
                         <tr>
                             <th>
-                               {!!Html::sortable_link(trans("Attendee.name"), $sort_by, 'first_name', $sort_order, ['q' => $q , 'page' => $attendees->currentPage()])!!}
+                               {!!Html::sortable_link(trans("Attendee.name"), $sort_by, 'last_name', $sort_order, ['q' => $q , 'page' => $attendees->currentPage()])!!}
                             </th>
                             <th>
                                {!!Html::sortable_link(trans("Attendee.company"), $sort_by, 'company', $sort_order, ['q' => $q , 'page' => $attendees->currentPage()])!!}
@@ -149,6 +149,16 @@
                                     data-href="{{route('showCancelAttendee', ['event_id'=>$event->id, 'attendee_id'=>$attendee->id])}}"
                                     class="loadModal btn btn-xs btn-danger"
                                     > @lang("basic.cancel")</a>
+
+                                    @if ($attendee->has_arrived == 1)
+
+                                    <span class="ci btn btn-successfulQrRead">
+                                      <i class="ico-checkmark"></i>
+                                    </span>
+
+                                    @else
+
+                                    @endif
                             </td>
                         </tr>
                         @endforeach
