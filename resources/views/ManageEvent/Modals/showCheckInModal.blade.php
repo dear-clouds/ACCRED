@@ -130,8 +130,8 @@
 
             signaturePad = new SignaturePad(canvas);
 
-            var attendee_id = document.getElementById("attendee_id").value;
-            var event_id = document.getElementById("event_id").value;
+            var attendee_id = wrapper.querySelector("attendee_id").value;
+            var event_id = wrapper.querySelector("event_id").value;
 
             clearButton.addEventListener("click", function(event) {
               signaturePad.clear();
