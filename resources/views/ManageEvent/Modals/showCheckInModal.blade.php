@@ -152,7 +152,7 @@
                   },
                   success: function(response)
                   {
-                      sweetAlert("Success!", "You have been check-in!", "success");
+                      alert("Success!", "You have been check-in!", "success");
                   },
                 }).done(function() {
                   //
