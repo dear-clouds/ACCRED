@@ -98,7 +98,7 @@
                     <tbody>
                         @foreach($attendees as $attendee)
                         <tr class="attendee_{{$attendee->id}} {{$attendee->is_cancelled ? 'danger' : ''}}">
-                            <td>{{{$attendee->full_name}}}</td>
+                            <td>{{{$attendee->last_name}}} {{{$attendee->first_name}}}</td>
                             <td>
                                 <a data-modal-id="MessageAttendee" href="javascript:void(0);" class="loadModal"
                                     data-href="{{route('showMessageAttendee', ['attendee_id'=>$attendee->id])}}"
@@ -110,7 +110,7 @@
                             <td>
                               @if ($attendee->has_arrived == 1)
 
-                              <span class="ci btn btn-successfulQrRead" style="background-color: #36F158; color:white;border: none;border-radius: 150px;padding: 6px;">
+                              <span class="ci btn btn-successfulQrRead" style="background-color: #36F158; color:white;border: none;border-radius: 150px;padding: 6px 10px;">
                                 <i class="ico-checkmark"></i>
                               </span>
 

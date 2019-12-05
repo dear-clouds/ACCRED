@@ -76,7 +76,7 @@ class CreateUsersTable extends Migration
             $t->string('first_name')->nullable();
             $t->string('last_name');
             $t->string('email')->nullable();
-            $t->string('enveloppe')->nullable();
+            $t->integer('enveloppe')->nullable();
             $t->string('company')->nullable();
             $t->string('sender')->nullable();
             $t->string('signature')->nullable();
@@ -133,7 +133,7 @@ class CreateUsersTable extends Migration
             $t->string('last_name')->nullable();
             $t->string('phone')->nullable();
             $t->string('email')->nullable();
-            $t->string('enveloppe')->nullable();
+            $t->integer('enveloppe')->nullable();
             $t->string('company')->nullable();
             $t->string('sender')->nullable();
             $t->string('signature')->nullable();
@@ -250,7 +250,7 @@ class CreateUsersTable extends Migration
             $t->string('first_name')->nullable();
             $t->string('last_name');
             $t->string('email')->nullable();
-            $t->string('enveloppe')->nullable();
+            $t->integer('enveloppe')->nullable();
             $t->string('company')->nullable();
             $t->string('sender')->nullable();
             $t->string('signature')->nullable();
@@ -458,7 +458,7 @@ class CreateUsersTable extends Migration
             $t->string('first_name')->nullable();
             $t->string('last_name');
             $t->string('email')->nullable();
-            $t->string('enveloppe')->nullable();
+            $t->integer('enveloppe')->nullable();
             $t->string('company')->nullable();
             $t->string('sender')->nullable();
             $t->string('signature')->nullable();

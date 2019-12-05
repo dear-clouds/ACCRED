@@ -36,7 +36,7 @@ class EventAttendeesController extends MyBaseController
      */
     public function showAttendees(Request $request, $event_id)
     {
-        $allowed_sorts = ['first_name', 'email', 'ticket_id', 'company', 'enveloppe'];
+        $allowed_sorts = ['first_name', 'email', 'ticket_id', 'company', 'sender'];
 
         $searchQuery = $request->get('q');
         $sort_order = $request->get('sort_order') == 'asc' ? 'asc' : 'desc';
@@ -50,7 +50,6 @@ class EventAttendeesController extends MyBaseController
                 ->join('orders', 'orders.id', '=', 'attendees.order_id')
                 ->where(function ($query) use ($searchQuery) {
                     $query->where('orders.order_reference', 'like', $searchQuery . '%')
-                        ->orWhere('attendees.enveloppe', 'like', $searchQuery . '%')
                         ->orWhere('attendees.company', 'like', $searchQuery . '%')
                         ->orWhere('attendees.sender', 'like', $searchQuery . '%')
                         ->orWhere('attendees.first_name', 'like', $searchQuery . '%')
@@ -290,6 +289,7 @@ class EventAttendeesController extends MyBaseController
         $rules = [
             'ticket_id'  => 'required|exists:tickets,id,account_id,' . \Auth::user()->account_id,
             'attendees_list' => 'required|mimes:csv,txt,xlsx|max:500000000|',
+            'envelope' => 'unique',
         ];
 
         $messages = [
