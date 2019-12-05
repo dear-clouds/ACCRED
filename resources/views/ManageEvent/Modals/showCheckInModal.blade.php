@@ -122,24 +122,10 @@
 
           $(function () {
             var wrapper = document.getElementById("signature-pad"),
-                attendee_id = document.getElementById("attendee_id"),
                 clearButton = wrapper.querySelector("[data-action=clear]"),
                 saveButton = wrapper.querySelector("[data-action=save]"),
                 canvas = wrapper.querySelector("canvas"),
                 signaturePad;
-
-
-            // Adjust canvas coordinate space taking into account pixel ratio,
-            // to make it look crisp on mobile devices.
-            // This also causes canvas to be cleared.
-            // window.resizeCanvas = function () {
-            //   var ratio =  window.devicePixelRatio || 1;
-            //   canvas.width = canvas.offsetWidth * ratio;
-            //   canvas.height = canvas.offsetHeight * ratio;
-            //   canvas.getContext("2d").scale(ratio, ratio);
-            // }
-            //
-            // resizeCanvas();
 
             signaturePad = new SignaturePad(canvas);
 
@@ -162,7 +148,6 @@
                   data: {
                     signature: signaturePad.toDataURL(),
                     "_token": "{{ csrf_token() }}",
-                    attendee_id: attendee_id,
                   },
                   success: function(response)
                   {
