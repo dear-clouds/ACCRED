@@ -124,9 +124,10 @@
             var wrapper = document.getElementById("signature-pad"),
                 clearButton = wrapper.querySelector("[data-action=clear]"),
                 saveButton = wrapper.querySelector("[data-action=save]"),
-                attendee_id = document.getElementById('attendee_id').value,
                 canvas = wrapper.querySelector("canvas"),
                 signaturePad;
+
+            var attendee_id = document.getElementById('attendee_id').value;
 
 
             // Adjust canvas coordinate space taking into account pixel ratio,
