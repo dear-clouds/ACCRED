@@ -58,12 +58,21 @@
                 <span>@lang("Dashboard.tickets_sold")</span>
             </div>
         </div>
-        <div class="col-sm-6">
+        <!-- <div class="col-sm-6">
             <div class="stat-box">
                 <h3>{{ $event->stats->sum('views') }}</h3>
                 <span>@lang("Dashboard.event_views")</span>
             </div>
-        </div>
+        </div> -->
+
+        <div class="col-sm-6">
+            <div class="stat-box">
+
+    <h3>{{ $attendees->where('checking', 1)->count() }}</h3>
+
+<span>Checked-in</span>
+</div>
+</div>
 
         <!-- May be implemented soon.
         <div class="col-sm-3 hide">
