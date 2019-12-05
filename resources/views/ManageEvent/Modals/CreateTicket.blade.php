@@ -20,10 +20,10 @@
                                         ))  !!}
                         </div>
 
-                        <!-- <div class="row">
+                        <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    {!! Form::label('price', trans("ManageEvent.ticket_price"), array('class'=>'control-label required')) !!}
+                                    {!! Form::label('price', trans("ManageEvent.ticket_price"), array('class'=>'control-label')) !!}
                                     {!!  Form::text('price', Input::old('price'),
                                                 array(
                                                 'class'=>'form-control',
@@ -46,7 +46,7 @@
                                 </div>
                             </div>
 
-                        </div> -->
+                        </div>
 
                         <!-- <div class="form-group more-options">
                             {!! Form::label('description', trans("ManageEvent.ticket_description"), array('class'=>'control-label')) !!}
