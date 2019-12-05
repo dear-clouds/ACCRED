@@ -126,6 +126,8 @@
                 clearButton = wrapper.querySelector("[data-action=clear]"),
                 saveButton = wrapper.querySelector("[data-action=save]"),
                 canvas = wrapper.querySelector("canvas"),
+                attendee_id = "@{{ attendee.id }}",
+                event_id = "{{ $event_id }}",
                 signaturePad;
 
             signaturePad = new SignaturePad(canvas);
@@ -149,8 +151,8 @@
                   data: {
                     signature: signaturePad.toDataURL(),
                     "_token": "{{ csrf_token() }}",
-                    attendee_id: "{{ $attendee_id }}",
-                    event_id: "{{ $event_id }}",
+                    attendee_id: attendee_id,
+                    event_id: event_id,
                   },
                   success: function(response)
                   {
