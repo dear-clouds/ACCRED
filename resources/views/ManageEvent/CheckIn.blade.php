@@ -14,6 +14,13 @@
 
     @include('Shared/Layouts/ViewJavascript')
 
+    <!-- Jquery -->
+<script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<!-- Ajax -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<!-- Signature Pad -->
+<script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
+
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
     <meta name="apple-mobile-web-app-capable" content="yes">
 
@@ -100,7 +107,7 @@
                             @lang("Order.ticket"): <b>@{{ attendee.ticket }}</b>
                             <br />
 
-                                <script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
+                                /* <script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script> */
 
                                 <button data-modal-id="showCheckInModal-{{ $event_id }}-@{{ attendee.id }}" href="javascript:void(0);"  data-href="/event/{{ $event_id }}/check_in/@{{ attendee.id }}/modal" class="loadModal btn btn-success" type="button">Check-in</button>
 

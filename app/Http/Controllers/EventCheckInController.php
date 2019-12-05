@@ -114,7 +114,9 @@ class EventCheckInController extends MyBaseController
       $decoded_image = base64_decode($encoded_image);
 
       //store the decoded image//
-      $storagePath = \Storage::put('/signatures/'. $event_id . '/' . $attendee_id .'_signature.png', $decoded_image);
+      // $storagePath = \Storage::put('/signatures/'. $event_id . '/' . $attendee_id .'_signature.png', $decoded_image);
+      $path = '/signatures/'. $event_id . '/' . $attendee_id;
+      file_put_contents($path . "-signature.png", $decoded_image);
 
       //store the file in the db//
       // $signature->signature = 'signatures/'.$request->assid.'_driver_signature.png';
@@ -136,7 +138,7 @@ class EventCheckInController extends MyBaseController
         $rules = [
             'last_name' => 'required',
             'ticket_id'  => 'required|exists:tickets,id,account_id,' . Auth::user()->account_id,
-            'email'      => 'email',
+            'enveloppe' => 'unique:attendees',
         ];
 
         $messages = [
@@ -257,7 +259,7 @@ class EventCheckInController extends MyBaseController
 
         else {
 
-        Attendee::find($attendee->id)->update(['has_arrived' => true, 'arrival_time' => Carbon::now(), 'checking' => $checking]);
+        Attendee::find($attendee->id)->update(['has_arrived' => true, 'arrival_time' => Carbon::now('UTC'), 'checking' => $checking]);
 
         /* Save signature */
         // $data_uri = "data:image/png;base64,signature";
