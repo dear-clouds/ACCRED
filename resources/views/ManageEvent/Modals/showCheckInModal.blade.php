@@ -107,7 +107,7 @@
                         <canvas id="signature-pad" class="signature-pad" width="100%" height=200></canvas>
                     </div>
                     <div>
-                        {!! Form::hidden('attendee_id', $attendee->id) !!}
+                        <input type="hidden" name="attendee_id" value="{{$attendee->id}}">
                         <button type="button" class="btn btn-sm btn-secondary" id="clear">Clear</button>
                         <button type="button" class="btn btn-sm btn-primary" id="save">Save</button>
                     </div>
@@ -117,60 +117,62 @@
           <script>
           $(function () {
 
-                      $.ajaxSetup({
-                          headers: {
-                              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                          }
-                      });
+            $.ajaxSetup({
+  headers: {
+    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  }
+});
 
-                      var signaturePad = new SignaturePad(document.getElementById('signature-pad'), {
-                        backgroundColor: 'rgba(255, 255, 255, 0)',
-                        penColor: 'rgb(0, 0, 0)'
-                      });
-                      var saveButton = document.getElementById('save');
-                      var cancelButton = document.getElementById('clear');
+            var signaturePad = new SignaturePad(document.getElementById('signature-pad'), {
+              backgroundColor: 'rgba(255, 255, 255, 0)',
+              penColor: 'rgb(0, 0, 0)'
+            });
+            var saveButton = document.getElementById('save');
+            var cancelButton = document.getElementById('clear');
+            var attendee_id = document.getElementById('attendee_id').value;
 
+            cancelButton.addEventListener('click', function (event){
+                event.preventDefault();
+            });
 
-                      saveButton.addEventListener('click', function (event) {
-                          if (signaturePad.isEmpty()) {
-                              sweetAlert("Oops...", "Please provide signature first.", "error");
-                          } else {
+            saveButton.addEventListener('click', function (event) {
 
-                              // do ajax to post it
-                              $.ajax({
-                                  url : "{{route('saveSignature')}}",
-                                  type: 'POST',
-                                  data : {
-                                      signature: signaturePad.toDataURL('image/png'),
-                                      position: $('#position').val()
-                                  },
-                                  success: function(response)
-                                  {
-                                      swal({
-                                        title: "Signature Saved",
-                                        text: "Your signature has now been stored.",
-                                        icon: "success",
-                                      });
-                                      window.setTimeout(function(){window.location.reload()}, 3000);
-                                      //data - response from server
-                                      console.log(response);
-                                  },
-                                  error: function(response)
-                                  {
+                 event.preventDefault();
 
-                                      console.log(response);
-                                  }
-                              });
-                          }
+                if (signaturePad.isEmpty()) {
+                    sweetAlert("Oops...", "Please provide signature first.", "error");
+                } else {
 
-                      });
+                    // do ajax to post it
+                    $.ajax({
+                        url : "{{route('saveSignature')}}",
+                        type: 'POST',
+                        data : {
+                            signature: signaturePad.toDataURL(),
+                            attendee_id: attendee_id,
 
-                      cancelButton.addEventListener('click', function (event) {
-                          signaturePad.clear();
-                      });
+                        },
+                        success: function(response)
+                        {
+                            alert('The signature has been saved reload the page to view the signature.')
 
-                  });
+                            console.log(response);
+                        },
+                        error: function(response)
+                        {
 
+                            console.log(response);
+                        }
+                    });
+                }
+
+            });
+
+            cancelButton.addEventListener('click', function (event) {
+                signaturePad.clear();
+            });
+
+        });
           </script>
 
           <h2>Enveloppe n°{{$attendee->enveloppe}}</h2>
