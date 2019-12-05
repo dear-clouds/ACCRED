@@ -110,8 +110,8 @@
               </div>
 
               <div class="m-signature-pad--footer">
-                {!! Form::hidden('attendee_id', $attendee->id) !!}
-                {!! Form::hidden('event_id', $event->id) !!}
+                <input type="hidden" name="attendee_id" value="{{$attendee->id}}">
+                <input type="hidden" name="event_id" value="{{$event->id}}">
               <button type="button" class="btn btn-sm btn-secondary" data-action="clear">Clear</button>
               <button type="button" class="btn btn-sm btn-primary" data-action="save">Save</button>
             </div>
@@ -126,11 +126,12 @@
                 clearButton = wrapper.querySelector("[data-action=clear]"),
                 saveButton = wrapper.querySelector("[data-action=save]"),
                 canvas = wrapper.querySelector("canvas"),
-                attendee_id = "@{{ attendee.id }}",
-                event_id = "{{ $event_id }}",
                 signaturePad;
 
             signaturePad = new SignaturePad(canvas);
+
+            var attendee_id = document.getElementById('attendee_id').value;
+            var event_id = document.getElementById('event_id').value;
 
             clearButton.addEventListener("click", function(event) {
               signaturePad.clear();
