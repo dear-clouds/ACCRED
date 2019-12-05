@@ -117,7 +117,7 @@ class EventAttendeesController extends MyBaseController
     {
         $rules = [
             'last_name' => 'required',
-            'enveloppe' => 'unique',
+            'enveloppe' => 'unique:enveloppe',
             'ticket_id'  => 'required|exists:tickets,id,account_id,' . \Auth::user()->account_id,
             // 'email'      => 'email',
         ];
@@ -290,7 +290,7 @@ class EventAttendeesController extends MyBaseController
         $rules = [
             'ticket_id'  => 'required|exists:tickets,id,account_id,' . \Auth::user()->account_id,
             'attendees_list' => 'required|mimes:csv,txt,xlsx|max:500000000|',
-            'envelope' => 'unique',
+            'envelope' => 'unique:enveloppe',
         ];
 
         $messages = [
