@@ -169,7 +169,7 @@
 
           @else
 
-        <img src="http://accred.fiawec.com/user_content/signatures/{{ $event_id }}/@{{ attendee.id }}_signature.png" width="100%">
+        <img src="http://accred.fiawec.com/user_content/signatures/{{$event->id}}/{{$attendee->id}}_signature.png" width="100%">
 
           @endif
 
