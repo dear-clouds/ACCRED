@@ -110,7 +110,7 @@
               </div>
 
               <div class="m-signature-pad--footer">
-                <input type="hidden" name="attendee_id" value="{{$attendee->id}}">
+                <input type="hidden" name="attendee_id" id="attendee_id" value="{{$attendee->id}}">
               <button type="button" class="btn btn-sm btn-secondary" data-action="clear">Clear</button>
               <button type="button" class="btn btn-sm btn-primary" data-action="save">Save</button>
             </div>
@@ -122,6 +122,7 @@
 
           $(function () {
             var wrapper = document.getElementById("signature-pad"),
+                attendee_id = document.getElementById("attendee_id"),
                 clearButton = wrapper.querySelector("[data-action=clear]"),
                 saveButton = wrapper.querySelector("[data-action=save]"),
                 canvas = wrapper.querySelector("canvas"),
