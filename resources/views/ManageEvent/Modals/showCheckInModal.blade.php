@@ -110,7 +110,8 @@
               </div>
 
               <div class="m-signature-pad--footer">
-                <input type="hidden" name="attendee_id" id="attendee_id" value="{{$attendee->id}}">
+                {!! Form::hidden('attendee_id', $attendee->id) !!}
+                {!! Form::hidden('event_id', $event->id) !!}
               <button type="button" class="btn btn-sm btn-secondary" data-action="clear">Clear</button>
               <button type="button" class="btn btn-sm btn-primary" data-action="save">Save</button>
             </div>
