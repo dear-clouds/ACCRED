@@ -149,6 +149,8 @@
                   data: {
                     signature: signaturePad.toDataURL(),
                     "_token": "{{ csrf_token() }}",
+                    attendee_id: "{{ $attendee_id }}",
+                    event_id: "{{ $event_id }}",
                   },
                   success: function(response)
                   {
