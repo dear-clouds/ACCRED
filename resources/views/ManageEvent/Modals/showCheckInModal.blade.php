@@ -104,7 +104,7 @@
                 <form  method="post" enctype="multipart/form-data" class="ansform">
                     {{ csrf_field() }}
                     <div class="wrapper">
-                        <canvas id="signature-pad" class="signature-pad" width=500 height=200></canvas>
+                        <canvas id="signature-pad" class="signature-pad" width=570 height=200 style="border: 1px dashed #eee;"></canvas>
                     </div>
                     <div>
                         <input type="hidden" name="attendee_id" value="{{$attendee->id}}">
