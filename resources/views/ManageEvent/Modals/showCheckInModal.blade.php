@@ -102,77 +102,79 @@
                 <h2>Check-in</h2>
 
                 <form  method="post" enctype="multipart/form-data" class="ansform">
-                    {{ csrf_field() }}
-                    <div class="wrapper">
-                        <canvas id="signature-pad" class="signature-pad" width=570 height=200 style="border: 1px dashed #eee;"></canvas>
-                    </div>
-                    <div>
-                        <input type="hidden" name="attendee_id" value="{{$attendee->id}}">
-                        <button type="button" class="btn btn-sm btn-secondary" id="clear">Clear</button>
-                        <button type="button" class="btn btn-sm btn-primary" id="save">Save</button>
-                    </div>
-                </form>
+                  {{ csrf_field() }}
+
+                <div id="signature-pad" class="m-signature-pad">
+                <div class="m-signature-pad--body">
+                <canvas id="signature-pad" class="signature-pad" width=570 height=200 style="border: 2px dashed #ccc;"></canvas>
+              </div>
+
+              <div class="m-signature-pad--footer">
+                <input type="hidden" name="attendee_id" value="{{$attendee->id}}">
+              <button type="button" class="btn btn-sm btn-secondary" data-action="clear">Clear</button>
+              <button type="button" class="btn btn-sm btn-primary" data-action="save">Save</button>
+            </div>
+          </div>
+        </form>
 
 
           <script>
+
           $(function () {
+            var wrapper = document.getElementById("signature-pad"),
+                clearButton = wrapper.querySelector("[data-action=clear]"),
+                saveButton = wrapper.querySelector("[data-action=save]"),
+                attendee_id = document.getElementById('attendee_id').value,
+                canvas = wrapper.querySelector("canvas"),
+                signaturePad;
 
-            $.ajaxSetup({
-  headers: {
-    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-  }
-});
 
-            var signaturePad = new SignaturePad(document.getElementById('signature-pad'), {
-              backgroundColor: 'rgba(255, 255, 255, 0)',
-              penColor: 'rgb(0, 0, 0)'
-            });
-            var saveButton = document.getElementById('save');
-            var cancelButton = document.getElementById('clear');
-            var attendee_id = document.getElementById('attendee_id').value;
+            // Adjust canvas coordinate space taking into account pixel ratio,
+            // to make it look crisp on mobile devices.
+            // This also causes canvas to be cleared.
+            // window.resizeCanvas = function () {
+            //   var ratio =  window.devicePixelRatio || 1;
+            //   canvas.width = canvas.offsetWidth * ratio;
+            //   canvas.height = canvas.offsetHeight * ratio;
+            //   canvas.getContext("2d").scale(ratio, ratio);
+            // }
+            //
+            // resizeCanvas();
 
-            cancelButton.addEventListener('click', function (event){
-                event.preventDefault();
-            });
+            signaturePad = new SignaturePad(canvas);
 
-            saveButton.addEventListener('click', function (event) {
-
-                 event.preventDefault();
-
-                if (signaturePad.isEmpty()) {
-                    sweetAlert("Oops...", "Please provide signature first.", "error");
-                } else {
-
-                    // do ajax to post it
-                    $.ajax({
-                        url : "{{route('saveSignature')}}",
-                        type: 'POST',
-                        data : {
-                            signature: signaturePad.toDataURL(),
-                            attendee_id: attendee_id,
-
-                        },
-                        success: function(response)
-                        {
-                            alert('The signature has been saved reload the page to view the signature.')
-
-                            console.log(response);
-                        },
-                        error: function(response)
-                        {
-
-                            console.log(response);
-                        }
-                    });
-                }
-
+            clearButton.addEventListener("click", function(event) {
+              signaturePad.clear();
             });
 
-            cancelButton.addEventListener('click', function (event) {
-                signaturePad.clear();
-            });
+            saveButton.addEventListener("click", function(event) {
+              event.preventDefault();
 
-        });
+              if (signaturePad.isEmpty()) {
+                alert("Please provide a signature first.");
+              } else {
+                // var dataUrl = signaturePad.toDataURL();
+                // var image_data = dataUrl.replace(/^data:image\/(png|jpg);base64,/, "");
+
+                $.ajax({
+                  url: "{{route('saveSignature')}}",
+                  type: 'POST',
+                  data: {
+                    signature: signaturePad.toDataURL(),
+                    "_token": "{{ csrf_token() }}",
+                    attendee_id: attendee_id,
+                  },
+                  success: function(response)
+                  {
+                      sweetAlert("Success!", "You have been check-in!", "success");
+                  },
+                }).done(function() {
+                  //
+                });
+              }
+            });
+          });
+
           </script>
 
           <h2>Enveloppe n°{{$attendee->enveloppe}}</h2>
