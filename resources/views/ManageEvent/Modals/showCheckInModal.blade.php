@@ -127,8 +127,6 @@
                 canvas = wrapper.querySelector("canvas"),
                 signaturePad;
 
-            var attendee_id = document.getElementById('attendee_id').value;
-
 
             // Adjust canvas coordinate space taking into account pixel ratio,
             // to make it look crisp on mobile devices.
