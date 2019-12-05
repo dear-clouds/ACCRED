@@ -86,6 +86,20 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                        @if ($attendee->has_arrived == 1)
+
+                        <strong>Arrival time:</strong> {{{$attendee->arrival_time}}}
+
+                        @else
+
+                        This attendee has not arrived.
+                        
+                        @endif
+                      </div>
+                      </div>
+
                     </div>
                 </div>
             </div> <!-- /end modal body-->
