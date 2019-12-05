@@ -91,12 +91,17 @@
                             @if ($attendee->has_arrived == 1)
                             <div class="col-md-12" style="background: green; padding: 10px; color: white; text-align: center;">
 
-                        <strong>Arrival time:</strong> {{{$attendee->arrival_time}}}
+                      <p><strong>Arrival time:</strong> {{{$attendee->arrival_time}}}</p>
+
+                    </div>
+                    <img src="http://accred.fiawec.com/user_content/signatures/{{$event->id}}/{{$attendee->id}}_signature.png" width="100%">
 
                         @else
                         <div class="col-md-12" style="background: #b30404; padding: 10px; color: white; text-align: center;">
 
                         This attendee has not arrived.
+
+                      </div>
 
                         @endif
                       </div>
