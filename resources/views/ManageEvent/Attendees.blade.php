@@ -33,7 +33,7 @@
         </div>
 
         <div class="btn-group btn-group-responsive">
-            <button data-modal-id="ImportAttendees" href="javascript:void(0);"  data-href="{{route('showImportAttendee', ['event_id'=>$event->id])}}" class="loadModal btn btn-success" type="button"><i class="ico-file"></i> @lang("ManageEvent.invite_attendees")</button>
+            <button data-modal-id="ImportAttendees" href="javascript:void(0);"  data-href="{{route('showImportAttendee', ['event_id'=>$event->id])}}" class="loadModal btn btn-success" type="button"><i class="ico-file"></i> Import Attendees</button>
         </div>
 
         <div class="btn-group btn-group-responsive">
@@ -90,7 +90,7 @@
                                {!!Html::sortable_link(trans("ManageEvent.ticket"), $sort_by, 'ticket_id', $sort_order, ['q' => $q , 'page' => $attendees->currentPage()])!!}
                             </th>
                             <th>
-                               {!!Html::sortable_link(trans("Attendee.enveloppe"), $sort_by, 'envelope', $sort_order, ['q' => $q , 'page' => $attendees->currentPage()])!!}
+                               {!!Html::sortable_link("Checked-in", $sort_by, 'has_arrived', $sort_order, ['q' => $q , 'page' => $attendees->currentPage()])!!}
                             </th>
                             <th></th>
                         </tr>
@@ -108,9 +108,15 @@
                                 {{{$attendee->ticket->title}}}
                             </td>
                             <td>
-                                <a href="javascript:void(0);" data-modal-id="view-order-{{ $attendee->order->id }}" data-href="{{route('showManageOrder', ['order_id'=>$attendee->order->id])}}" title="View Order #{{$attendee->order->order_reference}}" class="loadModal">
-                                    {{$attendee->enveloppe}}
-                                </a>
+                              @if ($attendee->has_arrived == 1)
+
+                              <span class="ci btn btn-successfulQrRead">
+                                <i class="ico-checkmark"></i>
+                              </span>
+
+                              @else
+
+                              @endif
                             </td>
                             <td class="text-center">
                                 <div class="btn-group">
@@ -150,15 +156,7 @@
                                     class="loadModal btn btn-xs btn-danger"
                                     > @lang("basic.cancel")</a>
 
-                                    @if ($attendee->has_arrived == 1)
 
-                                    <span class="ci btn btn-successfulQrRead">
-                                      <i class="ico-checkmark"></i>
-                                    </span>
-
-                                    @else
-
-                                    @endif
                             </td>
                         </tr>
                         @endforeach
