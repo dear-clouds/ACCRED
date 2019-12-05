@@ -115,13 +115,11 @@ class EventCheckInController extends MyBaseController
       $decoded_image = base64_decode($encoded_image);
 
       //store the decoded image//
-      $storagePath = \Storage::put('/signatures/'. $event_id . '/' . $attendee_id .'_signature.png', $decoded_image);
-      // $path = '/signatures/'. $event_id . '/' . $attendee_id;
-      // file_put_contents($path . "-signature.png", $decoded_image);
+      $storagePath = \Storage::put('/signatures/'. $request->get('event_id') . '/' . $request->get('attendee_id') .'_signature.png', $decoded_image);
 
       //store the file in the db//
-      // $signature->signature = 'signatures/'.$request->assid.'_driver_signature.png';
-      // $signature->save();
+      $attendee->signature = '/signatures/'. $request->get('event_id') . '/' . $request->get('attendee_id') .'_signature.png';
+      $attendee->save();
 
 
   }
