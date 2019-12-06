@@ -108,16 +108,16 @@
                             </h6>
                             <p class="list-group-text">
                                 <a href="{{ route('showEventOrders', ['event_id' => $order->event_id, 'q' => $order->order_reference]) }}">
-                                    <b>#{{ $order->order_reference }}</b></a> -
+                                    <b>#{{ $order->enveloppe }}</b></a> -
                                 <a href="{{ route('showEventAttendees', ['event_id'=>$order->event->id,'q'=>$order->order_reference]) }}">
                                     <strong>{{ $order->full_name }}</strong>
                                 </a> {{ @trans("Order.registered") }}
                                     {{ $order->attendees()->withTrashed()->count() }} {{ @trans("Order.tickets") }}
                             </p>
-                            <h6>
+                            <!-- <h6>
                                 {{ $order->created_at->diffForHumans() }} &bull; <span
                                         style="color: green;">{{ $order->event->currency_symbol }}{{ $order->amount }}</span>
-                            </h6>
+                            </h6> -->
                         </li>
                     @endforeach
                     @else
