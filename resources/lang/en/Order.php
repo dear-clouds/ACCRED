@@ -37,7 +37,7 @@ return array (
   'recent_orders' => 'Recent Invitations',
   'reference' => 'Reference',
   'refund/cancel' => 'Refund / Cancel',
-  'registered' => 'has been invited',
+  'registered' => 'has been invited in',
   'search_placeholder' => 'Search Orders..',
   'status' => 'Status',
   'sub_total' => 'Sub Total',
