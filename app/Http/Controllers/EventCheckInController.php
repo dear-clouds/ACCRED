@@ -224,10 +224,10 @@ class EventCheckInController extends MyBaseController
         Attendee::find($attendee->id)->update(['has_arrived' => true, 'arrival_time' => Carbon::now()]);
 
         /* Save signature */
-        $data_uri = "data:image/png;base64,signature";
-        $encoded_image = explode(",", $data_uri)[1];
-        $decoded_image = base64_decode($encoded_image);
-        Storage::put('/uploads/signatures/' $event_id . '/' . $attendee_id . '-signature.png', $decoded_image);
+        // $data_uri = "data:image/png;base64,signature";
+        // $encoded_image = explode(",", $data_uri)[1];
+        // $decoded_image = base64_decode($encoded_image);
+        // Storage::put('/uploads/signatures/' $event_id . '/' . $attendee_id . '-signature.png', $decoded_image);
 
         return response()->json([
             'status'  => 'success',
