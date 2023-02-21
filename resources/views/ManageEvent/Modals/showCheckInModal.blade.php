@@ -130,9 +130,6 @@
 
             signaturePad = new SignaturePad(canvas);
 
-            var attendee_id = wrapper.querySelector("attendee_id").value;
-            var event_id = wrapper.querySelector("event_id").value;
-
             clearButton.addEventListener("click", function(event) {
               signaturePad.clear();
             });
@@ -152,8 +149,6 @@
                   data: {
                     signature: signaturePad.toDataURL(),
                     "_token": "{{ csrf_token() }}",
-                    attendee_id: attendee_id,
-                    event_id: event_id,
                   },
                   success: function(response)
                   {
