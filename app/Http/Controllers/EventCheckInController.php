@@ -251,40 +251,40 @@ class EventCheckInController extends MyBaseController
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-      public function getSignaturePad() {
-         var imageData = signaturePad.toDataURL();
-         document.getElementsByName("image")[0].setAttribute("value", imageData);
-  }
-
-    public function postSignatureAttendee(Request $request)
-    {
-        $attendee_id = $request->get('attendee_id');
-
-        $attendee = Attendee::scope()->find($attendee_id);
-
-        $signature = new Signature;
-        $signature->attendee_id = $attendee_id;
-        $signature->position = $request->position;
-
-        $data_uri = $request->signature;
-        $encoded_image = explode(",", $data_uri)[1];
-        //$decoded_image = base64_decode($encoded_image);
-
-        $sig = sha1($request->session()->get('attendee.first_name').$request->session()->get('attendee.last_name')) . "_signature.png";
-        $folder = '/uploads/signatures/';
-
-        Storage::put($folder, $sig);
-
-        $signature->signature = $encoded_image;
-        $signature->save();
-
-        dd($attendee, $signature);
-
-        return response()->json([
-            'status'  => 'success',
-            'id'      => $attendee->id,
-        ]);
-    }
+  //     public function getSignaturePad() {
+  //        var imageData = signaturePad.toDataURL();
+  //        document.getElementsByName("image")[0].setAttribute("value", imageData);
+  // }
+  //
+  //   public function postSignatureAttendee(Request $request)
+  //   {
+  //       $attendee_id = $request->get('attendee_id');
+  //
+  //       $attendee = Attendee::scope()->find($attendee_id);
+  //
+  //       $signature = new Signature;
+  //       $signature->attendee_id = $attendee_id;
+  //       $signature->position = $request->position;
+  //
+  //       $data_uri = $request->signature;
+  //       $encoded_image = explode(",", $data_uri)[1];
+  //       //$decoded_image = base64_decode($encoded_image);
+  //
+  //       $sig = sha1($request->session()->get('attendee.first_name').$request->session()->get('attendee.last_name')) . "_signature.png";
+  //       $folder = '/uploads/signatures/';
+  //
+  //       Storage::put($folder, $sig);
+  //
+  //       $signature->signature = $encoded_image;
+  //       $signature->save();
+  //
+  //       dd($attendee, $signature);
+  //
+  //       return response()->json([
+  //           'status'  => 'success',
+  //           'id'      => $attendee->id,
+  //       ]);
+  //   }
 
 
     /**

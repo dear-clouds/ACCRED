@@ -107,7 +107,7 @@
 
 
 
-                              <!-- <script>
+                              <script>
                               $(function () {
                                 var wrapper = document.getElementById("signature-pad"),
                                     clearButton = wrapper.querySelector("[data-action=clear]"),
@@ -163,7 +163,7 @@
                                 });
                               });
 
-                              </script> -->
+                              </script>
 
 
 
