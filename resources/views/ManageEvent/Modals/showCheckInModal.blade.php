@@ -107,9 +107,8 @@
 
 
 
-                              <script>
+                              <!-- <script>
                               $(function () {
-                                
                                 var wrapper = document.getElementById("signature-pad"),
                                     clearButton = wrapper.querySelector("[data-action=clear]"),
                                     saveButton = wrapper.querySelector("[data-action=save]"),
@@ -164,7 +163,7 @@
                                 });
                               });
 
-                              </script>
+                              </script> -->
 
 
 
