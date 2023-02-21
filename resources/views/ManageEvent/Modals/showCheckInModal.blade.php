@@ -101,7 +101,7 @@
 
                 <h2>Check-in</h2>
 
-                <form  method="post" enctype="multipart/form-data" class="ansform"> <!--Panel-->
+                <!-- <form  method="post" enctype="multipart/form-data" class="ansform">
 
                   {{ csrf_field() }}
                   <div class="wrapper">
@@ -113,12 +113,11 @@
                     <button id="save">Save</button>
                     <button id="clear">Clear</button>
                   </div>
-                  <!--/.Panel-->
-                </form>
+                </form> -->
 
 
 
-                <!-- <div id="signature-pad" class="m-signature-pad">
+                <div id="signature-pad" class="m-signature-pad">
                 <div class="m-signature-pad--body">
                 <canvas style="border: 2px dashed #ccc; height: 200px; width: 100%;"></canvas>
               </div>
@@ -127,7 +126,7 @@
               <button type="button" class="btn btn-sm btn-secondary" data-action="clear">Clear</button>
               <button type="button" class="btn btn-sm btn-primary" data-action="save">Save</button>
             </div>
-          </div> -->
+          </div>
 
 
 
