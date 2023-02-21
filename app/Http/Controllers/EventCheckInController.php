@@ -222,7 +222,9 @@ class EventCheckInController extends MyBaseController
             ]);
         }
 
-        Attendee::find($attendee->id)->update(['has_arrived' => true, 'arrival_time' => Carbon::now()]);
+        else {
+
+        Attendee::find($attendee->id)->update(['has_arrived' => true, 'arrival_time' => Carbon::now(), 'checking' => $checking]);
 
         /* Save signature */
         // $data_uri = "data:image/png;base64,signature";
@@ -230,13 +232,17 @@ class EventCheckInController extends MyBaseController
         // $decoded_image = base64_decode($encoded_image);
         // Storage::put('/uploads/signatures/' $event_id . '/' . $attendee_id . '-signature.png', $decoded_image);
 
-        return response()->json([
-            'status'  => 'success',
-            'checked' => $checking,
-            'message' =>  (($checking == 'in') ? trans("Controllers.attendee_successfully_checked_in") : trans("Controllers.attendee_successfully_checked_out")),
-            'id'      => $attendee->id,
-            'redirectUrl' => '/event/' . $event_id . '/check_in',
-        ]);
+        // return response()->json([
+        //     'status'  => 'success',
+        //     'checked' => $checking,
+        //     'message' =>  (($checking == 'in') ? trans("Controllers.attendee_successfully_checked_in") : trans("Controllers.attendee_successfully_checked_out")),
+        //     'id'      => $attendee->id,
+        //     'redirectUrl' => '/event/' . $event_id . '/check_in',
+        // ]);
+
+        return redirect()->back()->with('success', trans("Controllers.attendee_successfully_checked_in"));
+
+        }
     }
 
 
