@@ -5,6 +5,7 @@ var checkinApp = new Vue({
         searchTerm: '',
         searchResultsCount: 0,
         showScannerModal: false,
+        showCheckInModal: false,
         workingAway: false,
         isInit: false,
         isScanning: false,
@@ -87,6 +88,10 @@ var checkinApp = new Vue({
         showQrModal: function () {
             this.showScannerModal = true;
             this.initScanner();
+        },
+
+        showCheckInModal: function () {
+            this.showCheckInModal = true;
         },
 
         initScanner: function () {

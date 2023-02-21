@@ -58,9 +58,30 @@ class EventCheckInController extends MyBaseController
         return view('ManageEvent.Modals.QrcodeCheckIn');
     }
 
-    public function showCheckInModal(Request $request, $event_id)
+    // public function showCheckInModal(Request $request, $event_id)
+    // {
+    //     return view('ManageEvent.Modals.CheckIn');
+    // }
+
+    /**
+     * Show the 'Edit Attendee' modal
+     *
+     * @param Request $request
+     * @param $event_id
+     * @param $attendee_id
+     * @return View
+     */
+    public function showCheckInModal(Request $request, $event_id, $attendee_id)
     {
-        return view('ManageEvent.Modals.CheckIn');
+        $attendee = Attendee::scope()->findOrFail($attendee_id);
+
+        $data = [
+            'attendee' => $attendee,
+            'event'    => $attendee->event,
+            'tickets'  => $attendee->event->tickets->pluck('title', 'id'),
+        ];
+
+        return view('ManageEvent.Modals.showCheckInModal', $data);
     }
 
     /**

@@ -83,16 +83,19 @@
                     </div>
 
                     <ul v-if="searchResultsCount > 0" class="list-group" id="attendee_list" v-cloak>
+
+                      <a data-modal-id="CheckInModal" href="javascript:void(0);"  data-href="{{route('showCheckInModal', ['event_id'=>$event->id])}}">
+
                         <li
-                        @click="toggleCheckin(attendee)"
+                        /* @click="toggleCheckin(attendee)"
                         v-for="attendee in attendees"
-                        class="at list-group-item"
+                        class="at list-group-item" */
+                        /* @click="showCheckInModal" */
                         :class = "{arrived : attendee.has_arrived || attendee.has_arrived == '1'}"
                         >
+
                         @lang("Attendee.name"): <b>@{{ attendee.first_name }} @{{ attendee.last_name }} </b> &nbsp; <span v-if="!attendee.is_payment_received" class="label label-danger">@lang("Order.awaiting_payment")</span>
                         <br>
-                            @lang("Attendee.enveloppe"): <b>@{{ attendee.enveloppe }}</b>
-                            <br>
                                 @lang("Attendee.company"): <b>@{{ attendee.company }}</b>
 
                                 <br>
@@ -102,7 +105,10 @@
                         <a href="" class="ci btn btn-successfulQrRead">
                             <i class="ico-checkmark"></i>
                         </a>
+
                         </li>
+                        </a>
+
                     </ul>
                 </div>
             </div>
@@ -148,10 +154,10 @@
                     </span>
                     <span class="message" v-if="scanResultObject.status == 'success'">
                     <span class="uppercase">@lang("Attendee.name")</span>: @{{ scanResultObject.name }}<br>
-                   <span class="uppercase">@lang("Attendee.reference")</span>: @{{scanResultObject.reference }}<br>
+                   /* <span class="uppercase">@lang("Attendee.reference")</span>: @{{scanResultObject.reference }}<br> */
                    <span class="uppercase">@lang("Attendee.ticket")</span>: @{{scanResultObject.ticket }}
                    <span class="uppercase">@lang("Attendee.company")</span>: @{{scanResultObject.company }}
-                   <span class="uppercase">@lang("Attendee.sender")</span>: @{{scanResultObject.sender }}
+                   /* <span class="uppercase">@lang("Attendee.sender")</span>: @{{scanResultObject.sender }} */
                     </span>
                     <span v-if="isScanning">
                         <div id="scanning-ellipsis">@lang("Attendee.scanning")<span>.</span><span>.</span><span>.</span></div>
