@@ -692,7 +692,7 @@ Route::group(
                 'as'   => 'postCheckInSearch',
                 'uses' => 'EventCheckInController@postCheckInSearch',
             ]);
-            Route::post('{event_id}/check_in/{attendee_id}', [
+            Route::post('{event_id}/check_in/', [
                 'as'   => 'postCheckInAttendee',
                 'uses' => 'EventCheckInController@postCheckInAttendee',
             ]);
