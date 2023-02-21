@@ -11,19 +11,37 @@ use JavaScript;
 
 class EventCheckInController extends MyBaseController
 {
+
+  /**
+   * Attendee Signature
+   *
+   * @param Request $request
+   * @return \Illuminate\Http\JsonResponse
+   */
+  public function showSignatureAttendee(Request $request, $event_id, $attendee_id)
+  {
+    $attendee = Attendee::scope()->findOrFail($attendee_id);
+
+    return view('ManageEvent.Modals.Signature');
+  }
+
+
+
     /**
      * Show the check-in page
      *
      * @param $event_id
+     * @param $attendee_id
      * @return \Illuminate\View\View
      */
     public function showCheckIn($event_id)
     {
         $event = Event::scope()->findOrFail($event_id);
+        $attendee = $event->attendees();
 
         $data = [
             'event'     => $event,
-            'attendees' => $event->attendees
+            'attendee'  => $attendee
         ];
 
         JavaScript::put([
@@ -47,7 +65,7 @@ class EventCheckInController extends MyBaseController
      * @param $event_id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function postCheckInSearch(Request $request, $event_id)
+    public function postCheckInSearch(Request $request, $event_id, $attendee_id)
     {
         $searchQuery = $request->get('q');
 
@@ -66,6 +84,8 @@ class EventCheckInController extends MyBaseController
                     //->orWhere('attendees.email', 'like', $searchQuery . '%')
                     ->orWhere('orders.order_reference', 'like', $searchQuery . '%')
                     ->orWhere('attendees.enveloppe', 'like', $searchQuery . '%')
+                    ->orWhere('attendees.company', 'like', $searchQuery . '%')
+                    ->orWhere('attendees.sender', 'like', $searchQuery . '%')
                     ->orWhere('attendees.last_name', 'like', $searchQuery . '%');
             })
             ->select([
@@ -76,6 +96,8 @@ class EventCheckInController extends MyBaseController
                 'attendees.arrival_time',
                 'attendees.reference_index',
                 'attendees.enveloppe',
+                'attendees.company',
+                'attendees.sender',
                 'attendees.has_arrived',
                 'tickets.title as ticket',
                 'orders.order_reference',
@@ -93,7 +115,7 @@ class EventCheckInController extends MyBaseController
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function postCheckInAttendee(Request $request)
+    public function postCheckInAttendee(Request $request, $attendee_id)
     {
         $attendee_id = $request->get('attendee_id');
         $checking = $request->get('checking');
@@ -132,7 +154,7 @@ class EventCheckInController extends MyBaseController
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function postCheckInAttendeeQr($event_id, Request $request)
+    public function postCheckInAttendeeQr($event_id, Request $request, $attendee_id)
     {
         $event = Event::scope()->findOrFail($event_id);
 
@@ -150,6 +172,8 @@ class EventCheckInController extends MyBaseController
                 'attendees.email',
                 'attendees.reference_index',
                 'attendees.enveloppe',
+                'attendees.company',
+                'attendees.sender',
                 'attendees.arrival_time',
                 'attendees.has_arrived',
                 'tickets.title as ticket',
@@ -182,6 +206,8 @@ class EventCheckInController extends MyBaseController
             'name' => $attendee->first_name." ".$attendee->last_name,
             'reference' => $attendee->reference,
             'enveloppe' => $attendee->enveloppe,
+            'company' => $attendee->company,
+            'sender' => $attendee->sender,
             'ticket' => $attendee->ticket
         ]);
     }

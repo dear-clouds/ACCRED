@@ -29,7 +29,7 @@ class EventOrdersController extends MyBaseController
      */
     public function showOrders(Request $request, $event_id = '')
     {
-        $allowed_sorts = ['first_name', 'email', 'order_reference', 'enveloppe', 'order_status_id', 'created_at'];
+        $allowed_sorts = ['first_name', 'email', 'order_reference', 'enveloppe', 'company', 'order_status_id', 'created_at'];
 
         $searchQuery = $request->get('q');
         $sort_by = (in_array($request->get('sort_by'), $allowed_sorts) ? $request->get('sort_by') : 'created_at');
@@ -50,6 +50,7 @@ class EventOrdersController extends MyBaseController
                 ->where(function ($query) use ($searchQuery) {
                     $query->where('order_reference', 'like', $searchQuery . '%')
                         ->orWhere('enveloppe', 'like', $searchQuery . '%')
+                        ->orWhere('company', 'like', $searchQuery . '%')
                         ->orWhere('first_name', 'like', $searchQuery . '%')
                         ->orWhere('email', 'like', $searchQuery . '%')
                         ->orWhere('last_name', 'like', $searchQuery . '%');
@@ -184,6 +185,8 @@ class EventOrdersController extends MyBaseController
         $order->last_name = $request->get('last_name');
         $order->email = $request->get('email');
         $order->enveloppe = $request->get('enveloppe');
+        $order->company = $request->get('company');
+        $order->sender = $request->get('sender');
 
         $order->update();
 
@@ -363,6 +366,8 @@ class EventOrdersController extends MyBaseController
                         'orders.email',
                         'orders.order_reference',
                         'orders.enveloppe',
+                        'orders.company',
+                        'orders.sender',
                         'orders.amount',
                         \DB::raw("(CASE WHEN orders.is_refunded = 1 THEN '$yes' ELSE '$no' END) AS `orders.is_refunded`"),
                         \DB::raw("(CASE WHEN orders.is_partially_refunded = 1 THEN '$yes' ELSE '$no' END) AS `orders.is_partially_refunded`"),
@@ -384,6 +389,8 @@ class EventOrdersController extends MyBaseController
                     trans("Attendee.last_name"),
                     trans("Attendee.email"),
                     trans("Attendee.enveloppe"),
+                    trans("Attendee.company"),
+                    trans("Attendee.sender"),
                     trans("Order.order_ref"),
                     trans("Order.amount"),
                     trans("Order.fully_refunded"),
