@@ -101,7 +101,7 @@
                             <br />
 
 
-                                <button data-modal-id="showCheckInModal@{{ attendee.id }}" href="javascript:void(0);"  data-href="https://lmem-preprod.appspot.com/event/{{ $event_id }}/check_in/@{{ attendee.id }}/modal" class="loadModal btn btn-success" type="button">Check-in</button>
+                                <button data-modal-id="showCheckInModal@{{ attendee.id }}" href="javascript:void(0);"  data-href="/event/{{ $event_id }}/check_in/@{{ attendee.id }}/modal" class="loadModal btn btn-success" type="button">Check-in</button>
 
                         <span class="ci btn btn-successfulQrRead">
                             <i class="ico-checkmark"></i>
