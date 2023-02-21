@@ -193,7 +193,7 @@
             </div> <!-- /end modal body-->
             <div class="modal-footer">
 
-              <form method="post" action="{{ action('EventCheckInController@postCheckInAttendee') }}">
+              <form method="post" action="/">
               <button type="submit" name="check-in">Check-in</button>
             </form>
 
