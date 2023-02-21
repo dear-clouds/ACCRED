@@ -61,6 +61,12 @@ class EventCheckInController extends MyBaseController
             'tickets'  => $attendee->event->tickets->pluck('title', 'id'),
         ];
 
+        JavaScript::put([
+            'qrcodeCheckInRoute' => route('postQRCodeCheckInAttendee', ['event_id' => $event->id]),
+            'checkInRoute'       => route('postCheckInAttendee', ['event_id' => $event->id]),
+            'checkInSearchRoute' => route('postCheckInSearch', ['event_id' => $event->id]),
+        ]);
+
         return view('ManageEvent.Modals.showCheckInModal', $data);
     }
 
