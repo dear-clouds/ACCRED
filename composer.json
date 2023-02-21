@@ -43,7 +43,8 @@
         "setasign/fpdi": "^2.2",
         "ext-gd": "*",
         "phpoffice/phpspreadsheet": "^1.9",
-        "gluedev/laravel-stackdriver": "^0.1.1"
+        "gluedev/laravel-stackdriver": "^0.1.1",
+        "sentry/sentry-laravel": "1.3.1"
     },
     "require-dev": {
         "phpunit/phpunit": "7.3.*",
