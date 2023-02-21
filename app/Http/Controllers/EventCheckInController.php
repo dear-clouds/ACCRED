@@ -220,6 +220,7 @@ class EventCheckInController extends MyBaseController
                 'id'      => $attendee->id,
                 'redirectUrl' => route('showCheckIn', [
                 'event_id' => $event_id,
+                ]),
             ]);
         }
 
@@ -234,6 +235,7 @@ class EventCheckInController extends MyBaseController
             'id'      => $attendee->id,
             'redirectUrl' => route('showCheckIn', [
             'event_id' => $event_id,
+            ]),
         ]);
     }
 
