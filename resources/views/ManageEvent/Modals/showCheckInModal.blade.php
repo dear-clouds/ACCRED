@@ -1,7 +1,5 @@
-
-
 <div role="dialog"  class="modal fade" style="display: none;">
-   {!! Form::model($attendee, array('url' => route('postCheckInEditAttendee', array('event_id' => $event->id, 'attendee_id' => $attendee->id)), 'class' => 'ajax')) !!}
+   {!! Form::model($attendee, array('url' => route('postEditAttendee', array('event_id' => $event->id, 'attendee_id' => $attendee->id)), 'class' => 'ajax')) !!}
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header text-center">
@@ -93,7 +91,6 @@
 
 <h2>Check-in</h2>
 
-
                               <div id="signature-pad" class="m-signature-pad">
                                 <div class="m-signature-pad--body">
                                   <canvas style="border: 2px dashed #ccc; height: 200px; width: 100%;"></canvas>
@@ -107,78 +104,13 @@
 
 
 
-                              <script>
-                              $(function () {
 
-                                $.ajaxSetup({
-                                    headers: {
-                                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                                    }
-                                });
-
-                                var wrapper = document.getElementById("signature-pad"),
-                                    clearButton = wrapper.querySelector("[data-action=clear]"),
-                                    saveButton = wrapper.querySelector("[data-action=save]"),
-                                    canvas = wrapper.querySelector("canvas"),
-                                    signaturePad;
-
-                                // Adjust canvas coordinate space taking into account pixel ratio,
-                                // to make it look crisp on mobile devices.
-                                // This also causes canvas to be cleared.
-                                // window.resizeCanvas = function () {
-                                //   var ratio =  window.devicePixelRatio || 1;
-                                //   canvas.width = canvas.offsetWidth * ratio;
-                                //   canvas.height = canvas.offsetHeight * ratio;
-                                //   canvas.getContext("2d").scale(ratio, ratio);
-                                // }
-                                //
-                                // resizeCanvas();
-
-                                signaturePad = new SignaturePad(canvas);
-
-                                clearButton.addEventListener("click", function(event) {
-                                  signaturePad.clear();
-                                });
-
-                                saveButton.addEventListener("click", function(event) {
-                                  event.preventDefault();
-
-                                  if (signaturePad.isEmpty()) {
-                                    alert("Please provide a signature first.");
-                                  } else {
-                                    var dataUrl = signaturePad.toDataURL();
-                                    var image_data = dataUrl.replace(/^data:image\/(png|jpg);base64,/, "");
-
-                                    $.ajax({
-                                      url: '/signature/',
-                                      type: 'POST',
-                                      data: {
-                                        signature: signaturePad.toDataURL('image/png'),
-                                      },
-                                      success: function(response)
-                                      {
-                                          sweetAlert("Success!", "You have been check-in!", "success");
-                                          setTimeout(function () {
-                                              location.reload();
-                                          }, 3000);
-                                          //data - response from server
-                                      },
-                                    }).done(function() {
-                                      //
-                                    });
-                                  }
-                                });
-                              });
-
-                              </script>
 
 
 
 
 
                               <h2>Enveloppe n°{{$attendee->enveloppe}}</h2>
-
-                              <a href="{{ action(EventCheckInController@postCheckInAttendee', $attendee->id ) }}">Check-in</a>
 
 
                           </ul>
