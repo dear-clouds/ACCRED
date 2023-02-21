@@ -274,7 +274,6 @@ class EventAttendeesController extends MyBaseController
     public function postImportAttendee(Request $request, $event_id)
     {
         $rules = [
-            'ticket_id'      => 'required|exists:tickets,id,account_id,' . \Auth::user()->account_id,
             'attendees_list' => 'required|mimes:csv,txt|max:5000|',
         ];
 
@@ -290,7 +289,7 @@ class EventAttendeesController extends MyBaseController
             ]);
 
         }
-
+        // $attendee = Attendee::findOrFail($event_id);
         $ticket_id = $request->get('ticket_id');
         $event = Event::findOrFail($event_id);
         $ticket_price = 0;
@@ -303,7 +302,7 @@ class EventAttendeesController extends MyBaseController
 
             // Loop through
             foreach ($the_file as $rows) {
-                if (!empty($rows['first_name']) && !empty($rows['last_name']) && !empty($rows['email'])) {
+                if (!empty($rows['first_name']) && !empty($rows['enveloppe'])) {
                     $num_added++;
                     $attendee_first_name = strip_tags($rows['first_name']);
                     $attendee_last_name = strip_tags($rows['last_name']);
