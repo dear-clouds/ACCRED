@@ -106,104 +106,66 @@
                               <script>
                               $(function () {
 
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
+                                $.ajaxSetup({
+                                    headers: {
+                                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                    }
+                                });
 
-            var signaturePad = new SignaturePad(document.getElementById('signature-pad'), {
-                backgroundColor: 'rgba(255, 255, 255, 0)',
-                penColor: 'rgb(0, 0, 0)'
-            });
-            var saveButton = wrapper.querySelector("[data-action=save]"),
-            var cancelButton = wrapper.querySelector("[data-action=clear]"),
+                                var wrapper = document.getElementById("signature-pad"),
+                                    clearButton = wrapper.querySelector("[data-action=clear]"),
+                                    saveButton = wrapper.querySelector("[data-action=save]"),
+                                    canvas = wrapper.querySelector("canvas"),
+                                    signaturePad;
 
+                                // Adjust canvas coordinate space taking into account pixel ratio,
+                                // to make it look crisp on mobile devices.
+                                // This also causes canvas to be cleared.
+                                window.resizeCanvas = function () {
+                                  var ratio =  window.devicePixelRatio || 1;
+                                  canvas.width = canvas.offsetWidth * ratio;
+                                  canvas.height = canvas.offsetHeight * ratio;
+                                  canvas.getContext("2d").scale(ratio, ratio);
+                                }
 
-            saveButton.addEventListener('click', function (event) {
-                if (signaturePad.isEmpty()) {
-                    sweetAlert("Oops...", "Please provide signature first.", "error");
-                } else {
+                                resizeCanvas();
 
-                    // do ajax to post it
-                    $.ajax({
-                        url : '/check_in/',
-                        type: 'POST',
-                        data : {
-                            signature: signaturePad.toDataURL('image/png'),
-                            position: $('#position').val()
-                        },
-                        success: function(response)
-                        {
-                            sweetAlert("Success!", "Good stuff! Your signature is now saved", "success");
-                            setTimeout(function () {
-                                location.reload();
-                            }, 3000);
-                            //data - response from server
-                        },
-                        error: function(response)
-                        {
-                            sweetAlert("Oops...", "Sorry, something went wrong! We will investigate as soon as possible.", "error");
-                            console.log(response);
-                        }
-                    });
-                }
+                                signaturePad = new SignaturePad(canvas);
 
-            });
+                                clearButton.addEventListener("click", function(event) {
+                                  signaturePad.clear();
+                                });
 
-            cancelButton.addEventListener('click', function (event) {
-                signaturePad.clear();
-            });
+                                saveButton.addEventListener("click", function(event) {
+                                  event.preventDefault();
 
-        });
+                                  if (signaturePad.isEmpty()) {
+                                    alert("Please provide a signature first.");
+                                  } else {
+                                    var dataUrl = signaturePad.toDataURL();
+                                    var image_data = dataUrl.replace(/^data:image\/(png|jpg);base64,/, "");
 
-
-                              // $(function () {
-                              //   var wrapper = document.getElementById("signature-pad"),
-                              //       clearButton = wrapper.querySelector("[data-action=clear]"),
-                              //       saveButton = wrapper.querySelector("[data-action=save]"),
-                              //       canvas = wrapper.querySelector("canvas"),
-                              //       signaturePad;
-                              //
-                              //   // Adjust canvas coordinate space taking into account pixel ratio,
-                              //   // to make it look crisp on mobile devices.
-                              //   // This also causes canvas to be cleared.
-                              //   window.resizeCanvas = function () {
-                              //     var ratio =  window.devicePixelRatio || 1;
-                              //     canvas.width = canvas.offsetWidth * ratio;
-                              //     canvas.height = canvas.offsetHeight * ratio;
-                              //     canvas.getContext("2d").scale(ratio, ratio);
-                              //   }
-                              //
-                              //   resizeCanvas();
-                              //
-                              //   signaturePad = new SignaturePad(canvas);
-                              //
-                              //   clearButton.addEventListener("click", function(event) {
-                              //     signaturePad.clear();
-                              //   });
-                              //
-                              //   saveButton.addEventListener("click", function(event) {
-                              //     event.preventDefault();
-                              //
-                              //     if (signaturePad.isEmpty()) {
-                              //       alert("Please provide a signature first.");
-                              //     } else {
-                              //       var dataUrl = signaturePad.toDataURL();
-                              //       var image_data = dataUrl.replace(/^data:image\/(png|jpg);base64,/, "");
-                              //
-                              //       $.ajax({
-                              //         url: '/check_in/',
-                              //         type: 'POST',
-                              //         data: {
-                              //           image_data: image_data,
-                              //         },
-                              //       }).done(function() {
-                              //         //
-                              //       });
-                              //     }
-                              //   });
-                              // });
+                                    $.ajax({
+                                      url: '/check_in/',
+                                      type: 'POST',
+                                      data: {
+                                        signature: signaturePad.toDataURL('image/png'),
+                                        position: $('#position').val()
+                                      },
+                                      success: function(response)
+                                      {
+                                          sweetAlert("Success!", "You have been check-in!", "success");
+                                          setTimeout(function () {
+                                              location.reload();
+                                          }, 3000);
+                                          //data - response from server
+                                      },
+                                    }).done(function() {
+                                      //
+                                    });
+                                  }
+                                });
+                              });
 
                               </script>
 
