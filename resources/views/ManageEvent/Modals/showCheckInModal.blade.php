@@ -101,7 +101,7 @@
 
                                 <div class="m-signature-pad--footer">
                                   <button type="button" class="btn btn-sm btn-secondary" data-action="clear">Clear</button>
-                                  <button type="button" class="btn btn-sm btn-primary" data-action="save">Save</button>
+                                  <button @click="toggleCheckin(attendee)" type="button" class="btn btn-sm btn-primary" data-action="save">Save</button>
                                 </div>
                               </div>
 
