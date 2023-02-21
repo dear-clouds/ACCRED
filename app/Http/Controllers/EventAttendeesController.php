@@ -51,8 +51,12 @@ class EventAttendeesController extends MyBaseController
                 ->where(function ($query) use ($searchQuery) {
                     $query->where('orders.order_reference', 'like', $searchQuery . '%')
                         ->orWhere('attendees.enveloppe', 'like', $searchQuery . '%')
+                        ->orWhere('attendees.company', 'like', $searchQuery . '%')
+                        ->orWhere('attendees.sender', 'like', $searchQuery . '%')
                         ->orWhere('attendees.first_name', 'like', $searchQuery . '%')
                         ->orWhere('attendees.email', 'like', $searchQuery . '%')
+                        ->orWhere('attendees.company', 'like', $searchQuery . '%')
+                        ->orWhere('attendees.sender', 'like', $searchQuery . '%')
                         ->orWhere('attendees.last_name', 'like', $searchQuery . '%');
                 })
                 ->orderBy(($sort_by == 'order_reference' ? 'orders.' : 'attendees.') . $sort_by, $sort_order)
@@ -137,6 +141,8 @@ class EventAttendeesController extends MyBaseController
         $ticket_price = 0;
         $attendee_first_name = strip_tags($request->get('first_name'));
         $attendee_last_name = strip_tags($request->get('last_name'));
+        $attendee_company = strip_tags($request->get('company'));
+        $attendee_sender = strip_tags($request->get('sender'));
         $attendee_email = $request->get('email');
         $attendee_enveloppe = $request->get('enveloppe');
         $email_attendee = $request->get('email_ticket');
@@ -153,6 +159,8 @@ class EventAttendeesController extends MyBaseController
             $order->last_name = $attendee_last_name;
             $order->email = $attendee_email;
             $order->enveloppe = $attendee_enveloppe;
+            $order->company = $attendee_company;
+            $order->sender = $attendee_sender;
             $order->order_status_id = config('attendize.order_complete');
             $order->amount = $ticket_price;
             $order->account_id = Auth::user()->account_id;
@@ -202,6 +210,8 @@ class EventAttendeesController extends MyBaseController
             $attendee->last_name = $attendee_last_name;
             $attendee->email = $attendee_email;
             $attendee->enveloppe = $attendee_enveloppe;
+            $attendee->company = $attendee_company;
+            $attendee->sender = $attendee_sender;
             $attendee->event_id = $event_id;
             $attendee->order_id = $order->id;
             $attendee->ticket_id = $ticket_id;
@@ -308,6 +318,8 @@ class EventAttendeesController extends MyBaseController
                     $attendee_last_name = strip_tags($rows['last_name']);
                     $attendee_email = $rows['email'];
                     $attendee_enveloppe = $rows['enveloppe'];
+                    $attendee_company = $rows['company'];
+                    $attendee_sender = $rows['sender'];
 
                     error_log($ticket_id . ' ' . $ticket_price . ' ' . $email_attendee);
 
@@ -319,6 +331,8 @@ class EventAttendeesController extends MyBaseController
                     $order->first_name = $attendee_first_name;
                     $order->last_name = $attendee_last_name;
                     $order->enveloppe = $attendee_enveloppe;
+                    $order->company = $attendee_company;
+                    $order->sender = $attendee_sender;
                     $order->email = $attendee_email;
                     $order->order_status_id = config('attendize.order_complete');
                     $order->amount = $ticket_price;
@@ -369,6 +383,8 @@ class EventAttendeesController extends MyBaseController
                     $attendee->last_name = $attendee_last_name;
                     $attendee->email = $attendee_email;
                     $attendee->enveloppe = $attendee_enveloppe;
+                    $attendee->company = $attendee_company;
+                    $attendee->sender = $attendee_sender;
                     $attendee->event_id = $event_id;
                     $attendee->order_id = $order->id;
                     $attendee->ticket_id = $ticket_id;
@@ -598,7 +614,9 @@ class EventAttendeesController extends MyBaseController
                         'attendees.last_name',
                         'attendees.email',
                         'attendees.enveloppe',
-			'attendees.private_reference_number',
+                        'attendees.company',
+                        'attendees.sender',
+			                  'attendees.private_reference_number',
                         'orders.order_reference',
                         'tickets.title',
                         'orders.created_at',
@@ -618,6 +636,8 @@ class EventAttendeesController extends MyBaseController
 		                'Ticket ID',
                     'Order Reference',
                     'Enveloppe',
+                    'Company',
+                    'Sender',
                     'Ticket Type',
                     'Purchase Date',
                     'Has Arrived',
@@ -682,6 +702,54 @@ class EventAttendeesController extends MyBaseController
                 'messages' => $validator->messages()->toArray(),
             ]);
         }
+
+        $attendee = Attendee::scope()->findOrFail($attendee_id);
+        $attendee->update($request->all());
+
+        session()->flash('message',trans("Controllers.successfully_updated_attendee"));
+
+        return response()->json([
+            'status'      => 'success',
+            'id'          => $attendee->id,
+            'redirectUrl' => '',
+        ]);
+    }
+
+
+
+    /**
+     * Attendee Signature
+     *
+     * @param Request $request
+     * @param $event_id
+     * @param $attendee_id
+     * @return mixed
+     */
+    public function postSignatureAttendee(Request $request, $event_id, $attendee_id)
+    {
+        $rules = [
+            'ticket_id'  => 'required|exists:tickets,id,account_id,' . Auth::user()->account_id,
+            // 'email'      => 'required|email',
+        ];
+
+        $messages = [
+            'ticket_id.exists'   => trans("Controllers.ticket_not_exists_error"),
+            'ticket_id.required' => trans("Controllers.ticket_field_required_error"),
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status'   => 'error',
+                'messages' => $validator->messages()->toArray(),
+            ]);
+        }
+
+        $data_uri = "data:image/png;base64,signature";
+        $encoded_image = explode(",", $data_uri)[1];
+        $decoded_image = base64_decode($encoded_image);
+        Storage::put('signature.png', $decoded_image);
 
         $attendee = Attendee::scope()->findOrFail($attendee_id);
         $attendee->update($request->all());
