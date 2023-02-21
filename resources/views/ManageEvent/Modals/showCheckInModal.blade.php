@@ -193,15 +193,10 @@
             </div> <!-- /end modal body-->
             <div class="modal-footer">
 
-              {!! Form::model($attendee, array('method' => 'POST', 'url' => route('postCheckInAttendee', array('event_id' => $event->id, 'attendee_id' => $attendee->id)), 'class' => 'ajax')) !!}
-
-              <!-- <form method="post" action="{{route('postCheckInAttendee', ['event_id' => $event->id, 'attendee_id' => $attendee->id])}}"> -->
+              <form method="post" action="{{route('postQRCodeCheckInAttendee', ['event_id' => $event->id, 'attendee_id' => $attendee->id])}}">
                 @csrf
-
-                {!! Form::hidden('attendee_id', $attendee->id) !!}
-                {!! Form::submit('Check-In'), ['class'=>"btn btn-success"]) !!}
-              <!-- <button type="submit" name="check-in" class="btn btn-success">Check-in</button>
-            </form> -->
+              <button type="submit" name="check-in" class="btn btn-success">Check-in</button>
+            </form>
 
 
             </div>
