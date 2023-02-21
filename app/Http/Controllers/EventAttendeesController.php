@@ -36,7 +36,7 @@ class EventAttendeesController extends MyBaseController
      */
     public function showAttendees(Request $request, $event_id)
     {
-        $allowed_sorts = ['first_name', 'email', 'ticket_id', 'order_reference', 'enveloppe'];
+        $allowed_sorts = ['first_name', 'email', 'ticket_id', 'company', 'enveloppe'];
 
         $searchQuery = $request->get('q');
         $sort_order = $request->get('sort_order') == 'asc' ? 'asc' : 'desc';
@@ -119,7 +119,7 @@ class EventAttendeesController extends MyBaseController
         $rules = [
             'last_name' => 'required',
             'ticket_id'  => 'required|exists:tickets,id,account_id,' . \Auth::user()->account_id,
-            'email'      => 'email',
+            // 'email'      => 'email',
         ];
 
         $messages = [
