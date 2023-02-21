@@ -93,7 +93,7 @@
 
 <h2>Check-in</h2>
 
-<div id="attendee_list" v-cloak>
+<div id="attendee_list">
                         <button
                         @click="toggleCheckin(attendee)"
                         :class = "{arrived : attendee.has_arrived || attendee.has_arrived == '1'}"
