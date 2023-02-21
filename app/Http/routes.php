@@ -718,10 +718,7 @@ Route::group(
                 'uses' => 'EventCheckInController@postCheckInEditAttendee',
             ]);
 
-            Route::post('/signature/', [
-                'as'   => 'saveSignature',
-                'uses' => 'EventCheckInController@saveSignature',
-            ]);
+            Route::post('/signature/', 'EventCheckInController@saveSignature')->name('saveSignature');
 
 
             /*
