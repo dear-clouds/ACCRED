@@ -97,7 +97,7 @@
                         <div class="row">
                             <div class="col-md-12">
 
-                              {!! Form::model($attendee, array('url' => route('postQRCodeCheckInAttendee', array('event_id' => $event->id)), 'class' => 'ajax')) !!}
+                              {{  Form::open([route'=>'postQRCodeCheckInAttendee', 'method' => 'post')] }}
 
                               <h2>Check-in</h2>
 
@@ -193,7 +193,7 @@
             </div> <!-- /end modal body-->
             <div class="modal-footer">
 
-               
+
                {!! Form::button(trans("basic.cancel"), ['class'=>"btn modal-close btn-danger",'data-dismiss'=>'modal']) !!}
                {!! Form::submit('Check-In'), ['class'=>"btn btn-success"]) !!}
             </div>
