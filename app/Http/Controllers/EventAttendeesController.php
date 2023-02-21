@@ -230,7 +230,7 @@ class EventAttendeesController extends MyBaseController
 
             return response()->json([
                 'status'      => 'success',
-                'redirectUrl' => '#', [
+                'redirectUrl' => route('showCheckIn', [
                 'event_id' => $event_id,
                 ]),
             ]);
