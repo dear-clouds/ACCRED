@@ -30,8 +30,8 @@ class EventCheckInController extends MyBaseController
         ];
 
         JavaScript::put([
-            'qrcodeCheckInRoute' => route('postQRCodeCheckInAttendee', ['event_id' => $event->id]),
-            'checkInRoute'       => route('postCheckInAttendee', ['event_id' => $event->id]),
+            // 'qrcodeCheckInRoute' => route('postQRCodeCheckInAttendee', ['event_id' => $event->id]),
+            // 'checkInRoute'       => route('postCheckInAttendee', ['event_id' => $event->id]),
             'checkInSearchRoute' => route('postCheckInSearch', ['event_id' => $event->id]),
         ]);
 
