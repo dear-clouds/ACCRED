@@ -165,8 +165,8 @@ class EventOrdersController extends MyBaseController
     public function postEditOrder(Request $request, $order_id)
     {
         $rules = [
-            'first_name' => ['required'],
-            // 'last_name' => ['required'],
+            // 'first_name' => ['required'],
+            'last_name' => ['required'],
             'email' => ['email'],
         ];
 

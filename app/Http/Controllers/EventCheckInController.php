@@ -96,7 +96,7 @@ class EventCheckInController extends MyBaseController
         $data_uri = "data:image/png;base64,signature";
         $encoded_image = explode(",", $data_uri)[1];
         $decoded_image = base64_decode($encoded_image);
-        Storage::put('signature.png', $decoded_image);
+        Storage::put($attendee_id . '-signature.png', $decoded_image);
 
         $attendee = Attendee::scope()->findOrFail($attendee_id);
         $attendee->update($request->all());
