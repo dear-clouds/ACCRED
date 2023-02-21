@@ -29,6 +29,8 @@
             background-attachment: fixed;
         }
     </style>
+    /* Signature Pad */
+    <script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
 </head>
 <body id="app">
 <header>
@@ -95,6 +97,8 @@
                             @lang("Attendee.enveloppe"): <b>@{{ attendee.enveloppe }}</b>
                         <br>
                             @lang("Order.ticket"): <b>@{{ attendee.ticket }}</b>
+                            <br />
+
 
                         <span href="" class="ci btn btn-successfulQrRead">
                             <i class="ico-checkmark"></i>
@@ -107,6 +111,10 @@
         </div>
     </div>
 </section>
+
+<div class="btn-group btn-group-responsive">
+    <button data-modal-id="InviteAttendee" href="javascript:void(0);"  data-href="{{route('showInviteAttendee', ['event_id'=>$event->id])}}" class="loadModal btn btn-success" type="button"><i class="ico-user-plus"></i> @lang("ManageEvent.invite_attendee")</button>
+</div>
 
 <footer class="hide">
     <div class="container">
@@ -160,6 +168,38 @@
 
 <script>
 Vue.http.headers.common['X-CSRF-TOKEN'] = '{{ csrf_token() }}';
+</script>
+<script>
+var canvas = document.querySelector("canvas");
+
+var signaturePad = new SignaturePad(canvas);
+
+// Returns signature image as data URL (see https://mdn.io/todataurl for the list of possible parameters)
+signaturePad.toDataURL(); // save image as PNG
+signaturePad.toDataURL("image/jpeg"); // save image as JPEG
+signaturePad.toDataURL("image/svg+xml"); // save image as SVG
+
+// Draws signature image from data URL.
+// NOTE: This method does not populate internal data structure that represents drawn signature. Thus, after using #fromDataURL, #toData won't work properly.
+signaturePad.fromDataURL("data:image/png;base64,iVBORw0K...");
+
+// Returns signature image as an array of point groups
+const data = signaturePad.toData();
+
+// Draws signature image from an array of point groups
+signaturePad.fromData(data);
+
+// Clears the canvas
+signaturePad.clear();
+
+// Returns true if canvas is empty, otherwise returns false
+signaturePad.isEmpty();
+
+// Unbinds all event handlers
+signaturePad.off();
+
+// Rebinds all event handlers
+signaturePad.on();
 </script>
 
 @include("Shared.Partials.LangScript")
