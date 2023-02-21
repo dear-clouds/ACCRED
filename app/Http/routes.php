@@ -720,7 +720,7 @@ Route::group(
 
             Route::post('/signature', [
                 'as'   => 'postSignatureAttendee',
-                'uses' => 'EventCheckInController@postSignatureAttendee',
+                'uses' => 'EventCheckInController@saveSignature',
             ]);
 
 
