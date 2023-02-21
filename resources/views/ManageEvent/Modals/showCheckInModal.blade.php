@@ -192,7 +192,7 @@
                 </div>
             </div> <!-- /end modal body-->
             <div class="modal-footer">
-              <button @click="toggleCheckin(attendee)"></i>Check-in</button>
+              <button onclick="toggleCheckin(attendee)"></i>Check-in</button>
 
             </div>
         </div><!-- /end modal content-->
