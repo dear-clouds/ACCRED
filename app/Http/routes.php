@@ -700,7 +700,7 @@ Route::group(
             Route::post('/check_in/', [
                 'as'   => 'postCheckInAttendeeModal',
                 'uses' => 'EventCheckInController@postCheckInAttendee',
-            ]);postSignatureAttendee
+            ]);
 
             Route::post('/signature/', [
                 'as'   => 'postSignatureAttendee',
