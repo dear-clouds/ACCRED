@@ -98,28 +98,29 @@ class EventCheckInController extends MyBaseController
    * Save Signature
    *
    * @param Request $request
+   * @param $event_id
    * @return \Illuminate\Http\RedirectResponse
    */
-  // public function saveSignature(Request $request, $event_id)
-  // {
-  //     //Find Assessment in DB//
-  //     // $signature = DrivingAssessments::find($request->assid);
-  //     $attendee_id = $request->get('attendee_id');
-  //
-  //     //Get image from ajax, encode then decode the image to store//
-  //     $data_uri = $request->signature;
-  //     $encoded_image = explode(",", $data_uri)[1];
-  //     $decoded_image = base64_decode($encoded_image);
-  //
-  //     //store the decoded image//
-  //     $storagePath = Storage::put('/uploads/signatures/'. $event_id . '/' . $attendee_id .'_signature.png', $decoded_image);
-  //
-  //     //store the file in the db//
-  //     // $signature->signature = 'signatures/'.$request->assid.'_driver_signature.png';
-  //     // $signature->save();
-  //
-  //
-  // }
+  public function saveSignature(Request $request, $event_id)
+  {
+      //Find Assessment in DB//
+      // $signature = DrivingAssessments::find($request->assid);
+      $attendee_id = $request->get('attendee_id');
+
+      //Get image from ajax, encode then decode the image to store//
+      $data_uri = $request->signature;
+      $encoded_image = explode(",", $data_uri)[1];
+      $decoded_image = base64_decode($encoded_image);
+
+      //store the decoded image//
+      $storagePath = Storage::put('/uploads/signatures/'. $event_id . '/' . $attendee_id .'_signature.png', $decoded_image);
+
+      //store the file in the db//
+      // $signature->signature = 'signatures/'.$request->assid.'_driver_signature.png';
+      // $signature->save();
+
+
+  }
 
     /**
      * Updates an attendee

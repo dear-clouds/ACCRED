@@ -101,23 +101,22 @@
 
                 <h2>Check-in</h2>
 
-                <!-- <form  method="post" enctype="multipart/form-data" class="ansform">
-
+                <form  method="post" enctype="multipart/form-data" class="ansform">
                   {{ csrf_field() }}
                   <div class="wrapper">
 
-                    <canvas id="signature-pad" class="signature-pad" width=400 height=200></canvas>
+                    <canvas id="signature-pad" class="signature-pad" width="100%" height=200></canvas>
                   </div>
                   <div>
-                    <input type="hidden" name="assid" value="{{$da->id}}">
+                    {!! Form::hidden('attendee_id', $attendee->id) !!}
                     <button id="save">Save</button>
                     <button id="clear">Clear</button>
                   </div>
-                </form> -->
+                </form>
 
 
 
-                <div id="signature-pad" class="m-signature-pad">
+                <!-- <div id="signature-pad" class="m-signature-pad">
                 <div class="m-signature-pad--body">
                 <canvas style="border: 2px dashed #ccc; height: 200px; width: 100%;"></canvas>
               </div>
@@ -126,123 +125,123 @@
               <button type="button" class="btn btn-sm btn-secondary" data-action="clear">Clear</button>
               <button type="button" class="btn btn-sm btn-primary" data-action="save">Save</button>
             </div>
-          </div>
+          </div> -->
 
 
 
           <script>
-          // $(function () {
-          //
-          //   $.ajaxSetup({
-          //     headers: {
-          //       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-          //     }
-          //   });
-          //
-          //   var signaturePad = new SignaturePad(document.getElementById('signature-pad'), {
-          //     backgroundColor: 'rgba(255, 255, 255, 0)',
-          //     penColor: 'rgb(0, 0, 0)'
-          //   });
-          //   var saveButton = document.getElementById('save');
-          //   var cancelButton = document.getElementById('clear');
-          //   // var assid = document.getElementById('assid').value;
-          //
-          //   cancelButton.addEventListener('click', function (event){
-          //     event.preventDefault();
-          //   });
-          //
-          //   saveButton.addEventListener('click', function (event) {
-          //
-          //     event.preventDefault();
-          //
-          //     if (signaturePad.isEmpty()) {
-          //       sweetAlert("Oops...", "Please provide signature first.", "error");
-          //     } else {
-          //
-          //       // do ajax to post it
-          //       $.ajax({
-          //         url : '{{route('postSignatureAttendee')}}',
-          //         type: 'POST',
-          //         data : {
-          //           signature: signaturePad.toDataURL(),
-          //
-          //         },
-          //         success: function(response)
-          //         {
-          //           alert('The signature has been saved.')
-          //
-          //           console.log(response);
-          //         },
-          //         error: function(response)
-          //         {
-          //
-          //           console.log(response);
-          //         }
-          //       });
-          //     }
-          //
-          //   });
-          //
-          //   cancelButton.addEventListener('click', function (event) {
-          //     signaturePad.clear();
-          //   });
-          //
-          // });
-
           $(function () {
-            var wrapper = document.getElementById("signature-pad"),
-                clearButton = wrapper.querySelector("[data-action=clear]"),
-                saveButton = wrapper.querySelector("[data-action=save]"),
-                canvas = wrapper.querySelector("canvas"),
-                signaturePad;
 
-            // Adjust canvas coordinate space taking into account pixel ratio,
-            // to make it look crisp on mobile devices.
-            // This also causes canvas to be cleared.
-            // window.resizeCanvas = function () {
-            //   var ratio =  window.devicePixelRatio || 1;
-            //   canvas.width = canvas.offsetWidth * ratio;
-            //   canvas.height = canvas.offsetHeight * ratio;
-            //   canvas.getContext("2d").scale(ratio, ratio);
-            // }
-            //
-            // resizeCanvas();
-
-            signaturePad = new SignaturePad(canvas);
-
-            clearButton.addEventListener("click", function(event) {
-              signaturePad.clear();
+            $.ajaxSetup({
+              headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+              }
             });
 
-            saveButton.addEventListener("click", function(event) {
+            var signaturePad = new SignaturePad(document.getElementById('signature-pad'), {
+              backgroundColor: 'rgba(255, 255, 255, 0)',
+              penColor: 'rgb(0, 0, 0)'
+            });
+            var saveButton = document.getElementById('save');
+            var cancelButton = document.getElementById('clear');
+            // var assid = document.getElementById('assid').value;
+
+            cancelButton.addEventListener('click', function (event){
+              event.preventDefault();
+            });
+
+            saveButton.addEventListener('click', function (event) {
+
               event.preventDefault();
 
               if (signaturePad.isEmpty()) {
-                alert("Please provide a signature first.");
+                sweetAlert("Oops...", "Please provide signature first.", "error");
               } else {
-                var dataUrl = signaturePad.toDataURL();
-                var image_data = dataUrl.replace(/^data:image\/(png|jpg);base64,/, "");
 
+                // do ajax to post it
                 $.ajax({
-                  url: '{{route('postSignatureAttendee')}}',
+                  url : '{{route('saveSignature')}}',
                   type: 'POST',
-                  data: {
-                    signature: signaturePad.toDataURL('image/png'),
+                  data : {
+                    signature: signaturePad.toDataURL(),
+
                   },
                   success: function(response)
                   {
-                      sweetAlert("Success!", "You have been check-in!", "success");
-                      setTimeout(function () {
-                          location.reload();
-                      }, 3000);
-                      //data - response from server
+                    alert('The signature has been saved.')
+
+                    console.log(response);
                   },
-                }).done(function() {
-                  //
+                  error: function(response)
+                  {
+
+                    console.log(response);
+                  }
                 });
               }
+
             });
+
+            cancelButton.addEventListener('click', function (event) {
+              signaturePad.clear();
+            });
+
           });
+
+          // $(function () {
+          //   var wrapper = document.getElementById("signature-pad"),
+          //       clearButton = wrapper.querySelector("[data-action=clear]"),
+          //       saveButton = wrapper.querySelector("[data-action=save]"),
+          //       canvas = wrapper.querySelector("canvas"),
+          //       signaturePad;
+          //
+          //   // Adjust canvas coordinate space taking into account pixel ratio,
+          //   // to make it look crisp on mobile devices.
+          //   // This also causes canvas to be cleared.
+          //   // window.resizeCanvas = function () {
+          //   //   var ratio =  window.devicePixelRatio || 1;
+          //   //   canvas.width = canvas.offsetWidth * ratio;
+          //   //   canvas.height = canvas.offsetHeight * ratio;
+          //   //   canvas.getContext("2d").scale(ratio, ratio);
+          //   // }
+          //   //
+          //   // resizeCanvas();
+          //
+          //   signaturePad = new SignaturePad(canvas);
+          //
+          //   clearButton.addEventListener("click", function(event) {
+          //     signaturePad.clear();
+          //   });
+          //
+          //   saveButton.addEventListener("click", function(event) {
+          //     event.preventDefault();
+          //
+          //     if (signaturePad.isEmpty()) {
+          //       alert("Please provide a signature first.");
+          //     } else {
+          //       var dataUrl = signaturePad.toDataURL();
+          //       var image_data = dataUrl.replace(/^data:image\/(png|jpg);base64,/, "");
+          //
+          //       $.ajax({
+          //         url: '{{route('postSignatureAttendee')}}',
+          //         type: 'POST',
+          //         data: {
+          //           signature: signaturePad.toDataURL('image/png'),
+          //         },
+          //         success: function(response)
+          //         {
+          //             sweetAlert("Success!", "You have been check-in!", "success");
+          //             setTimeout(function () {
+          //                 location.reload();
+          //             }, 3000);
+          //             //data - response from server
+          //         },
+          //       }).done(function() {
+          //         //
+          //       });
+          //     }
+          //   });
+          // });
 
           </script>
 
