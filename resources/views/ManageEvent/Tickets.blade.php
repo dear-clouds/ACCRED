@@ -121,9 +121,9 @@
                                     <i class="ico-ticket ticket_icon mr5 ellipsis"></i>
                                 @endif
                                 {{$ticket->title}}
-                                <span class="pull-right">
+                                <!-- <span class="pull-right">
                         {{ ($ticket->is_free) ? trans("Order.free") : money($ticket->price, $event->currency) }}
-                    </span>
+                    </span> -->
                             </h3>
                         </div>
                         <div class='panel-body'>
@@ -144,7 +144,7 @@
                                         <p class="nm text-muted">@lang("Ticket.remaining")</p>
                                     </div>
                                 </li>
-                                <li>
+                                <!-- <li>
                                     <div class="section">
                                         <h4 class="nm hint--top"
                                             title="{{money($ticket->sales_volume, $event->currency)}} + {{money($ticket->organiser_fees_volume, $event->currency)}} @lang("Order.organiser_booking_fees")">
@@ -153,14 +153,14 @@
                                         </h4>
                                         <p class="nm text-muted">@lang("Ticket.revenue")</p>
                                     </div>
-                                </li>
+                                </li> -->
                             </ul>
                         </div>
                         <div class="panel-footer" style="height: 56px;">
                             <div class="sortHandle" title="@lang("basic.drag_to_reorder")">
                                 <i class="ico-paragraph-justify"></i>
                             </div>
-                            <ul class="nav nav-section nav-justified">
+                            <!-- <ul class="nav nav-section nav-justified">
                                 <li>
                                     <a href="javascript:void(0);">
                                         @if($ticket->sale_status === config('attendize.ticket_status_on_sale'))
@@ -184,7 +184,7 @@
                                         @endif
                                     </a>
                                 </li>
-                            </ul>
+                            </ul> -->
                         </div>
                     </div>
                 </div>

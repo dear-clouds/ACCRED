@@ -93,6 +93,8 @@
                         <br>
                             @lang("Order.reference"): <b>@{{ attendee.order_reference + '-' + attendee.reference_index }}</b>
                         <br>
+                        @lang("Order.enveloppe"): <b>@{{ attendee.enveloppe + '-' + attendee.enveloppe_index }}</b>
+                    <br>
                             @lang("Order.ticket"): <b>@{{ attendee.ticket }}</b>
                         <a href="" class="ci btn btn-successfulQrRead">
                             <i class="ico-checkmark"></i>
@@ -150,7 +152,7 @@
                         <div id="scanning-ellipsis">@lang("Attendee.scanning")<span>.</span><span>.</span><span>.</span></div>
                     </span>
         </div>
-        <canvas id="QrCanvas" width="800" height="600"></canvas>
+        {{--<canvas id="QrCanvas" width="800" height="600"></canvas>--}}
     </div>
 </div>
 {{-- /END QR Modal--}}
