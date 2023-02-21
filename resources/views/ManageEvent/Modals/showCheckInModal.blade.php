@@ -123,32 +123,19 @@
                                     canvas = wrapper.querySelector("canvas"),
                                     signaturePad;
 
-                                // Adjust canvas coordinate space taking into account pixel ratio,
-                                // to make it look crisp on mobile devices.
-                                // This also causes canvas to be cleared.
-                                // window.resizeCanvas = function () {
-                                //   var ratio =  window.devicePixelRatio || 1;
-                                //   canvas.width = canvas.offsetWidth * ratio;
-                                //   canvas.height = canvas.offsetHeight * ratio;
-                                //   canvas.getContext("2d").scale(ratio, ratio);
-                                // }
-                                //
-                                // resizeCanvas();
-
-                                signaturePad = new SignaturePad(canvas);
-
-                                function resizeCanvas() {
-                                  var ratio =  Math.max(window.devicePixelRatio || 1, 1);
+                                Adjust canvas coordinate space taking into account pixel ratio,
+                                to make it look crisp on mobile devices.
+                                This also causes canvas to be cleared.
+                                window.resizeCanvas = function () {
+                                  var ratio =  window.devicePixelRatio || 1;
                                   canvas.width = canvas.offsetWidth * ratio;
                                   canvas.height = canvas.offsetHeight * ratio;
                                   canvas.getContext("2d").scale(ratio, ratio);
-                                  signaturePad.clear(); // otherwise isEmpty() might return incorrect value
-                              }
+                                }
 
-                              window.addEventListener("resize", resizeCanvas);
-                              resizeCanvas();
+                                resizeCanvas();
 
-
+                                signaturePad = new SignaturePad(canvas);
 
                                 clearButton.addEventListener("click", function(event) {
                                   signaturePad.clear();
