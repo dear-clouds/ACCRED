@@ -66,6 +66,8 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
+
+
                 <div class="attendee_list">
                     <h4 class="attendees_title">
                         <span v-if="!searchTerm">
@@ -83,16 +85,13 @@
 
                     <ul v-if="searchResultsCount > 0" class="list-group" id="attendee_list" v-cloak>
 
-                    @php ($event_id = $event->id)
+                        <li
+                        v-for="attendee in attendees"
+                        class="at list-group-item"
+                        :class = "{arrived : attendee.has_arrived || attendee.has_arrived == '1'}"
+                        >
 
-                    <li
-                    @click="toggleCheckin(attendee)"
-                    v-for="attendee in attendees"
-                    class="at list-group-item"
-                    :class = "{arrived : attendee.has_arrived || attendee.has_arrived == '1'}"
-                    >
-
-
+                        @php ($event_id = $event->id)
 
                         @lang("Attendee.name"): <b>@{{ attendee.first_name }} @{{ attendee.last_name }} </b> &nbsp; <span v-if="!attendee.is_payment_received" class="label label-danger">@lang("Order.awaiting_payment")</span>
                         <br>
@@ -158,8 +157,10 @@
                     </span>
                     <span class="message" v-if="scanResultObject.status == 'success'">
                     <span class="uppercase">@lang("Attendee.name")</span>: @{{ scanResultObject.name }}<br>
+                   /* <span class="uppercase">@lang("Attendee.reference")</span>: @{{scanResultObject.reference }}<br> */
                    <span class="uppercase">@lang("Attendee.ticket")</span>: @{{scanResultObject.ticket }}
                    <span class="uppercase">@lang("Attendee.company")</span>: @{{scanResultObject.company }}
+                   /* <span class="uppercase">@lang("Attendee.sender")</span>: @{{scanResultObject.sender }} */
                     </span>
                     <span v-if="isScanning">
                         <div id="scanning-ellipsis">@lang("Attendee.scanning")<span>.</span><span>.</span><span>.</span></div>
@@ -169,6 +170,11 @@
     </div>
 </div>
 {{-- /END QR Modal--}}
+
+/* <script>
+Vue.http.headers.common['X-CSRF-TOKEN'] = '{{ csrf_token() }}';
+</script> */
+
 
 
 @include("Shared.Partials.LangScript")
@@ -181,13 +187,11 @@
             }
         });
     });
-
     @if(!Auth::user()->first_name)
       setTimeout(function () {
         $('.editUserModal').click();
     }, 1000);
     @endif
-
 </script>
 {!! HTML::script('vendor/qrcode-scan/llqrcode.js') !!}
 {!! HTML::script('assets/javascript/check_in.js') !!}
