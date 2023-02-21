@@ -90,10 +90,6 @@ var checkinApp = new Vue({
             this.initScanner();
         },
 
-        showCheckInModal: function () {
-            this.showCheckInModal = true;
-        },
-
         initScanner: function () {
 
             var that = this;

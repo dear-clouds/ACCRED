@@ -10,16 +10,6 @@
                     </h3>
             </div>
             <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                   {!! Form::label('ticket_id', trans("ManageEvent.ticket"), array('class'=>'control-label required')) !!}
-                                   {!! Form::select('ticket_id', $tickets, $attendee->ticket_id, ['class' => 'form-control']) !!}
-                                </div>
-                            </div>
-                        </div>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -91,6 +81,7 @@
                     <div class="row more-options">
                         <div class="col-md-12">
                             Ici Signature
+                            <canvas></canvas> //This is where the singature pad will appear
                         </div>
                     </div>
                 </div>
@@ -113,3 +104,11 @@
        {!! Form::close() !!}
     </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
+<script>
+  var canvas = document.querySelector("canvas");
+  var signaturePad = new SignaturePad(canvas);
+  var dataURL = canvas.toDataURL();
+  signaturePad.toDataURL("data:image/png;base64,signature");
+</script>
