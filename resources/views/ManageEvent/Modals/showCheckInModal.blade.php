@@ -1,18 +1,3 @@
-<!doctype html>
-<html>
-<head>
-
-    {!! HTML::script('vendor/vue/dist/vue.min.js') !!}
-    {!! HTML::script('vendor/vue-resource/dist/vue-resource.min.js') !!}
-
-    {!! HTML::style('assets/stylesheet/application.css') !!}
-    {!! HTML::style('assets/stylesheet/check_in.css') !!}
-    {!! HTML::script('vendor/jquery/dist/jquery.min.js') !!}
-
-    @include('Shared/Layouts/ViewJavascript')
-  </head>
-  <body>
-
 
 
 <div role="dialog"  class="modal fade" style="display: none;">
@@ -222,5 +207,3 @@
 
     </div>
 </div>
-</body>
-</html>

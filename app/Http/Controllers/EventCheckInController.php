@@ -199,7 +199,7 @@ class EventCheckInController extends MyBaseController
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function postCheckInAttendee(Request $request)
+    public function postCheckInAttendee(Request $request, $event_id)
     {
         $attendee_id = $request->get('attendee_id');
         $checking = $request->get('checking');
