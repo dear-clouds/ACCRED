@@ -17,6 +17,7 @@ return array (
   'last_name' => 'Nazwisko',
   'name' => 'Imię',
   'ticket' => 'Bilet',
+  'enveloppe' => 'Envelope',
   'reference' => 'Zamówienie',
   'search_attendees' => 'Przeszukaj dane uczestników...',
   'send_invitation_n_ticket_to_attendee' => 'Wyślij zaproszenie i bilet do uczestnika.',

@@ -15,6 +15,7 @@ return array (
   'event_attendees' => 'Participants à l\'évènement',
   'first_name' => 'Prénom',
   'last_name' => 'Nom de famille',
+  'enveloppe' => 'Enveloppe',
   'name' => 'Nom',
   'search_attendees' => 'Rechercher des participants...',
   'send_invitation_n_ticket_to_attendee' => 'Envoyer invitation et ticket au participant.',

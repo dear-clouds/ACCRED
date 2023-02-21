@@ -14,7 +14,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                   {!! Form::label('ticket_id', trans("ManageEvent.ticket"), array('class'=>'control-label required')) !!}
+                                   {!! Form::label('ticket_id', trans("ManageEvent.ticket"), array('class'=>'control-label')) !!}
                                    {!! Form::select('ticket_id', $tickets, null, ['class' => 'form-control']) !!}
                                 </div>
                             </div>
@@ -23,7 +23,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                {!! Form::label('first_name', trans("Attendee.first_name"), array('class'=>'control-label required')) !!}
+                                {!! Form::label('first_name', trans("Attendee.first_name"), array('class'=>'control-label')) !!}
 
                                 {!!  Form::text('first_name', Input::old('first_name'),
                                             array(
@@ -45,20 +45,28 @@
                         </div>
 
                         <div class="form-group">
-                            {!! Form::label('email', trans("Attendee.email_address"), array('class'=>'control-label required')) !!}
+                            {!! Form::label('email', trans("Attendee.email_address"), array('class'=>'control-label')) !!}
 
                             {!!  Form::text('email', Input::old('email'),
                                                 array(
                                                 'class'=>'form-control'
                                                 ))  !!}
                         </div>
-
                         <div class="form-group">
+                            {!! Form::label('enveloppe', trans("Attendee.enveloppe"), array('class'=>'control-label')) !!}
+
+                            {!!  Form::text('enveloppe', Input::old('enveloppe'),
+                                                array(
+                                                'class'=>'form-control'
+                                                ))  !!}
+                        </div>
+
+                        <!-- <div class="form-group">
                             <div class="checkbox custom-checkbox">
                                 <input type="checkbox" name="email_ticket" id="email_ticket" value="1" />
                                 <label for="email_ticket">&nbsp;&nbsp;@lang("Attendee.send_invitation_n_ticket_to_attendee")</label>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div> <!-- /end modal body-->

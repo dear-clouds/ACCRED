@@ -53,6 +53,7 @@ class EventDashboardController extends MyBaseController
             $tickets_sold = 0;
             $organiser_fees_volume = 0;
 
+
             foreach ($chartData as $item) {
                 if ($item['date'] == $date->format('Y-m-d')) {
                     $views = $item['views'];
@@ -60,6 +61,7 @@ class EventDashboardController extends MyBaseController
                     $organiser_fees_volume = $item['organiser_fees_volume'];
                     $unique_views = $item['unique_views'];
                     $tickets_sold = $item['tickets_sold'];
+
 
                     break;
                 }
@@ -71,6 +73,7 @@ class EventDashboardController extends MyBaseController
                 'unique_views' => $unique_views,
                 'sales_volume' => $sales_volume + $organiser_fees_volume,
                 'tickets_sold' => $tickets_sold,
+                
             ];
         }
 
@@ -85,6 +88,7 @@ class EventDashboardController extends MyBaseController
             'event'      => $event,
             'chartData'  => json_encode($result),
             'ticketData' => json_encode($tickets_data),
+            'attendees' => $event->attendees,
         ];
 
         return view('ManageEvent.Dashboard', $data);

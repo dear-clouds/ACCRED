@@ -15,6 +15,7 @@ return array (
   'event_attendees' => 'Event Attendees',
   'first_name' => 'First Name',
   'last_name' => 'Last Name',
+  'enveloppe' => 'Envelope',
   'name' => 'Name',
   'ticket' => 'Category',
   'reference' => 'Reference',

@@ -91,7 +91,7 @@ class EventViewController extends Controller
     {
         $rules = [
             'name'    => 'required',
-            'email'   => ['required', 'email'],
+            'email'   => 'email',
             'message' => ['required'],
         ];
 
