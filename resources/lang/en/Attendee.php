@@ -16,6 +16,8 @@ return array (
   'first_name' => 'First Name',
   'last_name' => 'Last Name',
   'enveloppe' => 'Envelope',
+  'company' => 'Company',
+  'sender' => 'Sender',
   'name' => 'Name',
   'ticket' => 'Category',
   'reference' => 'Reference',

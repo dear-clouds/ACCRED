@@ -83,7 +83,7 @@
                                {!!Html::sortable_link(trans("Attendee.name"), $sort_by, 'first_name', $sort_order, ['q' => $q , 'page' => $attendees->currentPage()])!!}
                             </th>
                             <th>
-                               {!!Html::sortable_link(trans("Attendee.email"), $sort_by, 'email', $sort_order, ['q' => $q , 'page' => $attendees->currentPage()])!!}
+                               {!!Html::sortable_link(trans("Attendee.company"), $sort_by, 'company', $sort_order, ['q' => $q , 'page' => $attendees->currentPage()])!!}
                             </th>
 
                             <th>
@@ -102,7 +102,7 @@
                             <td>
                                 <a data-modal-id="MessageAttendee" href="javascript:void(0);" class="loadModal"
                                     data-href="{{route('showMessageAttendee', ['attendee_id'=>$attendee->id])}}"
-                                    > {{$attendee->email}}</a>
+                                    > {{$attendee->company}}</a>
                             </td>
                             <td>
                                 {{{$attendee->ticket->title}}}

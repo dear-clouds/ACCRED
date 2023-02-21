@@ -156,6 +156,8 @@
                         <span class="uppercase">@lang("Attendee.name")</span>: @{{ scanResultObject.name }}<br>
                         <span class="uppercase">@lang("Attendee.reference")</span>: @{{scanResultObject.reference }}<br>
                         <span class="uppercase">@lang("Attendee.ticket")</span>: @{{scanResultObject.ticket }}
+                        <span class="uppercase">@lang("Attendee.company")</span>: @{{scanResultObject.company }}
+                        <span class="uppercase">@lang("Attendee.sender")</span>: @{{scanResultObject.sender }}
                     </span>
                     <span v-if="isScanning">
                         <div id="scanning-ellipsis">@lang("Attendee.scanning")<span>.</span><span>.</span><span>.</span></div>
