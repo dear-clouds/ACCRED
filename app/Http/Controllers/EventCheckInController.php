@@ -282,6 +282,7 @@ class EventCheckInController extends MyBaseController
          var imageData = signaturePad.toDataURL();
          document.getElementsByName("image")[0].setAttribute("value", imageData);
   }
+  
     public function postSignatureAttendee(Request $request)
     {
         $attendee_id = $request->get('attendee_id');
