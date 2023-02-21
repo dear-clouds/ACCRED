@@ -337,11 +337,6 @@ class EventCheckInController extends MyBaseController
                 'status'  => 'error',
                 'message' => trans("Controllers.attendee_already_checked_in", ["time"=> $attendee->arrival_time->format(env("DEFAULT_DATETIME_FORMAT"))])
             ]);
-
-            $data_uri = "data:image/png;base64,signature";
-            $encoded_image = explode(",", $data_uri)[1];
-            $decoded_image = base64_decode($encoded_image);
-            Storage::put($attendee_id . '-signature.png', $decoded_image);
         }
 
         Attendee::find($attendee->id)->update(['has_arrived' => true, 'arrival_time' => Carbon::now()]);
