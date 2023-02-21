@@ -94,7 +94,7 @@
                         <strong>Arrival time:</strong> {{{$attendee->arrival_time}}}
 
                         @else
-                        <div class="col-md-12" style="background: #b30404; padding: 10px; color: white; text-align: center;">#b30404
+                        <div class="col-md-12" style="background: #b30404; padding: 10px; color: white; text-align: center;">
 
                         This attendee has not arrived.
 

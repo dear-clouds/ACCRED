@@ -36,7 +36,7 @@ class EventAttendeesController extends MyBaseController
      */
     public function showAttendees(Request $request, $event_id)
     {
-        $allowed_sorts = ['first_name', 'email', 'ticket_id', 'company', 'sender'];
+        $allowed_sorts = ['last_name', 'has_arrived', 'ticket_id', 'company', 'sender'];
 
         $searchQuery = $request->get('q');
         $sort_order = $request->get('sort_order') == 'asc' ? 'asc' : 'desc';
