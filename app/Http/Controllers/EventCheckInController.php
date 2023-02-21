@@ -289,6 +289,7 @@ class EventCheckInController extends MyBaseController
                 'attendees.first_name',
                 'attendees.last_name',
                 'attendees.email',
+                'attendees.signature',
                 'attendees.reference_index',
                 'attendees.enveloppe',
                 'attendees.company',
@@ -325,6 +326,7 @@ class EventCheckInController extends MyBaseController
             'name' => $attendee->first_name." ".$attendee->last_name,
             'reference' => $attendee->reference,
             'enveloppe' => $attendee->enveloppe,
+            'signature' => $attendee->signature,
             'company' => $attendee->company,
             'sender' => $attendee->sender,
             'ticket' => $attendee->ticket

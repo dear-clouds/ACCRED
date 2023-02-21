@@ -93,6 +93,7 @@
                                 {!! Form::submit(trans("ManageEvent.edit_attendee"), ['class'=>"btn btn-success"]) !!}
                             </div>
                         </div>
+                        {!! Form::close() !!}
                         <div class="row">
                             <div class="col-md-12">
 
@@ -189,9 +190,10 @@
                 </div>
             </div> <!-- /end modal body-->
             <div class="modal-footer">
+              {!! Form::model($attendee, array('url' => route('postQRCodeCheckInAttendee', array('event_id' => $event->id, 'attendee_id' => $attendee->id)), 'class' => 'ajax')) !!}
                {!! Form::hidden('attendee_id', $attendee->id) !!}
                {!! Form::button(trans("basic.cancel"), ['class'=>"btn modal-close btn-danger",'data-dismiss'=>'modal']) !!}
-               <a href="" class="btn btn-success">Check-in</a>
+               <a href="EventCheckInController@postCheckInAttendeeQr" class="btn btn-success">Check-in</a>
             </div>
         </div><!-- /end modal content-->
        {!! Form::close() !!}
