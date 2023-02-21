@@ -98,9 +98,9 @@
                             @lang("Order.ticket"): <b>@{{ attendee.ticket }}</b>
                             <br />
 
-                                
+                                <script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
 
-                                <button data-modal-id="showCheckInModal@{{ attendee.id }}" href="javascript:void(0);"  data-href="/event/{{ $event_id }}/check_in/@{{ attendee.id }}/modal" class="loadModal btn btn-success" type="button">Check-in</button>
+                                
 
 
                         <span class="ci btn btn-successfulQrRead">
