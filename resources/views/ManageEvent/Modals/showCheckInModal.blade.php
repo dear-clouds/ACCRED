@@ -145,9 +145,6 @@
   function drawCanvas() {
      resizeCanvas();
      signaturePad = new SignaturePad(canvas);
-     if ("{$fsc->firma}" !== "") {
-        signaturePad.fromDataURL("{$fsc->firma}");
-     }
   }
 
   window.addEventListener("resize", drawCanvas);
