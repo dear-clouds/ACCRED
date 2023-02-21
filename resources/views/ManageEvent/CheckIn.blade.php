@@ -103,7 +103,7 @@
                                 <script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
 
                                 <button data-modal-id="showCheckInModal@{{ attendee.id }}" href="javascript:void(0);"  data-href="/event/{{ $event_id }}/check_in/@{{ attendee.id }}/modal" class="loadModal btn btn-success" type="button">Check-in</button>
-                                
+
 
                         <span class="ci btn btn-successfulQrRead">
                             <i class="ico-checkmark"></i>
@@ -178,23 +178,6 @@ Vue.http.headers.common['X-CSRF-TOKEN'] = '{{ csrf_token() }}';
 
 
 @include("Shared.Partials.LangScript")
-{!! HTML::script('assets/javascript/backend.js') !!}
-<script>
-    $(function () {
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-            }
-        });
-    });
-
-    @if(!Auth::user()->first_name)
-      setTimeout(function () {
-        $('.editUserModal').click();
-    }, 1000);
-    @endif
-
-</script>
 {!! HTML::script('vendor/qrcode-scan/llqrcode.js') !!}
 {!! HTML::script('assets/javascript/check_in.js') !!}
 </body>
