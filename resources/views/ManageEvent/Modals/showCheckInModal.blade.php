@@ -1,10 +1,6 @@
 <html>
 <head>
 
-
-
-
-
 </head>
 <body>
 
@@ -114,10 +110,8 @@
                                 </div>
                               </div>
 
-                              {!! HTML::script('vendor/jquery/dist/jquery.min.js') !!}
-
                               <script>
-                              $(function () {
+                              $(document).ready(function () {
                                 var wrapper = document.getElementById("signature-pad"),
                                     clearButton = wrapper.querySelector("[data-action=clear]"),
                                     saveButton = wrapper.querySelector("[data-action=save]"),
