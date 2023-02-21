@@ -1,6 +1,6 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2018/04/26 10:16:27 
+ Generated via "php artisan localization:missing" at 2018/04/26 10:16:27
 *************************************************************************/
 
 return array (
@@ -68,5 +68,5 @@ return array (
   'select_an_organiser' => 'Sélectionner un organisateur',
   'select_organiser' => 'Sélectionner un organisateur',
   'text_color' => 'Couleur de texte',
-  'tickets_sold' => 'Billets vendus',
+  'tickets_sold' => 'Participants',
 );
