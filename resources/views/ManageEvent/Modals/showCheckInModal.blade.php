@@ -197,24 +197,7 @@
 </div>
 
 
-@include("Shared.Partials.LangScript")
-{!! HTML::script('assets/javascript/backend.js') !!}
-<script>
-    $(function () {
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-            }
-        });
-    });
 
-    @if(!Auth::user()->first_name)
-      setTimeout(function () {
-        $('.editUserModal').click();
-    }, 1000);
-    @endif
-
-</script>
 <script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
 </body>
 </html>
