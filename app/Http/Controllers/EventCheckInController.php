@@ -125,14 +125,14 @@ class EventCheckInController extends MyBaseController
         $attendee = Attendee::scope()->findOrFail($attendee_id);
         $attendee->update($request->all());
 
-        dd($attendee);
-
-        $data_uri = "data:image/png;base64,signature";
-        $encoded_image = explode(",", $data_uri)[1];
-        $decoded_image = base64_decode($encoded_image);
-        Storage::put('/uploads/signatures/' $event_id . '/' . $attendee_id . '-signature.png', $decoded_image);
-
-        dd($decoded_image);
+        // dd($attendee);
+        //
+        // $data_uri = "data:image/png;base64,signature";
+        // $encoded_image = explode(",", $data_uri)[1];
+        // $decoded_image = base64_decode($encoded_image);
+        // Storage::put('/uploads/signatures/' $event_id . '/' . $attendee_id . '-signature.png', $decoded_image);
+        //
+        // dd($decoded_image);
 
         session()->flash('message',trans("Controllers.successfully_updated_attendee"));
 
