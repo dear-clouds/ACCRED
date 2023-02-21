@@ -193,7 +193,11 @@
             </div> <!-- /end modal body-->
             <div class="modal-footer">
 
-              <a href="/event/{{ $event->id }}/qrcode_check_in" class="btn btn-success">Check-in</a>
+              {!! Form::open(['method' => 'post', 'route' => 'postCheckInAttendee']) !!}
+              <button type="submit"><i class="glyphicon glyphicon-remove"></i>Check-in</button>
+              {!! Form::close() !!}
+
+
             </div>
         </div><!-- /end modal content-->
 
