@@ -148,14 +148,14 @@
               if (signaturePad.isEmpty()) {
                 alert("Please provide a signature first.");
               } else {
-                var dataUrl = signaturePad.toDataURL();
-                var image_data = dataUrl.replace(/^data:image\/(png|jpg);base64,/, "");
+                // var dataUrl = signaturePad.toDataURL();
+                // var image_data = dataUrl.replace(/^data:image\/(png|jpg);base64,/, "");
 
                 $.ajax({
                   url: '/signature/',
                   type: 'POST',
                   data: {
-                    signature: signaturePad.toDataURL('image/png'),
+                    signature: signaturePad.toDataURL(),
                   },
                   success: function(response)
                   {
