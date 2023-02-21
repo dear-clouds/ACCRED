@@ -1,4 +1,4 @@
-{!! HTML::script('vendor/vue/dist/vue.min.js') !!}
+
 
 <div role="dialog"  class="modal fade" style="display: none;">
    {!! Form::model($attendee, array('url' => route('postEditAttendee', array('event_id' => $event->id, 'attendee_id' => $attendee->id)), 'class' => 'ajax')) !!}
@@ -194,7 +194,7 @@
             <div class="modal-footer">
 
               <!-- <form method="post" action="{{route('postCheckInAttendee', ['event_id' => $event->id, 'attendee_id' => $attendee->id, 'checking' => $attendee->has_arrived])}}"> -->
-              <span @click="toggleCheckin(attendee)" name="check-in" class="btn btn-success">Check-in</span>
+              <span @click="toggleCheckin()" name="check-in" class="btn btn-success">Check-in</span>
             <!-- </form> -->
 
 
@@ -211,7 +211,7 @@ var checkinApp = new Vue({
     },
 
     methods: {
-        toggleCheckin: function (attendee) {
+        toggleCheckin: function () {
 
             if(this.workingAway) {
                 return;
