@@ -312,8 +312,15 @@ class EventAttendeesController extends MyBaseController
         $num_added = 0;
         if ($request->file('attendees_list')) {
 
-          $the_file = Excel::load($request->file('attendees_list')->getRealPath(), function ($reader) {
-            })->get();
+          // $the_file = Excel::load($request->file('attendees_list')->getRealPath(), function ($reader) {
+          //   })->get();
+
+            $data = Excel::load(($request->file('attendees_list')->getRealPath(), function ($reader) {
+            $reader->ignoreEmpty();
+        })->get()->toArray();
+
+        # remove empty rows
+        $the_file = array_filter($data);
 
             // Loop through
             foreach ($the_file as $rows) {
