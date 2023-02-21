@@ -33,7 +33,7 @@ var checkinApp = new Vue({
                 console.log('Successfully fetched attendees')
             }, function () {
                 console.log('Failed to fetch attendees')
-                console.log(data)
+                console.log(res.data)
             });
         },
         toggleCheckin: function (attendee) {
