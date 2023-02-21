@@ -92,10 +92,10 @@
                             <div class="col-md-12" style="background: green; padding: 10px; color: white; text-align: center;">
 
                       <strong>Arrival time:</strong> {{{$attendee->arrival_time}}}
+                      <br /><br />
 
 
-
-                    <img src="http://accred.fiawec.com/user_content/signatures/{{$event->id}}/{{$attendee->id}}_signature.png" width="80%">
+                    <img src="http://accred.fiawec.com/user_content/signatures/{{$event->id}}/{{$attendee->id}}_signature.png" width="60%" style="background: white; border: 1px dashed #bbb;">
 
                     </div>
 
