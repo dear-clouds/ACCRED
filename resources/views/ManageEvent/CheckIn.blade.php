@@ -8,6 +8,7 @@
     {!! HTML::script('vendor/vue/dist/vue.min.js') !!}
     {!! HTML::script('vendor/vue-resource/dist/vue-resource.min.js') !!}
 
+
     {!! HTML::style('assets/stylesheet/application.css') !!}
     {!! HTML::style('assets/stylesheet/check_in.css') !!}
     {!! HTML::script('vendor/jquery/dist/jquery.min.js') !!}
@@ -42,10 +43,9 @@
             <div class="col-md-12">
                 <div class="attendee_input_wrap">
                     <div class="input-group">
-                                  <span class="input-group-btn">
-                                 <button @click="showQrModal" title="Scan QR Code" class="btn btn-default qr_search" type="button"><i
-                                              class="ico-qrcode"></i></button>
-                                </span>
+                                <span class="input-group-btn">
+                               <button data-modal-id="InviteAttendee" href="javascript:void(0);"  data-href="{{route('showInviteAttendee', ['event_id'=>$event->id])}}" class="loadModal btn btn-success" type="button"><i class="ico-user-plus"></i></button>
+                              </span>
                         {!!  Form::text('attendees_q', null, [
                     'class' => 'form-control attendee_search',
                             'id' => 'search',
@@ -87,18 +87,29 @@
 
                     <ul v-if="searchResultsCount > 0" class="list-group" id="attendee_list" v-cloak>
                         <li
-                        @click="toggleCheckin(attendee)"
+                        /* @click="toggleCheckin(attendee)" */
                         v-for="attendee in attendees"
                         class="at list-group-item"
                         :class = "{arrived : attendee.has_arrived || attendee.has_arrived == '1'}"
                         >
+                            <a
+                            data-modal-id="EditAttendee"
+                            href="javascript:void(0);"
+                            data-href="{{route('showEditAttendee', ['event_id'=>$event->id, 'attendee_id'=>$attendee->id])}}"
+                            class="loadModal">
+
                             @lang("Attendee.name"): <b>@{{ attendee.first_name }} @{{ attendee.last_name }} </b> &nbsp; <span v-if="!attendee.is_payment_received" class="label label-danger">@lang("Order.awaiting_payment")</span>
                         <br>
                             @lang("Attendee.enveloppe"): <b>@{{ attendee.enveloppe }}</b>
+                            <br>
+                                @lang("Attendee.company"): <b>@{{ attendee.company }}</b>
+
+                                <br>
+                                    @lang("Attendee.sender"): <b>@{{ attendee.sender }}</b>
                         <br>
                             @lang("Order.ticket"): <b>@{{ attendee.ticket }}</b>
                             <br />
-
+</a>
 
                         <span href="" class="ci btn btn-successfulQrRead">
                             <i class="ico-checkmark"></i>
@@ -112,9 +123,7 @@
     </div>
 </section>
 
-<div class="btn-group btn-group-responsive">
-    <button data-modal-id="InviteAttendee" href="javascript:void(0);"  data-href="{{route('showInviteAttendee', ['event_id'=>$event->id])}}" class="loadModal btn btn-success" type="button"><i class="ico-user-plus"></i> @lang("ManageEvent.invite_attendee")</button>
-</div>
+
 
 <footer class="hide">
     <div class="container">
@@ -207,5 +216,6 @@ signaturePad.on();
 @include("Shared.Partials.LangScript")
 {!! HTML::script('vendor/qrcode-scan/llqrcode.js') !!}
 {!! HTML::script('assets/javascript/check_in.js') !!}
+{!! HTML::script('assets/javascript/backend.js') !!}
 </body>
 </html>

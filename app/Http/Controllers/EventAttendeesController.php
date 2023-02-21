@@ -284,7 +284,7 @@ class EventAttendeesController extends MyBaseController
     public function postImportAttendee(Request $request, $event_id)
     {
         $rules = [
-            'attendees_list' => 'required|mimes:csv,txt|max:5000|',
+            'attendees_list' => 'required|mimes:csv,txt|max:500000000|',
         ];
 
         $messages = [
@@ -299,7 +299,7 @@ class EventAttendeesController extends MyBaseController
             ]);
 
         }
-        // $attendee = Attendee::findOrFail($event_id);
+        $attendee = Attendee::findOrFail($event_id);
         $ticket_id = $request->get('ticket_id');
         $event = Event::findOrFail($event_id);
         $ticket_price = 0;
@@ -312,14 +312,14 @@ class EventAttendeesController extends MyBaseController
 
             // Loop through
             foreach ($the_file as $rows) {
-                if (!empty($rows['first_name']) && !empty($rows['enveloppe'])) {
+                if (!empty($rows['enveloppe'])) {
                     $num_added++;
                     $attendee_first_name = strip_tags($rows['first_name']);
                     $attendee_last_name = strip_tags($rows['last_name']);
                     $attendee_email = $rows['email'];
                     $attendee_enveloppe = $rows['enveloppe'];
-                    $attendee_company = $rows['company'];
-                    $attendee_sender = $rows['sender'];
+                    $attendee_company = strip_tags($rows['company']);
+                    $attendee_sender = strip_tags($rows['sender']);
 
                     error_log($ticket_id . ' ' . $ticket_price . ' ' . $email_attendee);
 
@@ -633,11 +633,11 @@ class EventAttendeesController extends MyBaseController
                     'First Name',
                     'Last Name',
                     'Email',
-		                'Ticket ID',
-                    'Order Reference',
                     'Enveloppe',
                     'Company',
                     'Sender',
+                    'Ticket ID',
+                    'Order Reference',
                     'Ticket Type',
                     'Purchase Date',
                     'Has Arrived',
