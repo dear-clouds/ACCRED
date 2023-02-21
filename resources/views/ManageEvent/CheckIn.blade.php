@@ -14,6 +14,7 @@
 
     @include('Shared/Layouts/ViewJavascript')
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -91,14 +92,14 @@
                         >
                             @lang("Attendee.name"): <b>@{{ attendee.first_name }} @{{ attendee.last_name }} </b> &nbsp; <span v-if="!attendee.is_payment_received" class="label label-danger">@lang("Order.awaiting_payment")</span>
                         <br>
-                            @lang("Order.reference"): <b>@{{ attendee.order_reference + '-' + attendee.reference_index }}</b>
+                            @lang("Attendee.enveloppe"): <b>@{{ attendee.enveloppe }}</b>
                         <br>
-                        @lang("Order.enveloppe"): <b>@{{ attendee.enveloppe + '-' + attendee.enveloppe_index }}</b>
-                    <br>
                             @lang("Order.ticket"): <b>@{{ attendee.ticket }}</b>
-                        <a href="" class="ci btn btn-successfulQrRead">
+
+                        <span href="" class="ci btn btn-successfulQrRead">
                             <i class="ico-checkmark"></i>
-                        </a>
+                        </span>
+
                         </li>
                     </ul>
                 </div>
@@ -152,7 +153,7 @@
                         <div id="scanning-ellipsis">@lang("Attendee.scanning")<span>.</span><span>.</span><span>.</span></div>
                     </span>
         </div>
-        {{--<canvas id="QrCanvas" width="800" height="600"></canvas>--}}
+        <canvas id="QrCanvas" width="800" height="600"></canvas>
     </div>
 </div>
 {{-- /END QR Modal--}}

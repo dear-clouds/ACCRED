@@ -40,25 +40,25 @@
 
 @section('content')
     <div class="row">
-        <div class="col-sm-3">
+        <!-- <div class="col-sm-3">
             <div class="stat-box">
                 <h3>{{ money($event->sales_volume + $event->organiser_fees_volume, $event->currency) }}</h3>
                 <span>@lang("Dashboard.sales_volume")</span>
             </div>
-        </div>
+        </div> -->
         <!-- <div class="col-sm-3">
             <div class="stat-box">
                 <h3>{{ $event->orders->count() }}</h3>
                 <span>@lang("Dashboard.orders")</span>
             </div>
         </div> -->
-        <div class="col-sm-3">
+        <div class="col-sm-6">
             <div class="stat-box">
                 <h3>{{ $event->tickets->sum('quantity_sold') }}</h3>
                 <span>@lang("Dashboard.tickets_sold")</span>
             </div>
         </div>
-        <div class="col-sm-3">
+        <div class="col-sm-6">
             <div class="stat-box">
                 <h3>{{ $event->stats->sum('views') }}</h3>
                 <span>@lang("Dashboard.event_views")</span>
@@ -99,29 +99,6 @@
                     <div class="panel">
                         <div class="panel-heading panel-default">
                             <h3 class="panel-title">
-                                @lang("Dashboard.ticket_sales_volume")
-                                <span style="color: green; float: right;">
-                                    {{money($event->sales_volume + $event->organiser_fees_volume, $event->currency)}}
-                                    @lang("basic.total")
-                                </span>
-                            </h3>
-                        </div>
-                        <div class="panel-body">
-                            <div class="chart-wrap">
-                                <div style="height: 200px;" class="statChart" id="theChart3"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="panel">
-                        <div class="panel-heading panel-default">
-                            <h3 class="panel-title">
                                 @lang("Dashboard.event_page_visits")
                                 <span style="color: green; float: right;">
                                     {{$event->stats->sum('views')}} @lang("basic.total")
@@ -135,6 +112,30 @@
                         </div>
                     </div>
                 </div>
+
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                  <div class="panel">
+                      <div class="panel-heading panel-default">
+                          <h3 class="panel-title">
+                              @lang("Dashboard.ticket_sales_volume")
+                              <span style="color: green; float: right;">
+                                    {{$event->stats->sum('attendees')}} @lang("basic.total")
+                              </span>
+                          </h3>
+                      </div>
+                      <div class="panel-body">
+                          <div class="chart-wrap">
+                              <div style="height: 200px;" class="statChart" id="theChart3"></div>
+                          </div>
+                      </div>
+                  </div>
+
+              </div>
+
+
                 <div class="col-md-6">
                     <div class="panel">
                         <div class="panel-heading panel-default">

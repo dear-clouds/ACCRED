@@ -120,7 +120,7 @@ class EventTicketsController extends MyBaseController
             }
         }
 
-        session()->flash('message', 'Successfully Created Ticket');
+        session()->flash('message', 'Successfully Created Category');
 
         return response()->json([
             'status'      => 'success',
@@ -154,7 +154,7 @@ class EventTicketsController extends MyBaseController
             ]);
         }
 
-        Log::error('Ticket Failed to pause/resume', [
+        Log::error('Category Failed to pause/resume', [
             'ticket' => $ticket,
         ]);
 
@@ -222,8 +222,8 @@ class EventTicketsController extends MyBaseController
         /*
          * Add validation message
          */
-        $validation_messages['quantity_available.min'] = trans("Controllers.quantity_min_error");
-        $ticket->messages = $validation_messages + $ticket->messages;
+        // $validation_messages['quantity_available.min'] = trans("Controllers.quantity_min_error");
+        // $ticket->messages = $validation_messages + $ticket->messages;
 
         if (!$ticket->validate($request->all())) {
             return response()->json([

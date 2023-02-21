@@ -1,6 +1,6 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2018/04/26 11:05:24 
+ Generated via "php artisan localization:missing" at 2018/04/26 11:05:24
 *************************************************************************/
 
 return array (
@@ -43,9 +43,9 @@ return array (
   'social' => 'Social',
   'submit' => 'Submit',
   'success' => 'Success',
-  'ticket_design' => 'Ticket Design',
+  'ticket_design' => 'Category Design',
   'access_codes' => 'Access Codes',
-  'tickets' => 'Tickets',
+  'tickets' => 'Categories',
   'TOP' => 'TOP',
   'total' => 'total',
   'whoops' => 'Whoops!',

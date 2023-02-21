@@ -29,7 +29,7 @@ class EventOrdersController extends MyBaseController
      */
     public function showOrders(Request $request, $event_id = '')
     {
-        $allowed_sorts = ['first_name', 'email', 'order_reference', 'order_enveloppe', 'order_status_id', 'created_at'];
+        $allowed_sorts = ['first_name', 'email', 'order_reference', 'enveloppe', 'order_status_id', 'created_at'];
 
         $searchQuery = $request->get('q');
         $sort_by = (in_array($request->get('sort_by'), $allowed_sorts) ? $request->get('sort_by') : 'created_at');
@@ -49,7 +49,7 @@ class EventOrdersController extends MyBaseController
             $orders = $event->orders()
                 ->where(function ($query) use ($searchQuery) {
                     $query->where('order_reference', 'like', $searchQuery . '%')
-                        ->orWhere('order_enveloppe', 'like', $searchQuery . '%')
+                        ->orWhere('enveloppe', 'like', $searchQuery . '%')
                         ->orWhere('first_name', 'like', $searchQuery . '%')
                         ->orWhere('email', 'like', $searchQuery . '%')
                         ->orWhere('last_name', 'like', $searchQuery . '%');
@@ -165,8 +165,8 @@ class EventOrdersController extends MyBaseController
     {
         $rules = [
             'first_name' => ['required'],
-            'last_name' => ['required'],
-            'email' => ['required', 'email'],
+            // 'last_name' => ['required'],
+            'email' => ['email'],
         ];
 
         $validator = Validator::make($request->all(), $rules);
@@ -183,6 +183,7 @@ class EventOrdersController extends MyBaseController
         $order->first_name = $request->get('first_name');
         $order->last_name = $request->get('last_name');
         $order->email = $request->get('email');
+        $order->enveloppe = $request->get('enveloppe');
 
         $order->update();
 
@@ -361,7 +362,7 @@ class EventOrdersController extends MyBaseController
                         'orders.last_name',
                         'orders.email',
                         'orders.order_reference',
-                        'orders.order_enveloppe',
+                        'orders.enveloppe',
                         'orders.amount',
                         \DB::raw("(CASE WHEN orders.is_refunded = 1 THEN '$yes' ELSE '$no' END) AS `orders.is_refunded`"),
                         \DB::raw("(CASE WHEN orders.is_partially_refunded = 1 THEN '$yes' ELSE '$no' END) AS `orders.is_partially_refunded`"),
@@ -382,6 +383,7 @@ class EventOrdersController extends MyBaseController
                     trans("Attendee.first_name"),
                     trans("Attendee.last_name"),
                     trans("Attendee.email"),
+                    trans("Attendee.enveloppe"),
                     trans("Order.order_ref"),
                     trans("Order.amount"),
                     trans("Order.fully_refunded"),

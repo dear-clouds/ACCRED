@@ -1,6 +1,6 @@
 <?php
 /*************************************************************************
- Generated via "php artisan localization:missing" at 2018/04/19 18:57:21 
+ Generated via "php artisan localization:missing" at 2018/04/19 18:57:21
 *************************************************************************/
 
 return array (
@@ -16,11 +16,11 @@ return array (
     'generate_affiliate_link' => 'Generate Affiliate link',
     'orders' => 'Orders',
     'quick_links' => 'Quick Links',
-    'registrations_by_ticket' => 'Registrations By Ticket',
+    'registrations_by_ticket' => 'Registrations By Category',
     'sales_volume' => 'Sales Volume',
     'share_event' => 'Share Event',
     'this_event_is_on_now' => 'This event is on now',
     'ticket_sales_volume' => 'Ticket Sales Volume',
-    'tickets_sold' => 'Tickets Sold',
+    'tickets_sold' => 'Envelopes',
     'website_embed_code' => 'Website Embed Code',
 );

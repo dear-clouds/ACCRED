@@ -110,16 +110,6 @@ class Attendee extends MyBaseModel
     }
 
     /**
-     * Get the attendee enveloppe
-     *
-     * @return string
-     */
-    public function getEnveloppeAttribute()
-    {
-        return $this->order->order_enveloppe . '-' . $this->enveloppe_index;
-    }
-
-    /**
      * Get the full name of the attendee.
      *
      * @return string

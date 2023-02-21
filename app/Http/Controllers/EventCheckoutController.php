@@ -66,7 +66,7 @@ class EventCheckoutController extends Controller
         if (!$request->has('tickets')) {
             return response()->json([
                 'status'  => 'error',
-                'message' => 'No tickets selected',
+                'message' => 'No categories selected',
             ]);
         }
 
@@ -527,6 +527,7 @@ class EventCheckoutController extends Controller
             }
             $order->first_name = strip_tags($request_data['order_first_name']);
             $order->last_name = strip_tags($request_data['order_last_name']);
+            $order->enveloppe = strip_tags($request_data['enveloppe']);
             $order->email = $request_data['order_email'];
             $order->order_status_id = isset($request_data['pay_offline']) ? config('attendize.order_awaiting_payment') : config('attendize.order_complete');
             $order->amount = $ticket_order['order_total'];
@@ -612,13 +613,13 @@ class EventCheckoutController extends Controller
                     $attendee = new Attendee();
                     $attendee->first_name = strip_tags($request_data["ticket_holder_first_name"][$i][$attendee_details['ticket']['id']]);
                     $attendee->last_name = strip_tags($request_data["ticket_holder_last_name"][$i][$attendee_details['ticket']['id']]);
+                    $attendee->enveloppe = strip_tags($request_data["enveloppe"][$i][$attendee_details['ticket']['id']]);
                     $attendee->email = $request_data["ticket_holder_email"][$i][$attendee_details['ticket']['id']];
                     $attendee->event_id = $event_id;
                     $attendee->order_id = $order->id;
                     $attendee->ticket_id = $attendee_details['ticket']['id'];
                     $attendee->account_id = $event->account->id;
                     $attendee->reference_index = $attendee_increment;
-                    $attendee->enveloppe_index = $attendee_increment;
                     $attendee->save();
 
 
@@ -690,7 +691,6 @@ class EventCheckoutController extends Controller
                 'redirectUrl' => route('showOrderDetails', [
                     'is_embedded'     => $this->is_embedded,
                     'order_reference' => $order->order_reference,
-                    'order_enveloppe' => $order->order_enveloppe,
                 ]),
             ]);
         }
@@ -698,7 +698,6 @@ class EventCheckoutController extends Controller
         return response()->redirectToRoute('showOrderDetails', [
             'is_embedded'     => $this->is_embedded,
             'order_reference' => $order->order_reference,
-            'order_enveloppe' => $order->order_enveloppe,
         ]);
 
 
