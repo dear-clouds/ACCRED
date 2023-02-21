@@ -110,7 +110,7 @@
                             <td>
                               @if ($attendee->has_arrived == 1)
 
-                              <span class="ci btn btn-successfulQrRead">
+                              <span class="ci btn btn-successfulQrRead" style="background-color: #36F158; color:white;border: none;border-radius: 150px;padding: 6px;">
                                 <i class="ico-checkmark"></i>
                               </span>
 
