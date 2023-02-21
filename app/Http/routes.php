@@ -697,10 +697,10 @@ Route::group(
                 'uses' => 'EventCheckInController@postCheckInAttendee',
             ]);
 
-            // Route::post('/check_in/', [
-            //     'as'   => 'postCheckInAttendeeModal',
-            //     'uses' => 'EventCheckInController@postCheckInAttendee',
-            // ]);
+            Route::post('/check_in/', [
+                'as'   => 'postCheckInAttendeeModal',
+                'uses' => 'EventCheckInController@postCheckInAttendee',
+            ]);
 
             Route::post('/signature/', [
                 'as'   => 'postSignatureAttendee',
