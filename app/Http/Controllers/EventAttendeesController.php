@@ -304,7 +304,7 @@ class EventAttendeesController extends MyBaseController
             ]);
 
         }
-
+        $enveloppe = [];
         $ticket_id = $request->get('ticket_id');
         $event = Event::findOrFail($event_id);
         $ticket_price = 0;
@@ -315,9 +315,24 @@ class EventAttendeesController extends MyBaseController
           $the_file = Excel::load($request->file('attendees_list')->getRealPath(), function ($reader) {
             })->get();
 
+            if(!empty($the_file) && $the_file->count()){
             // Loop through
-            foreach ($the_file as $rows) {
-                if (!empty($rows['enveloppe']) && !empty($rows['last_name'])) {
+            foreach ($the_file as $key => $value) {
+
+
+                  // Skip title previously added using array_key_exists or in_array
+                    if (array_key_exists($value->enveloppe, $enveloppe))
+                        continue;
+
+                    $rows[] = ['enveloppe' => $value->enveloppe, 'first_name' => $value->first_name, 'last_name' => $value->last_name, 'company' => $value->company, 'email' => $value->email, 'sender' => $value->sender];
+
+                    // Index added title
+                    $enveloppe[$value->enveloppe] = true; // or array_push
+
+                  }
+
+                  if (!empty($rows['enveloppe']) && !empty($rows['last_name'])) {
+
                     $num_added++;
                     $attendee_first_name = strip_tags($rows['first_name']);
                     $attendee_last_name = strip_tags($rows['last_name']);
