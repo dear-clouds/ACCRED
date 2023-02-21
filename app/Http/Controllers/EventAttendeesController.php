@@ -315,9 +315,9 @@ class EventAttendeesController extends MyBaseController
           // $the_file = Excel::load($request->file('attendees_list')->getRealPath(), function ($reader) {
           //   })->get();
 
-            $data = Excel::load(($request->file('attendees_list')->getRealPath(), function ($reader) {
+            $data = \Excel::load(($request->file('attendees_list')->getRealPath(), function ($reader) {
             $reader->ignoreEmpty();
-        })->get()->toArray();
+            })->get()->toArray();
 
         # remove empty rows
         $the_file = array_filter($data);
