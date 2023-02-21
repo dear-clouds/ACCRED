@@ -159,13 +159,9 @@
 
 
 
-                              <h2>Enveloppe</h2>
-                              {{$attendee->enveloppe}}
+                              <h2>Enveloppe n°{{$attendee->enveloppe}}</h2>
 
 
-                              <a
-                                  href="{{route('postCheckInAttendee', ['attendee_id'=>$attendee->id])}}"
-                                  >Check-in</a></li>
                           </ul>
 
                             </div>
