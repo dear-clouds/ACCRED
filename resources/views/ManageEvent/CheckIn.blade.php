@@ -171,11 +171,6 @@
 </div>
 {{-- /END QR Modal--}}
 
-/* <script>
-Vue.http.headers.common['X-CSRF-TOKEN'] = '{{ csrf_token() }}';
-</script> */
-
-
 
 @include("Shared.Partials.LangScript")
 {!! HTML::script('assets/javascript/backend.js') !!}
