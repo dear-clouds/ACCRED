@@ -167,10 +167,6 @@
 
           <h2>Enveloppe n°{{$attendee->enveloppe}}</h2>
 
-          @else
-
-        <img src="http://accred.fiawec.com/user_content/signatures/{{$event->id}}/{{$attendee->id}}_signature.png" width="100%">
-
           @endif
 
         </div>
