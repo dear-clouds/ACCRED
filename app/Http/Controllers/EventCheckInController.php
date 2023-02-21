@@ -223,8 +223,6 @@ class EventCheckInController extends MyBaseController
 
         Attendee::find($attendee->id)->update(['has_arrived' => true, 'arrival_time' => Carbon::now()]);
 
-        session()->flash('message', 'Attendeee successfully checked in!'));
-
         return response()->json([
             'status'  => 'success',
             'checked' => $checking,
