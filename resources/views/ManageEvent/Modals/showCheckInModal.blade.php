@@ -110,8 +110,8 @@
                                 </div>
                               </div>
 
-                              <script>
-                              $(document).ready(function () {
+                              <!-- <script>
+                              $(function () {
                                 var wrapper = document.getElementById("signature-pad"),
                                     clearButton = wrapper.querySelector("[data-action=clear]"),
                                     saveButton = wrapper.querySelector("[data-action=save]"),
@@ -158,7 +158,7 @@
                                 });
                               });
 
-                              </script>
+                              </script> -->
 
                               <h2>Enveloppe</h2>
                               {{$attendee->enveloppe}}
