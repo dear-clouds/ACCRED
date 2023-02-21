@@ -193,9 +193,9 @@
             </div> <!-- /end modal body-->
             <div class="modal-footer">
 
-              <!-- <form method="post" action="{{route('postCheckInAttendee', ['event_id' => $event->id, 'attendee_id' => $attendee->id, 'checking' => $attendee->has_arrived])}}"> -->
-              <span @click="toggleCheckin()" name="check-in" class="btn btn-success">Check-in</span>
-            <!-- </form> -->
+              <form method="post" action="{{route('postCheckInAttendee', ['event_id' => $event->id, 'attendee_id' => $attendee->id, 'checking' => $attendee->has_arrived])}}">
+              <button type="submit" name="check-in" class="btn btn-success">Check-in</button>
+            </form>
 
 
             </div>
@@ -203,43 +203,3 @@
 
     </div>
 </div>
-
-<script>
-var checkinApp = new Vue({
-    data: {
-        workingAway: false,
-    },
-
-    methods: {
-        toggleCheckin: function () {
-
-            if(this.workingAway) {
-                return;
-            }
-            this.workingAway = true;
-            var that = this;
-
-
-            var checkinData = {
-                checking: attendee.has_arrived ? 'out' : 'in',
-                attendee_id: attendee.id,
-            };
-
-            this.$http.post(Attendize.checkInRoute, checkinData).then(function (res) {
-                if (res.data.status == 'success' || res.data.status == 'error') {
-                    if (res.data.status == 'error') {
-                        alert(res.data.message);
-                    }
-                    attendee.has_arrived = checkinData.checking == 'out' ? 0 : 1;
-                    that.workingAway = false;
-                } else {
-                    /* @todo handle error*/
-                    that.workingAway = false;
-                }
-            });
-
-        }
-    }
-});
-
-</script>
