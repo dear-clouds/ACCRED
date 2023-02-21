@@ -193,7 +193,7 @@
               {!! Form::model($attendee, array('url' => route('postQRCodeCheckInAttendee', array('event_id' => $event->id, 'attendee_id' => $attendee->id)), 'class' => 'ajax')) !!}
                {!! Form::hidden('attendee_id', $attendee->id) !!}
                {!! Form::button(trans("basic.cancel"), ['class'=>"btn modal-close btn-danger",'data-dismiss'=>'modal']) !!}
-               <a href="EventCheckInController@postCheckInAttendeeQr" class="btn btn-success">Check-in</a>
+               {!! Form::submit('Check-In'), ['class'=>"btn btn-success"]) !!}
             </div>
         </div><!-- /end modal content-->
        {!! Form::close() !!}
