@@ -97,7 +97,7 @@
                         <div class="row">
                             <div class="col-md-12">
 
-                              {{  Form::open([route'=>'postQRCodeCheckInAttendee', 'method' => 'post')] }}
+
 
                               <h2>Check-in</h2>
 
@@ -194,10 +194,9 @@
             <div class="modal-footer">
 
 
-               {!! Form::button(trans("basic.cancel"), ['class'=>"btn modal-close btn-danger",'data-dismiss'=>'modal']) !!}
-               {!! Form::submit('Check-In'), ['class'=>"btn btn-success"]) !!}
+              
             </div>
         </div><!-- /end modal content-->
-       {!! Form::close() !!}
+
     </div>
 </div>
