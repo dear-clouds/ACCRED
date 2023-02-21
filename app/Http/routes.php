@@ -700,6 +700,11 @@ Route::group(
             Route::post('/check_in/', [
                 'as'   => 'postCheckInAttendeeModal',
                 'uses' => 'EventCheckInController@postCheckInAttendee',
+            ]);postSignatureAttendee
+
+            Route::post('/signature/', [
+                'as'   => 'postSignatureAttendee',
+                'uses' => 'EventCheckInController@postSignatureAttendee',
             ]);
 
             Route::post('{event_id}/qrcode_check_in', [
