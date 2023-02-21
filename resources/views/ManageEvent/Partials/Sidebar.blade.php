@@ -41,12 +41,12 @@
                     <span class="text">@lang("basic.promote")</span>
                 </a>
             </li>
-            <li class="{{ Request::is('*customize*') ? 'active' : '' }}">
+            <!-- <li class="{{ Request::is('*customize*') ? 'active' : '' }}">
                 <a href="{{route('showEventCustomize', array('event_id' => $event->id))}}">
                     <span class="figure"><i class="ico-cog"></i></span>
                     <span class="text">@lang("basic.customize")</span>
                 </a>
-            </li>
+            </li> -->
         </ul>
         <h5 class="heading">@lang("ManageEvent.event_tools")</h5>
         <ul id="nav_event" class="topmenu">
