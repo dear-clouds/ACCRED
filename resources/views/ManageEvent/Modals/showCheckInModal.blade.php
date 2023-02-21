@@ -178,7 +178,7 @@
 
                               <h2>Enveloppe n°{{$attendee->enveloppe}}</h2>
 
-                              <button @click="toggleCheckin(attendee)">Check-in</button>
+                              <a href="{{ action('EventCheckInController@postCheckInAttendee', $attendee->id ) }}">Check-in</a>
 
 
                           </ul>
