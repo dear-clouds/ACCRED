@@ -101,6 +101,7 @@
 
                 <h2>Check-in</h2>
 
+                <form>
                 {{ csrf_field() }}
                 <div id="signature-pad" class="m-signature-pad">
                 <div class="m-signature-pad--body">
@@ -112,6 +113,7 @@
               <button type="button" class="btn btn-sm btn-primary" data-action="save">Save</button>
             </div>
           </div>
+          </form>
 
 
 
