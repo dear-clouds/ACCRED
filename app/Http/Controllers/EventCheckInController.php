@@ -101,7 +101,7 @@ class EventCheckInController extends MyBaseController
    * @param $event_id
    * @return \Illuminate\Http\RedirectResponse
    */
-  public function saveSignature(Request $request)
+  public function saveSignature(Request $request, $event_id)
   {
       //Find Assessment in DB//
       // $signature = DrivingAssessments::find($request->assid);
