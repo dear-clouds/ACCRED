@@ -34,6 +34,7 @@ class Attendee extends MyBaseModel
         'enveloppe',
         'company',
         'sender',
+        'signature',
         'has_arrived',
         'arrival_time'
     ];
@@ -87,6 +88,14 @@ class Attendee extends MyBaseModel
     public function answers()
     {
         return $this->hasMany('App\Models\QuestionAnswer');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function signature()
+    {
+        return $this->hasMany('App\Models\Signature');
     }
 
     /**
