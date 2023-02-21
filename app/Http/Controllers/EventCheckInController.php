@@ -61,10 +61,6 @@ class EventCheckInController extends MyBaseController
             'tickets'  => $attendee->event->tickets->pluck('title', 'id'),
         ];
 
-        // JavaScript::put([
-        //     'checkInRoute'       => route('postCheckInAttendee', ['event_id' => $event->id]),
-        // ]);
-
         return view('ManageEvent.Modals.showCheckInModal', $data);
     }
 
@@ -221,6 +217,8 @@ class EventCheckInController extends MyBaseController
                 'id'      => $attendee->id,
             ]);
         }
+
+        Attendee::find($attendee->id)->update(['has_arrived' => true, 'arrival_time' => Carbon::now()]);
 
         return response()->json([
             'status'  => 'success',
