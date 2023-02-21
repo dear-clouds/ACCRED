@@ -1,12 +1,5 @@
 <?php
 
-$url = parse_url(getenv("CLEARDB_DATABASE_URL"));
-
-$host = $url["host"];
-$username = $url["user"];
-$password = $url["pass"];
-$database = substr($url["path"], 1);
-
 return [
 
     /*
@@ -34,7 +27,6 @@ return [
     */
 
     'default' => env('DB_TYPE', 'mysql'),
-    'default' => env('DB_CONNECTION', 'heroku'),
 
     /*
     |--------------------------------------------------------------------------
@@ -69,13 +61,14 @@ return [
         'mysql' => [
             'driver'    => 'mysql',
             'host'      => env('DB_HOST', 'localhost'),
-            'port'	    => env('DB_PORT'),
-            'database'  => env('DB_DATABASE', 'accred'),
-            'username'  => env('DB_USERNAME', 'root'),
+            'port'	    => env('DB_PORT', 3306),
+            'database'  => env('DB_DATABASE', ''),
+            'username'  => env('DB_USERNAME', ''),
             'password'  => env('DB_PASSWORD', ''),
             'charset'   => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix'    => env('DB_PREFIX'),
+            'unix_socket' => env('DB_SOCKET', ''),
             'strict'    => false,
         ],
 
@@ -98,17 +91,6 @@ return [
             'password' => env('DB_PASSWORD', ''),
             'prefix'   => '',
         ],
-
-        'heroku' => array(
-    'driver' => 'mysql',
-    'host' => $host,
-    'database' => $database,
-    'username' => $username,
-    'password' => $password,
-    'charset' => 'utf8',
-    'collation' => 'utf8_unicode_ci',
-    'prefix' => '',
-),
 
     ],
 

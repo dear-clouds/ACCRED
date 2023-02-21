@@ -42,6 +42,27 @@
                             </div>
                         </div>
                         <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    {!! Form::label('company', trans("Attendee.company"), array('class'=>'control-label')) !!}
+                                    {!!  Form::text('company', Input::old('company'),
+                                            array(
+                                            'class'=>'form-control'
+                                            ))  !!}
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    {!! Form::label('sender', trans("Attendee.sender"), array('class'=>'control-label')) !!}
+                                    {!!  Form::text('sender', Input::old('sender'),
+                                            array(
+                                            'class'=>'form-control'
+                                            ))  !!}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
                                     {!! Form::label('email', trans("Attendee.email"), array('class'=>'control-label')) !!}

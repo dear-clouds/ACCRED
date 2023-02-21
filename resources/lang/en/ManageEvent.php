@@ -86,14 +86,14 @@ return array (
   'start_sale_on' => 'Start Sale On',
   'surveys' => 'Surveys',
   'this_order_is_awaiting_payment' => 'This order is awaiting payment.',
-  'ticket' => 'Ticket',
-  'ticket_description' => 'Ticket Description',
-  'ticket_price' => 'Ticket Price',
-  'ticket_title' => 'Ticket Title',
+  'ticket' => 'Category',
+  'ticket_description' => 'Category Description',
+  'ticket_price' => 'Category Price',
+  'ticket_title' => 'Category Title',
   'ticket_title_placeholder' => 'E.g: General Admission',
   'update_order' => 'Update Order',
   'widgets' => 'Widgets',
-  'LLH:obsolete' => 
+  'LLH:obsolete' =>
   array (
     'create_question' => 'Create Question',
   ),
