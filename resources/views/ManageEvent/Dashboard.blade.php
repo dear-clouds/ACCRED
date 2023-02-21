@@ -68,7 +68,7 @@
         <div class="col-sm-6">
             <div class="stat-box">
 
-    <h3>{{ $attendees->where('checking', 1)->count() }}</h3>
+    <h3>{{ $attendees->where('has_arrived', 1)->count() }}</h3>
 
 <span>Checked-in</span>
 </div>
