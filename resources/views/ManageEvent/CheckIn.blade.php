@@ -81,8 +81,6 @@
                         @lang("ManageEvent.no_attendees_matching") <b>@{{ searchTerm }}</b>
                     </div>
 
-                    <script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
-
                     <ul v-if="searchResultsCount > 0" class="list-group" id="attendee_list" v-cloak>
 
                         <li
@@ -99,6 +97,8 @@
                         <br>
                             @lang("Order.ticket"): <b>@{{ attendee.ticket }}</b>
                             <br />
+
+                                
 
                                 <button data-modal-id="showCheckInModal@{{ attendee.id }}" href="javascript:void(0);"  data-href="/event/{{ $event_id }}/check_in/@{{ attendee.id }}/modal" class="loadModal btn btn-success" type="button">Check-in</button>
 
