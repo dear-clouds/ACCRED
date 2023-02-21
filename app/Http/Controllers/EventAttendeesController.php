@@ -315,18 +315,17 @@ class EventAttendeesController extends MyBaseController
           $the_file = Excel::load($request->file('attendees_list')->getRealPath(), function ($reader) {
             })->get();
 
-            if(!empty($the_file) && $the_file->count()){
             // Loop through
             foreach ($the_file as $key => $value) {
 
 
-                  // Skip title previously added using array_key_exists or in_array
+                  // Skip enveloppe previously added using array_key_exists or in_array
                     if (array_key_exists($value->enveloppe, $enveloppe))
                         continue;
 
                     $rows[] = ['enveloppe' => $value->enveloppe, 'first_name' => $value->first_name, 'last_name' => $value->last_name, 'company' => $value->company, 'email' => $value->email, 'sender' => $value->sender];
 
-                    // Index added title
+                    // Index added enveloppe
                     $enveloppe[$value->enveloppe] = true; // or array_push
 
                   }
