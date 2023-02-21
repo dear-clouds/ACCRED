@@ -130,7 +130,7 @@
           var image_data = dataUrl.replace(/^data:image\/(png|jpg);base64,/, "");
 
           $.ajax({
-            url: '/event/{{ $event_id }}/check_in/{{ $attendee_id }}/modal/checkin',
+            url: '/check_in/',
             type: 'POST',
             data: {
               image_data: image_data,
