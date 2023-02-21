@@ -1,10 +1,3 @@
-<html>
-<head>
-
-</head>
-<body>
-
-
 
 <div role="dialog"  class="modal fade" style="display: none;">
    {!! Form::model($attendee, array('url' => route('postCheckInEditAttendee', array('event_id' => $event->id, 'attendee_id' => $attendee->id)), 'class' => 'ajax')) !!}
@@ -192,7 +185,6 @@ $(function () {
 </div>
 
 
-@include("Shared.Partials.LangScript")
 {!! HTML::script('assets/javascript/backend.js') !!}
 <script>
     $(function () {
@@ -211,5 +203,3 @@ $(function () {
 
 </script>
 <script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
-</body>
-</html>
