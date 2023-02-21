@@ -5,6 +5,7 @@
 .env
 .idea
 installed
+cloud_sql_proxy.exe
 /.settings/
 /.project
 /.buildpath

@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'default' => env('DB_TYPE', 'pgsql'),
+    'default' => env('DB_TYPE', 'mysql'),
 
     /*
     |--------------------------------------------------------------------------
@@ -65,6 +65,7 @@ return [
             'database'  => env('DB_DATABASE', 'accred'),
             'username'  => env('DB_USERNAME', 'root'),
             'password'  => env('DB_PASSWORD', ''),
+            'unix_socket' => env('DB_SOCKET', ''),
             'charset'   => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix'    => env('DB_PREFIX'),
