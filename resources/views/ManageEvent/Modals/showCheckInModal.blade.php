@@ -179,7 +179,6 @@
 
                               <h2>Enveloppe n°{{$attendee->enveloppe}}</h2>
 
-                          </ul>
 
                             </div>
 
@@ -192,6 +191,7 @@
                 </div>
             </div> <!-- /end modal body-->
             <div class="modal-footer">
+
               <button onclick="toggleCheckin(attendee)"></i>Check-in</button>
 
             </div>
@@ -199,3 +199,5 @@
 
     </div>
 </div>
+{!! HTML::script('vendor/qrcode-scan/llqrcode.js') !!}
+{!! HTML::script('assets/javascript/check_in.js') !!}
