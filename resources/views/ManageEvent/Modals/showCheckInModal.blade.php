@@ -115,62 +115,61 @@
 
 
           <script>
-
           $(function () {
-            var wrapper = document.getElementById("signature-pad"),
-                clearButton = wrapper.querySelector("[data-action=clear]"),
-                saveButton = wrapper.querySelector("[data-action=save]"),
-                canvas = wrapper.querySelector("canvas"),
-                signaturePad;
 
-            // Adjust canvas coordinate space taking into account pixel ratio,
-            // to make it look crisp on mobile devices.
-            // This also causes canvas to be cleared.
-            // window.resizeCanvas = function () {
-            //   var ratio =  window.devicePixelRatio || 1;
-            //   canvas.width = canvas.offsetWidth * ratio;
-            //   canvas.height = canvas.offsetHeight * ratio;
-            //   canvas.getContext("2d").scale(ratio, ratio);
-            // }
-            //
-            // resizeCanvas();
+                      $.ajaxSetup({
+                          headers: {
+                              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                          }
+                      });
 
-            signaturePad = new SignaturePad(canvas, {
-    minWidth: 5,
-    maxWidth: 10,
-    penColor: "rgb(66, 133, 244)"
-});
+                      var signaturePad = new SignaturePad(document.getElementById('signature-pad'), {
+                        backgroundColor: 'rgba(255, 255, 255, 0)',
+                        penColor: 'rgb(0, 0, 0)'
+                      });
+                      var saveButton = document.getElementById('save');
+                      var cancelButton = document.getElementById('clear');
 
-            clearButton.addEventListener("click", function(event) {
-              signaturePad.clear();
-            });
 
-            saveButton.addEventListener("click", function(event) {
-              event.preventDefault();
+                      saveButton.addEventListener('click', function (event) {
+                          if (signaturePad.isEmpty()) {
+                              sweetAlert("Oops...", "Please provide signature first.", "error");
+                          } else {
 
-              if (signaturePad.isEmpty()) {
-                alert("Please provide a signature first.");
-              } else {
-                // var dataUrl = signaturePad.toDataURL();
-                // var image_data = dataUrl.replace(/^data:image\/(png|jpg);base64,/, "");
+                              // do ajax to post it
+                              $.ajax({
+                                  url : "{{route('saveSignature')}}",
+                                  type: 'POST',
+                                  data : {
+                                      signature: signaturePad.toDataURL('image/png'),
+                                      position: $('#position').val()
+                                  },
+                                  success: function(response)
+                                  {
+                                      swal({
+                                        title: "Signature Saved",
+                                        text: "Your signature has now been stored.",
+                                        icon: "success",
+                                      });
+                                      window.setTimeout(function(){window.location.reload()}, 3000);
+                                      //data - response from server
+                                      console.log(response);
+                                  },
+                                  error: function(response)
+                                  {
 
-                $.ajax({
-                  url: "{{route('saveSignature')}}",
-                  type: 'POST',
-                  data: {
-                    signature: signaturePad.toDataURL(),
-                    "_token": "{{ csrf_token() }}",
-                  },
-                  success: function(response)
-                  {
-                      sweetAlert("Success!", "You have been check-in!", "success");
-                  },
-                }).done(function() {
-                  //
-                });
-              }
-            });
-          });
+                                      console.log(response);
+                                  }
+                              });
+                          }
+
+                      });
+
+                      cancelButton.addEventListener('click', function (event) {
+                          signaturePad.clear();
+                      });
+
+                  });
 
           </script>
 
