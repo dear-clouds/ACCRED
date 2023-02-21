@@ -14,6 +14,7 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use App\Services\Order as OrderService;
 use App\Models\Ticket;
+use App\Imports\AttendeesImport;
 use Auth;
 use Config;
 use DB;
@@ -248,6 +249,9 @@ class EventAttendeesController extends MyBaseController
 
     }
 
+
+
+
     /**
      * Show the 'Import Attendee' modal
      *
@@ -273,6 +277,11 @@ class EventAttendeesController extends MyBaseController
         ]);
     }
 
+    function index()
+    {
+     $data = DB::table('attendees')->orderBy('id', 'DESC')->get();
+     return view('import_excel', compact('data'));
+    }
 
     /**
      * Import attendees
@@ -284,7 +293,7 @@ class EventAttendeesController extends MyBaseController
     public function postImportAttendee(Request $request, $event_id)
     {
         $rules = [
-            'attendees_list' => 'required|mimes:csv,txt|max:500000000|',
+            'attendees_list' => 'required|mimes:xlsx,csv,xls',
         ];
 
         $messages = [
@@ -299,30 +308,46 @@ class EventAttendeesController extends MyBaseController
             ]);
 
         }
+        $path = $request->file('attendees_list')->getRealPath();
         $attendee = Attendee::findOrFail($event_id);
         $ticket_id = $request->get('ticket_id');
         $event = Event::findOrFail($event_id);
         $ticket_price = 0;
         $email_attendee = $request->get('email_ticket');
         $num_added = 0;
-        if ($request->file('attendees_list')) {
 
-            $the_file = Excel::load($request->file('attendees_list')->getRealPath(), function ($reader) {
-            })->get();
+        $extension = File::extension($request->file->getClientOriginalName());
+        $data = Excel::load($path)->get();
+
+        if ($data->count() > 0) {
+
+          foreach($data->toArray() as $key => $value) {
+
+          // $the_file = Excel::import(new AttendeesImport, request()->file('attendees_list'));
+
+            // $the_file = Excel::import($request->file('attendees_list')->getRealPath(), function ($reader) {
+            // })->get();
 
             // Loop through
-            foreach ($the_file as $rows) {
-                if (!empty($rows['enveloppe'])) {
+            foreach ($value as $row) {
+              $insert[] = [
+                    'last_name' => $value->last_name,
+                    'enveloppe' => $value->enveloppe,
+                    ];
+
+
+                if (!empty($insert)) {
                     $num_added++;
-                    $attendee_first_name = strip_tags($rows['first_name']);
-                    $attendee_last_name = strip_tags($rows['last_name']);
-                    $attendee_email = $rows['email'];
-                    $attendee_enveloppe = $rows['enveloppe'];
-                    $attendee_company = strip_tags($rows['company']);
-                    $attendee_sender = strip_tags($rows['sender']);
+                    // $attendee_first_name = $value->first_name;
+                    // $attendee_last_name = $value->last_name;
+                    // $attendee_email = $value->email;
+                    // $attendee_enveloppe = $value->enveloppe;
+                    // $attendee_company = $value->company;
+                    // $attendee_sender = $value->sender;
 
                     error_log($ticket_id . ' ' . $ticket_price . ' ' . $email_attendee);
 
+                     DB::table('attendees')->insert($insert_data);
 
                     /**
                      * Create the order
@@ -397,17 +422,19 @@ class EventAttendeesController extends MyBaseController
                     }
                 }
             };
+          }
         }
 
         session()->flash('message', $num_added . ' Attendees Successfully Invited');
 
-        return response()->json([
-            'status'      => 'success',
-            'id'          => $attendee->id,
-            'redirectUrl' => route('showEventAttendees', [
-                'event_id' => $event_id,
-            ]),
-        ]);
+        // return response()->json([
+        //     'status'      => 'success',
+        //     'id'          => $attendee->id,
+        //     'redirectUrl' => route('showEventAttendees', [
+        //         'event_id' => $event_id,
+        //     ]),
+        // ]);
+        return back();
     }
 
     /**
@@ -592,7 +619,7 @@ class EventAttendeesController extends MyBaseController
     public function showExportAttendees($event_id, $export_as = 'xls')
     {
 
-        Excel::create('attendees-as-of-' . date('d-m-Y-g.i.a'), function ($excel) use ($event_id) {
+        Excel::download('attendees-as-of-' . date('d-m-Y-g.i.a'), function ($excel) use ($event_id) {
 
             $excel->setTitle('Attendees List');
 
@@ -616,10 +643,7 @@ class EventAttendeesController extends MyBaseController
                         'attendees.enveloppe',
                         'attendees.company',
                         'attendees.sender',
-			                  'attendees.private_reference_number',
-                        'orders.order_reference',
                         'tickets.title',
-                        'orders.created_at',
                         DB::raw("(CASE WHEN attendees.has_arrived THEN 'YES' ELSE 'NO' END) AS has_arrived"),
                         'attendees.arrival_time',
                     ])->get();
@@ -636,10 +660,7 @@ class EventAttendeesController extends MyBaseController
                     'Enveloppe',
                     'Company',
                     'Sender',
-                    'Ticket ID',
-                    'Order Reference',
                     'Ticket Type',
-                    'Purchase Date',
                     'Has Arrived',
                     'Arrival Time',
                 ]);
