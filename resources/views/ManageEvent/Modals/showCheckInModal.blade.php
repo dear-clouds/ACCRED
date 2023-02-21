@@ -193,7 +193,7 @@
             </div> <!-- /end modal body-->
             <div class="modal-footer">
 
-              <form method="post" action="/">
+              <form method="post" action="{{route('postCheckInAttendee)}}">
               <button type="submit" name="check-in">Check-in</button>
             </form>
 
