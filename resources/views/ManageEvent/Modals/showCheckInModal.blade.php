@@ -171,9 +171,6 @@
 
                               <h2>Enveloppe n°{{$attendee->enveloppe}}</h2>
 
-                              <!-- <a href="{{ action(EventCheckInController@postCheckInAttendee', $attendee->id ) }}">Check-in</a>
-
-/event/{{ $event_id }}/check_in/@{{ attendee.id }}/modal -->
                           </ul>
 
                             </div>
