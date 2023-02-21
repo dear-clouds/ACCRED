@@ -251,10 +251,10 @@ class EventCheckInController extends MyBaseController
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-  //     public function getSignaturePad() {
-  //        var imageData = signaturePad.toDataURL();
-  //        document.getElementsByName("image")[0].setAttribute("value", imageData);
-  // }
+      public function getSignaturePad() {
+         var imageData = signaturePad.toDataURL();
+         document.getElementsByName("image")[0].setAttribute("value", imageData);
+  }
 
     public function postSignatureAttendee(Request $request)
     {
@@ -273,8 +273,8 @@ class EventCheckInController extends MyBaseController
         $folder = '/uploads/signatures/';
 
         Storage::put($folder, $sig);
-        $attendee->signature = $encoded_image;
-        $attendee->save();
+        // $attendee->signature = $encoded_image;
+        // $attendee->save();
 
 
 
