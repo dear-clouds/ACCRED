@@ -154,7 +154,7 @@
                 $.ajax({
                   url: '/signature',
                   type: 'POST',
-                  "_token": "{{ csrf_token() }}",},
+                  "_token": "{{ csrf_token() }}",
                   data: {
                     signature: signaturePad.toDataURL(),
                   },
