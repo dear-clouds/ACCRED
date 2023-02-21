@@ -93,6 +93,14 @@
 
 <h2>Check-in</h2>
 
+<span
+                      @click="toggleCheckin(attendee)"
+                      class="at list-group-item"
+                      :class = "{arrived : attendee.has_arrived || attendee.has_arrived == '1'}"
+                      >  <span class="ci btn btn-successfulQrRead">
+                            <i class="ico-checkmark"></i>
+                        </span></span>
+
                               <div id="signature-pad" class="m-signature-pad">
                                 <div class="m-signature-pad--body">
                                   <canvas style="border: 2px dashed #ccc; height: 200px; width: 100%;"></canvas>
