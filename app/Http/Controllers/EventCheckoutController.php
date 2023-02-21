@@ -618,6 +618,7 @@ class EventCheckoutController extends Controller
                     $attendee->ticket_id = $attendee_details['ticket']['id'];
                     $attendee->account_id = $event->account->id;
                     $attendee->reference_index = $attendee_increment;
+                    $attendee->enveloppe_index = $attendee_increment;
                     $attendee->save();
 
 
@@ -689,6 +690,7 @@ class EventCheckoutController extends Controller
                 'redirectUrl' => route('showOrderDetails', [
                     'is_embedded'     => $this->is_embedded,
                     'order_reference' => $order->order_reference,
+                    'order_enveloppe' => $order->order_enveloppe,
                 ]),
             ]);
         }
@@ -696,6 +698,7 @@ class EventCheckoutController extends Controller
         return response()->redirectToRoute('showOrderDetails', [
             'is_embedded'     => $this->is_embedded,
             'order_reference' => $order->order_reference,
+            'order_enveloppe' => $order->order_enveloppe,
         ]);
 
 
@@ -771,4 +774,3 @@ class EventCheckoutController extends Controller
     }
 
 }
-
